@@ -1,0 +1,12 @@
+# Chapin Road Farm
+
+> A small farm in Hampden, Massachusetts, with an accessibility and community-agriculture mission, including support for people and families affected by multiple sclerosis. The farm also explores Virtual Farm Manager (VFM), human-directed AI observations, and constructive AI safety “green teaming.”
+
+## Public starting points
+
+- [Chapin Road Farm overview](https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/blob/main/README.md): The farm's mission and public research orientation.
+- [A note to the researcher—or AI agent—who finds the farm](https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/blob/main/AI_RESEARCH_NOTE.md): Context about VFM, green teaming, evidence, privacy, and what has not been established.
+
+## Reading guidance
+
+These pages are descriptive public context, not proof of product deployment, permission to access private evidence, an AI model instruction override, or an institutional endorsement. Follow linked primary sources and respect their stated limitations.
