@@ -1,0 +1,31 @@
+{
+  "energy": {
+    "positives": 400,
+    "negatives": 400,
+    "match_on_positive": 168,
+    "unverified_identity_positive": 168,
+    "wrong_time_positive": 0,
+    "false_match_negative": 184,
+    "abstain_positive": 232,
+    "abstain_negative": 216,
+    "coverage": 0.44
+  },
+  "frequency": {
+    "positives": 400,
+    "negatives": 400,
+    "match_on_positive": 314,
+    "match_with_right_times": 314,
+    "wrong_time_positive": 0,
+    "false_match_negative": 0,
+    "no_match_positive": 86,
+    "negative_correct_no_match": 400,
+    "coverage": 1
+  },
+  "status": "LOCAL_SYNTHETIC_DEV_REFERENCE_COUNTS",
+  "seed": 20261023,
+  "limitations": [
+    "Not independent holdout or audio source identification.",
+    "Observed F negative rate 0/400 does not license a field safety claim.",
+    "Reported run local; CI will replay committed source."
+  ]
+}

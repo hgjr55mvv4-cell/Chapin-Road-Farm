@@ -10,6 +10,8 @@ Start with [AUDITORY-DEV-01 synthetic waveform preflight](dev-01/README.md), [Mu
 
 **New bounded repair:** [DEV-01-TRANSPORT-v0.1](dev-01-transport-v01/README.md) is a separate Sol-authored source/test branch derived from the historical parser, with **20 local tests**; the original DEV-01 is preserved. Importantly, **a valid WAV and a correctly measured gap do not prove the detected sound regions are the intended source events.** [Earlier recovery handoff](SOL_TO_MUSE_RECOVERY_01.md) is now historical, superseded by Astra's relayed review.
 
+**Current DEV-02 advancement:** [AUDITORY-EVENT-INCREMENT-02](event-increment-02/README.md) now compares a matched 440→620 Hz tone-class detector with an energy-only baseline on **400 constructed positive and 400 negative WAV recordings**. The [case-level ledger](event-increment-02/receipts/cases.csv), [dataset candidate register](event-increment-02/DATASETS.md), and [independent Muse handoff](SOL_TO_MUSE_EVENT_02_AUDIT.md) are public. This is **synthetic tone-class identification only**, not physical source identity or real-audio understanding.
+
 ## Evidence ladder
 
 **Level 0:** sensor validity (missing, clipping, interference, sample format).  
