@@ -16,6 +16,10 @@
 
 [Auditory Intelligence](auditory-intelligence/README.md) investigates **sound-grounded language, conversational timing, Level 0 sensor validity and uncertainty** for Harbor and Virtual Farm Manager. [AUDITORY-DEV-01](auditory-intelligence/dev-01/README.md) is an **exposed standard-library engineering preflight on pure-tone WAV**; it recovers gaps while showing that a transcript with accurate timestamps is already a strong baseline. **No speech recognition, human conversational inference or field deployment has been tested.** Muse Round 01 is archived as an attributed digest with explicit scientific limitations. **Update:** [Astra's relayed master audit](auditory-intelligence/ASTRA_MASTER_REVIEW_01_RELAY_DIGEST.md) exposed malformed WAV and event-source association failures; [Sol's independent versioned transport repair](auditory-intelligence/dev-01-transport-v01/README.md) addresses only the former. Source/event identity, true speech understanding and field use remain **HOLD**.
 
+## Auditory event-association and candidate real-audio data
+
+[AUDITORY-EVENT-INCREMENT-02](auditory-intelligence/event-increment-02/README.md) is a standard-library **synthetic class-label association** experiment with 400 matched positive/negative pairs, a strong simple frequency baseline, an energy-only comparator and an [800-row public case ledger](auditory-intelligence/event-increment-02/receipts/cases.csv). [Candidate open real-audio datasets](auditory-intelligence/event-increment-02/DATASETS.md) are cataloged by *strong event labels vs machine-level condition labels* and license caveats. No public corpus was downloaded or used; source/physical machine identity and listener meaning remain unqualified.
+
 ## Questions we're working on
 
 1. How can software demonstrate it actually observed a **sound event**, rather than inferring it from lyrics, title or a person's description?
