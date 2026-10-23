@@ -30,3 +30,4 @@ jobs:
         run: |
           python -m unittest discover -s tests -v
           python verify_oracle.py
+          python -m unittest discover -s adversarial_tests -v
