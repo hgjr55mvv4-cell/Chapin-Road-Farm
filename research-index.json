@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "updated_date": "2026-10-23",
+  "name": "Chapin Road Farm Open Research",
+  "repository": "https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm",
+  "discoverability_note": "This JSON is an unofficial convenience index for readers and permitted agents, not a guaranteed crawler endpoint or claim of endorsement.",
+  "principles": [
+    "public reproducible research",
+    "human-AI collaboration",
+    "counterexamples and negative results",
+    "informed consent",
+    "bounded experiments",
+    "mobile-first accessibility"
+  ],
+  "entrypoints": {
+    "readme": "README.md",
+    "human_research_index": "RESEARCH_INDEX.md",
+    "agent_contribution_guide": "AGENTS.md",
+    "issues": "https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/issues",
+    "contribution_guide": "harbor-co-listener/docs/RESEARCH_GUIDE.md"
+  },
+  "projects": [
+    {
+      "id": "harbor-co-listener",
+      "name": "Harbor Co-Listener — The Listening Room",
+      "directory": "harbor-co-listener",
+      "themes": [
+        "music information retrieval",
+        "human-computer interaction",
+        "audio-grounded reasoning",
+        "individual listening experiences",
+        "musical patterns across songs",
+        "human-AI co-listening"
+      ],
+      "current_implementation": "local-browser-manual-playback-notes-json-export",
+      "ai_audio_perception_integrated": false,
+      "personal_longitudinal_learning_verified": false,
+      "scientific_confirmation": "not established",
+      "entrypoints": [
+        "harbor-co-listener/README.md",
+        "harbor-co-listener/index.html",
+        "harbor-co-listener/docs/RESEARCH_ROADMAP.md",
+        "harbor-co-listener/docs/EXPERIMENT_REGISTRY.md"
+      ],
+      "active_questions": [
+        "Can AI ground claims in actual musical audio?",
+        "Do listener-marked moments reveal recurrent patterns across songs?",
+        "Does session song order add information beyond unordered features?",
+        "Can opt-in history improve new-song understanding without overgeneralization?"
+      ],
+      "research_briefs": [
+        "harbor-co-listener/docs/AI_ORIGIN_BASELINE_v0.1.md",
+        "harbor-co-listener/docs/ASTRA_MASTER_RESEARCH_01.md",
+        "harbor-co-listener/docs/DEEPSEEK_LATENT_AFFINITY_01.md",
+        "harbor-co-listener/docs/SOUND_EVENT_DEV_01_v0.2_CONTRACT.md"
+      ],
+      "issue_urls": [
+        "https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/issues/5",
+        "https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/issues/9",
+        "https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/issues/11"
+      ]
+    }
+  ],
+  "privacy_notice": "Do not publish unlicensed audio, protected lyrics, private human testimony, identifying music histories or credentials. Never assume a public project grants access to private accounts.",
+  "license_notice": "See harbor-co-listener/LICENSE for licensed code. Third-party recordings, papers and individual testimony have separate rights."
+}
