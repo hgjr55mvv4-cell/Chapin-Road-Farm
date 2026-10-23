@@ -1,0 +1,27 @@
+name: Agent Collaboration Lab synthetic fixture
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'agent-collaboration-lab/examples/test-discovery-gap/**'
+      - '.github/workflows/agent-collab-fixture.yml'
+  pull_request:
+    paths:
+      - 'agent-collaboration-lab/examples/test-discovery-gap/**'
+      - '.github/workflows/agent-collab-fixture.yml'
+permissions:
+  contents: read
+jobs:
+  fixture:
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11', '3.13']
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run portable test-discovery demonstration
+        run: python agent-collaboration-lab/examples/test-discovery-gap/verify_fixture.py
