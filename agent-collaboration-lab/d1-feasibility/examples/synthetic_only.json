@@ -1,0 +1,74 @@
+{
+  "protocol": "D1-FEASIBILITY-01-v0.1",
+  "evidence_type": "SYNTHETIC_DEV",
+  "token_cap_per_task": 1200,
+  "frozen_spec_sha256": "ILLUSTRATIVE-NOT-A-COMPUTED-HASH",
+  "agents": {
+    "S": {
+      "model": "MOCK-S-NOT-INVOKED",
+      "input_manifest_sha256": "SYNTHETIC-COMMON-SOURCE",
+      "artifact_sha256": "MOCK-S",
+      "execution_receipt_id": "MOCK-S",
+      "observable_tokens": 1200,
+      "human_handoffs": 0
+    },
+    "P1": {
+      "model": "MOCK-P1-NOT-INVOKED",
+      "input_manifest_sha256": "SYNTHETIC-COMMON-SOURCE",
+      "artifact_sha256": "MOCK-P1",
+      "execution_receipt_id": "MOCK-P1",
+      "observable_tokens": 600,
+      "human_handoffs": 0
+    },
+    "P2": {
+      "model": "MOCK-P2-NOT-INVOKED",
+      "input_manifest_sha256": "SYNTHETIC-COMMON-SOURCE",
+      "artifact_sha256": "MOCK-P2",
+      "execution_receipt_id": "MOCK-P2",
+      "observable_tokens": 600,
+      "human_handoffs": 0
+    }
+  },
+  "candidates": [
+    {
+      "id": "a",
+      "truth": "valid",
+      "adjudication_ref": "MOCK-A",
+      "S": "ACCEPT",
+      "P1": "ACCEPT",
+      "P2": "ACCEPT"
+    },
+    {
+      "id": "b",
+      "truth": "valid",
+      "adjudication_ref": "MOCK-B",
+      "S": "ACCEPT",
+      "P1": "ACCEPT",
+      "P2": "REJECT"
+    },
+    {
+      "id": "c",
+      "truth": "faulty",
+      "adjudication_ref": "MOCK-C",
+      "S": "REJECT",
+      "P1": "ABSTAIN",
+      "P2": "REJECT"
+    },
+    {
+      "id": "d",
+      "truth": "faulty",
+      "adjudication_ref": "MOCK-D",
+      "S": "ABSTAIN",
+      "P1": "ABSTAIN",
+      "P2": "ABSTAIN"
+    },
+    {
+      "id": "e",
+      "truth": "unknown",
+      "ambiguity_ref": "MOCK-DISPUTE-E",
+      "S": "ABSTAIN",
+      "P1": "ABSTAIN",
+      "P2": "ABSTAIN"
+    }
+  ]
+}
