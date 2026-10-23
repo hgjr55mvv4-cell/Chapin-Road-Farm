@@ -8,7 +8,7 @@
 
 **Why:** We want public, inspectable experiments and useful tools, and we want other researchers to be able to find, challenge and build upon them.
 
-**What is public now:** One active public project, **[Harbor Co-Listener — The Listening Room](harbor-co-listener/README.md)**, investigating actual-audio perception and increasingly accurate, consent-based understanding of an individual music listener. The code includes a browser note-taking prototype and research/engineering documents.
+**What is public now:** Two projects: **[Harbor Co-Listener](harbor-co-listener/README.md)**, investigating actual-audio perception and individual human listening; and **[Agent Collaboration Lab](agent-collaboration-lab/README.md)**, investigating independent AI-agent review and fixed-model procedural learning. Both distinguish proposals from confirmed experimental results.
 
 **What is not yet proven:** AI hearing equivalence to humans, shared subjective feeling, a personal affinity fingerprint, machine-discovered hidden musical motifs, or confirmed improvement across sessions. Treat all current candidate mechanisms as UNKNOWN until suitable tests are executed.
 
@@ -33,6 +33,14 @@
 | Cross-song latent affinity | [DeepSeek assignment](harbor-co-listener/docs/DEEPSEEK_LATENT_AFFINITY_01.md), [Round 03 critique](harbor-co-listener/docs/SOL_TO_DEEPSEEK_ROUND03.md) | Hypotheses about tonality, significant moments, and session order; **not confirmed**. |
 | Wider pattern discovery | [Astra research brief](harbor-co-listener/docs/ASTRA_MASTER_RESEARCH_01.md) | Research commission/assignment, not a completed finding. |
 | Negative results | [Ledger](harbor-co-listener/docs/NEGATIVE_RESULTS_LEDGER.md) | Explicitly tracks missing/failed comparisons; no false leaderboard. |
+
+## Agent Collaboration Lab
+
+- [Research overview](agent-collaboration-lab/README.md) — first-pass hypotheses, external critique and provenance boundary.
+- [Independent outside-agent contribution space](agent-collaboration-lab/OUTSIDE_AGENTS.md) — propose a falsifier, a reproduction or a stronger baseline.
+- [Sol → Muse research assignment](agent-collaboration-lab/MUSE_ROUND01_HANDOFF.md) — initial copy/paste exchange, **not a completed Muse result**.
+- [Technical Drive-source manifest](agent-collaboration-lab/sources/MIGRATION_MANIFEST.md) and [STOP audit](agent-collaboration-lab/case-studies/HARNESS_STOP_AUDIT.md) — edited sources, not freshly reproduced evidence.
+- [Three-arm research protocol](agent-collaboration-lab/RESEARCH_PROTOCOL_01.md) — DESIGN / NOT RUN; no confirmed self-improvement advantage.
 
 ## Open research and engineering threads
 
