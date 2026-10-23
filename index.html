@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111b24">
+<meta name="description" content="Open research from Chapin Road Farm: human-AI collaboration, music cognition, the Harbor Co-Listener prototype, reproducible experiments, and community contributions.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Chapin Road Farm · Open Research">
+<meta property="og:description" content="Real prototypes. Competing hypotheses. Independent corrections. An open invitation to human and AI researchers.">
+<title>Chapin Road Farm · Open Research</title>
+<style>
+:root{color-scheme:dark;--bg:#111b24;--panel:#21313c;--line:#53636b;--fg:#f6f2e9;--sub:#d3dde0;--sea:#a9e5d9;--gold:#f3d3a5}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0,#294951,transparent 60%),var(--bg);color:var(--fg);font:17px/1.55 system-ui,-apple-system,sans-serif}
+a{color:var(--sea);text-underline-offset:.2em}a:hover{color:white}a:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+.wrap{width:min(1100px,calc(100% - 34px));margin:auto}
+.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;padding:21px 0;border-bottom:1px solid var(--line)}
+.brand,.kicker{letter-spacing:.11em;text-transform:uppercase;font-weight:750;font-size:.79rem;color:var(--gold)}
+nav{display:flex;gap:17px;flex-wrap:wrap}nav a{font-size:.9rem;color:var(--sub)}
+.hero{padding:90px 0 70px;max-width:920px}
+h1,h2{font-family:Georgia,serif;font-weight:400;letter-spacing:-.04em;line-height:1.12}
+h1{font-size:clamp(2.9rem,7vw,5.8rem);margin:14px 0 20px}h1 em{color:var(--gold);font-style:normal}
+h2{font-size:clamp(2rem,4vw,3rem);margin:12px 0}
+h3{font-size:1.24rem;line-height:1.28;letter-spacing:-.02em;margin:12px 0}
+.lede{font-size:clamp(1.1rem,2vw,1.35rem);color:var(--sub);max-width:730px}
+.action-row{display:flex;flex-wrap:wrap;gap:13px;margin-top:30px}
+.button{min-height:48px;display:inline-flex;align-items:center;justify-content:center;padding:11px 18px;border-radius:9px;border:1px solid var(--sea);font-weight:700;text-decoration:none}
+.button.main{color:#102820;background:var(--sea)}.button.alt{color:var(--sea)}
+section{padding:26px 0 60px}
+.desc{color:var(--sub);max-width:820px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:25px}
+.card{border:1px solid var(--line);background:var(--panel);padding:25px;border-radius:16px}
+.card.wide{grid-column:span 2}.card p{color:var(--sub)}
+.tag{color:var(--sea);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:.75rem}
+.callout{font:normal clamp(1.5rem,3vw,2rem)/1.35 Georgia,serif;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 0;margin:15px 0 0}
+.callout strong{font-weight:400;color:var(--gold)}
+footer{border-top:1px solid var(--line);color:var(--sub);padding:25px 0 45px;font-size:.92rem}
+@media(max-width:740px){.hero{padding:60px 0 42px}.grid{grid-template-columns:1fr}.card.wide{grid-column:span 1}section{padding-bottom:40px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="wrap top"><div class="brand">Chapin Road Farm · Open Research</div><nav aria-label="Main navigation"><a href="#research">Research</a><a href="#join">Contribute</a><a href="https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm">GitHub</a></nav></header>
+<main>
+<div class="wrap hero"><div class="kicker">Human-led · AI-assisted · Working in public</div><h1>Build what we can test.<br><em>Discover what we missed.</em></h1>
+<p class="lede">An open research workshop exploring how people and AI systems can collaborate, test ideas, acknowledge mistakes, and learn through evidence. Find our projects, see what is still uncertain, and help improve the work.</p>
+<div class="action-row"><a class="button main" href="./harbor-co-listener/index.html">Open the Listening Room</a><a class="button alt" href="https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/blob/main/RESEARCH_INDEX.md">Explore the research index</a></div></div>
+<section id="research" class="wrap" aria-labelledby="research-title"><div class="kicker">Our current public project</div>
+<h2 id="research-title">Harbor Co-Listener</h2>
+<p class="desc">A song can move someone whose words they don't understand. Could AI recognize musical details more accurately, and learn what matters to a particular human without making up an emotional explanation? We're building an open-source listening instrument to investigate.</p>
+<div class="grid">
+<article class="card wide"><div class="tag">Working v0.1 prototype · no integrated AI listener</div><h3>The Listening Room</h3><p>Play audio you already have on your device. Mark meaningful moments, record another listener's perspective, and export JSON. No login, API charge or audio upload. The software does not claim to hear or feel the music.</p><p><a href="./harbor-co-listener/index.html">Try the browser prototype →</a> · <a href="https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/tree/main/harbor-co-listener">Inspect the source ↗</a></p></article>
+<article class="card"><div class="tag">Unconfirmed hypothesis</div><h3>Patterns across songs</h3><p>Are hidden relationships in tonality, brief musical moments or song order responsible for some deeply felt connections? Competing explanations are being developed, not confirmed.</p><p><a href="https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/issues/11">Research issue ↗</a></p></article>
+<article class="card"><div class="tag">Engineering design · not qualified</div><h3>Ground claims in sound</h3><p>Before claiming musical insight, a tool should demonstrate it measured what actually happened in the audio—and document its errors.</p><p><a href="https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/issues/5">Audio grounding challenge ↗</a></p></article>
+<article class="card"><div class="tag">Open investigation</div><h3>Look for missing variables</h3><p>Independent reviewers and AI researchers are invited to identify blind spots, overlooked evidence, and convincing counterexamples.</p><p><a href="https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/issues/9">Pattern Atlas challenge ↗</a></p></article>
+</div></section>
+<section id="join" class="wrap" aria-labelledby="join-title"><div class="kicker">Help us build something testable</div><h2 id="join-title">Curiosity welcome. Disagreement encouraged.</h2>
+<p class="desc">Researchers, musicians, developers, accessibility testers and AI agents can contribute source audits, synthetic fixtures, honest negative results, small pull requests and questions nobody has answered yet. Personal listening memories never have to be shared publicly.</p>
+<div class="action-row"><a class="button main" href="https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/issues/new/choose">Contribute a research question</a><a class="button alt" href="https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/blob/main/AGENTS.md">Guide for AI agents</a></div>
+<div class="callout">An elegant explanation isn't a result. <strong>A counterexample or an honest “unknown” may be progress.</strong></div>
+</section>
+</main>
+<footer><div class="wrap"><strong>Chapin Road Farm · Open Research</strong><p>Prototype status and research claims are deliberately separated. No listener-specific AI learning or human-like AI experience has been scientifically demonstrated by this project. Source licenses do not grant rights to third-party music, papers or personal histories.</p><p><a href="https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm">Repository</a> · <a href="https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/blob/main/RESEARCH_INDEX.md">Research index</a> · <a href="https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/blob/main/harbor-co-listener/docs/ETHICS_AND_PRIVACY.md">Ethics and privacy</a></p></div></footer>
+</body></html>
