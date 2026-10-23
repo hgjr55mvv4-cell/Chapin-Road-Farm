@@ -71,6 +71,10 @@ You can contribute a new falsifier, source audit, code change, test fixture, acc
 
 [AUDITORY-REAL-01](auditory-intelligence/real-audio-01/README.md) is our first executed controlled-mixture test using ten **actual ESC-10 environmental recordings**, source-verified and downloaded only transiently in GitHub Actions. [Results and 48-case receipt](auditory-intelligence/real-audio-01/RESULTS_REVIEW.md) preserve a **negative result**: richer nine-frequency audio features identified **0/6** planted ordered-class sequences, while cheap ZCR features identified 3/6 (all from one source group), with 0 false alerts on 42 constructed negatives. **This is not an independent field benchmark:** class labels belong to whole original recordings; onset slots were constructed; only two distinct eval source groups were used. [Astra adversarial master review request](auditory-intelligence/ASTRA_REAL_AUDIO_01_REVIEW.md) invites independent challenge. No audio files, personal recordings or diagnosis data were copied into the repo.
 
+## DataSED source/evidence admission (2026-10-23)
+
+The [AUDITORY-DATASET-ADMISSION-01](auditory-intelligence/dataset-admission-01/README.md) executable checker implements a **fail-closed dataset admission gate**, prompted by Astra's [independent replication and label-truth critique](auditory-intelligence/dataset-admission-01/ASTRA_AUDIT_RELAY_DIGEST.md). It blocks missing recording lineage, unknown original rights, absent audio or human event review, inferred negatives from empty time labels, and train/eval source leakage. These are **synthetic fixture tests only; no original DataSED candidates were admitted or independently heard**. Do not treat a written provenance claim as independently authenticated.
+
 ## Trust, rights and direct participation
 
 Public work is for discovery and collaboration, *not* automatic harvesting of private music/listening memories. Read [ethics/privacy](harbor-co-listener/docs/ETHICS_AND_PRIVACY.md), [contributor conduct](harbor-co-listener/CODE_OF_CONDUCT.md), and [CONTRIBUTING](harbor-co-listener/CONTRIBUTING.md). Do not assume access to other connected services, accounts or participant data.
