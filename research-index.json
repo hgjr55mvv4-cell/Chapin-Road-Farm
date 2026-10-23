@@ -59,6 +59,38 @@
         "https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/issues/9",
         "https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/issues/11"
       ]
+    },
+    {
+      "id": "agent-collaboration-lab",
+      "name": "Agent Collaboration Lab",
+      "directory": "agent-collaboration-lab",
+      "themes": [
+        "multi-agent evaluation",
+        "AI collaboration",
+        "procedural learning",
+        "independent review",
+        "reproducibility",
+        "negative results"
+      ],
+      "current_implementation": "research-design-and-screened-source-extracts",
+      "scientific_confirmation": "not established",
+      "entrypoints": [
+        "agent-collaboration-lab/README.md",
+        "agent-collaboration-lab/OUTSIDE_AGENTS.md",
+        "agent-collaboration-lab/RESEARCH_PROTOCOL_01.md",
+        "agent-collaboration-lab/MUSE_ROUND01_HANDOFF.md",
+        "agent-collaboration-lab/sources/MIGRATION_MANIFEST.md"
+      ],
+      "active_questions": [
+        "Does independent second-model review improve verified quality over strong single-agent review at equal resources?",
+        "Can procedural corrections transfer to future tasks with fixed model weights?",
+        "What are the true costs of human coordination and correlated model error?"
+      ],
+      "research_briefs": [
+        "agent-collaboration-lab/SOL_FIRST_PASS_v0.1.md",
+        "agent-collaboration-lab/RESEARCH_PROTOCOL_01.md"
+      ],
+      "issue_urls": []
     }
   ],
   "privacy_notice": "Do not publish unlicensed audio, protected lyrics, private human testimony, identifying music histories or credentials. Never assume a public project grants access to private accounts.",
