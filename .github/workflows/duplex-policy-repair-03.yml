@@ -1,0 +1,34 @@
+name: Duplex policy repair 03 — bounded mock
+on:
+  pull_request:
+    paths:
+      - 'auditory-intelligence/duplex-policy-repair-03/**'
+      - '.github/workflows/duplex-policy-repair-03.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'auditory-intelligence/duplex-policy-repair-03/**'
+      - '.github/workflows/duplex-policy-repair-03.yml'
+permissions:
+  contents: read
+jobs:
+  source_check:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11', '3.13']
+    defaults:
+      run:
+        working-directory: auditory-intelligence/duplex-policy-repair-03
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Verify published exact source hashes
+        run: sha256sum -c receipts/checksums.sha256
+      - name: Execute all deterministic duplex policy regressions
+        run: python -m unittest discover -s tests -v
+      - name: Confirm mock-only module loads without side effects
+        run: python -c "from policy import Ledger,Speech,parse; print('PASS_MOCK_ONLY_HOST_SEPARATION')"
