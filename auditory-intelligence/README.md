@@ -6,9 +6,9 @@ Research shared across Harbor Co-Listener and Virtual Farm Manager: can an AI di
 
 Start with [AUDITORY-DEV-01 synthetic waveform preflight](dev-01/README.md), [Muse Round 01 attributed research digest](MUSE_ROUND01_RELAY_DIGEST.md), [Sol review](SOL_REVIEW_01.md) and [next bounded Muse review prompt](SOL_TO_MUSE_ROUND02.md).
 
-**Independent full-spectrum research commission:** [ASTRA — AUDITORY-INTELLIGENCE-MASTER-REVIEW-01](ASTRA_MASTER_REVIEW_01.md). Astra is asked to scrutinize the published sensor code, real versus inferred speech evidence, fair transcript-with-timestamps baselines, practical farm/Harbor scenarios, primary science and a falsifiable next experiment. This is an **assignment only**, not a completed review.
+**Astra independent master review received:** [attributed Round 01 audit digest](ASTRA_MASTER_REVIEW_01_RELAY_DIGEST.md) and [Sol's evidence reconciliation](SOL_ASTRA_RECONCILIATION_01.md). Astra reports 12 original tests, 19 adversarial probes and a separate 16-test isolated repair; the original full report and patch **bytes have not been received**. **Disposition: REPAIR DEV-01 FIRST; scientific confirmation HOLD.**
 
-**Interrupted Work continuity:** [Sol → Muse interim recovery and sensor audit](SOL_TO_MUSE_RECOVERY_01.md). Astra's Work output has **not been received**; Brian will resume that original session when credits are available. Muse may independently inspect a proposed truncated-WAV Level 0 regression; no Astra findings are presumed.
+**New bounded repair:** [DEV-01-TRANSPORT-v0.1](dev-01-transport-v01/README.md) is a separate Sol-authored source/test branch derived from the historical parser, with **20 local tests**; the original DEV-01 is preserved. Importantly, **a valid WAV and a correctly measured gap do not prove the detected sound regions are the intended source events.** [Earlier recovery handoff](SOL_TO_MUSE_RECOVERY_01.md) is now historical, superseded by Astra's relayed review.
 
 ## Evidence ladder
 
