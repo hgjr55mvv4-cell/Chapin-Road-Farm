@@ -6,6 +6,8 @@ Research shared across Harbor Co-Listener and Virtual Farm Manager: can an AI di
 
 Start with [AUDITORY-DEV-01 synthetic waveform preflight](dev-01/README.md), [Muse Round 01 attributed research digest](MUSE_ROUND01_RELAY_DIGEST.md), [Sol review](SOL_REVIEW_01.md) and [next bounded Muse review prompt](SOL_TO_MUSE_ROUND02.md).
 
+**Independent full-spectrum research commission:** [ASTRA — AUDITORY-INTELLIGENCE-MASTER-REVIEW-01](ASTRA_MASTER_REVIEW_01.md). Astra is asked to scrutinize the published sensor code, real versus inferred speech evidence, fair transcript-with-timestamps baselines, practical farm/Harbor scenarios, primary science and a falsifiable next experiment. This is an **assignment only**, not a completed review.
+
 ## Evidence ladder
 
 **Level 0:** sensor validity (missing, clipping, interference, sample format).  
