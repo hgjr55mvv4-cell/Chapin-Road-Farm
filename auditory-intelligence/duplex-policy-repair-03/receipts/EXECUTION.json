@@ -1,0 +1,8 @@
+{
+  "status": "LOCAL_EXPOSED_ENGINEERING_DEV",
+  "python": "3.13.5",
+  "tests": 54,
+  "returncode": 0,
+  "source_sha256": "b338cebb86677fe6e2a1cbcfe4161028607ce8b4919aa5b0587052b5e2445010",
+  "limits": "not speech/authentication/acoustic/physical qualification"
+}
