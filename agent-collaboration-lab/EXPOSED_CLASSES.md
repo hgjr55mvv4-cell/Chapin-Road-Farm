@@ -15,4 +15,7 @@
 | Half-open interval endpoint semantics | [New oracle integrity fixture](oracle-integrity-dev/CONTRACT.md) | DEV only, public labels |
 | First-occurrence deduplication and order | [New oracle integrity fixture](oracle-integrity-dev/CONTRACT.md) | DEV only, public labels |
 
+| Whitespace stripping before distinct-key comparison | [Bounded property tests](oracle-integrity-dev/property_tests/README.md), Muse Round 04 | DEV / exposed regression |
+| Unicode normalization before distinct-key comparison | Same bounded property test and [unknown interpretation ledger](ORACLE_UNKNOWN_LEDGER.md) | DEV / contract semantic clarification required |
+
 **Rule:** Renaming functions, data fields or filenames does not create a fresh confirmation sample. Freeze a future prospective test protocol and independently draw cases later. Preserve source/exposure maps, report unknown overlap, and never represent an editorial Drive extract as unseen implementation evidence.

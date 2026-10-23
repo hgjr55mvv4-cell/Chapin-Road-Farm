@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-23",
+  "status": "ENGINEERING DEV ONLY",
+  "python": "3.13.5",
+  "platform": "linux",
+  "source": "faithful manual mirror of fetched public implementations; actual GitHub module import to be checked by CI",
+  "command": "python test_properties.py",
+  "exit_code": 0,
+  "unittest_methods": 4,
+  "failures": 0,
+  "errors": 0,
+  "interval_pairs": 2025,
+  "dedup_sequences": 4369,
+  "seeded_translations": 1000,
+  "seed": 20261023,
+  "whitespace_mutant_detected": true,
+  "unicode_mutant_detected": true,
+  "limits": "Source mirror locally, not a checked-out repository; finite and author-generated cases do not prove general behavior or agent effects"
+}
