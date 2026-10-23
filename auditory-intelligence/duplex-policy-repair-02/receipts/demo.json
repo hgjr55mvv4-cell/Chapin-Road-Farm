@@ -1,0 +1,73 @@
+{
+  "version": "DUPLEX-POLICY-REPAIR-02",
+  "status": "EXPOSED_MOCK_ONLY",
+  "no_audio_or_model_inference": true,
+  "case_count": 6,
+  "cases": {
+    "earlier_partial_then_complete": {
+      "actions": [
+        "ASK_TEXT_CLARIFICATION",
+        "RETRACT_PENDING",
+        "PROPOSE_CHANGE"
+      ],
+      "pending_count": 1,
+      "logical_task_state": {},
+      "physical_actions": 0,
+      "externally_supplied_mock_labels": true
+    },
+    "echo_false_task_user_playback_matched": {
+      "actions": [
+        "IGNORE_NON_TASK_SOUND"
+      ],
+      "pending_count": 0,
+      "logical_task_state": {},
+      "physical_actions": 0,
+      "externally_supplied_mock_labels": true
+    },
+    "confident_echo_bad_evidence": {
+      "actions": [
+        "PROPOSE_CHANGE"
+      ],
+      "pending_count": 1,
+      "logical_task_state": {},
+      "physical_actions": 0,
+      "externally_supplied_mock_labels": true
+    },
+    "unknown_source_clear_text": {
+      "actions": [
+        "ASK_SOURCE_CONFIRMATION",
+        "COMMIT_UI_CONFIRMED"
+      ],
+      "pending_count": 0,
+      "logical_task_state": {
+        "gate": "right"
+      },
+      "physical_actions": 0,
+      "externally_supplied_mock_labels": true
+    },
+    "bad_confidence": {
+      "actions": [
+        "ABSTAIN_INVALID_INPUT"
+      ],
+      "pending_count": 0,
+      "logical_task_state": {},
+      "physical_actions": 0,
+      "externally_supplied_mock_labels": true
+    },
+    "two_changes": {
+      "actions": [
+        "PROPOSE_CHANGE",
+        "PROPOSE_CHANGE",
+        "COMMIT_UI_CONFIRMED",
+        "COMMIT_UI_CONFIRMED"
+      ],
+      "pending_count": 0,
+      "logical_task_state": {
+        "gate": "right",
+        "trays": "12"
+      },
+      "physical_actions": 0,
+      "externally_supplied_mock_labels": true
+    }
+  }
+}

@@ -25,6 +25,10 @@ Start with [AUDITORY-DEV-01 synthetic waveform preflight](dev-01/README.md), [Mu
 
 [Sol's actual-byte ZIP replay and independent diagnostic probes](SOL_DUPLEX_IMPLEMENTATION_REPLAY_01.md) confirmed 18/18 original tests and found three actionable mock issues: **the oracle changes both source and confidence**, a confidently misclassified echo causes a false correction yield, and an unresolved older clarification blocks a later valid correction. [Astra/Muse review and PLAYBACK-REFERENCE-01 handoff](SOL_TO_ASTRA_PLAYBACK_REFERENCE_01.md) distinguishes implementation fixes from a **design-only** echo-versus-independent-speech acoustic experiment. **Neither source authorization nor actual audio listening is qualified.**
 
+## Duplex correction transaction repair (Oct 23, 2026)
+
+Astra's latest user-relayed audit challenged the original [duplex 15-session mock](SOL_DUPLEX_FACTORIAL_FINDINGS.md): the oracle changed source labels **and** confidence, earlier ASK events blocked later complete corrections, and non-finite confidence could bypass checks. [DUPLEX-POLICY-REPAIR-02](duplex-policy-repair-02/README.md) is a new **mock-only transactional implementation** with 28 local regression tests, explicit UI-only logical commits and a retained failure for confidently misattributed echo. Source, authority, addressee, playback status and quote tags remain **externally supplied fixture metadata**, not measured capabilities. [Sol → Astra/Muse independent audit](SOL_TO_ASTRA_MUSE_POLICY_REPAIR_02.md) and [PLAYBACK-REFERENCE-01 v0.2 acoustic design](duplex-policy-repair-02/PLAYBACK_REFERENCE_01_DESIGN.md) are ready. **No actual playback audio experiment has run; scientific and farm deployment HOLD.**
+
 ## Evidence ladder
 
 **Level 0:** sensor validity (missing, clipping, interference, sample format).  

@@ -1,0 +1,33 @@
+test_01_anchored_negation_and_quantity (test_policy_repair.RepairTests.test_01_anchored_negation_and_quantity) ... ok
+test_02_proposal_cannot_commit_without_ui (test_policy_repair.RepairTests.test_02_proposal_cannot_commit_without_ui) ... ok
+test_03_explicit_commit_stays_logical_only (test_policy_repair.RepairTests.test_03_explicit_commit_stays_logical_only) ... ok
+test_04_unauthorized_control_cannot_commit (test_policy_repair.RepairTests.test_04_unauthorized_control_cannot_commit) ... ok
+test_05_incomplete_then_complete_same_thread_resolves (test_policy_repair.RepairTests.test_05_incomplete_then_complete_same_thread_resolves) ... ok
+test_06_earlier_uncertain_source_does_not_block_later (test_policy_repair.RepairTests.test_06_earlier_uncertain_source_does_not_block_later) ... ok
+test_07_old_proposal_same_thread_requires_supersession (test_policy_repair.RepairTests.test_07_old_proposal_same_thread_requires_supersession) ... ok
+test_08_explicit_resolution_can_replace_uncommitted (test_policy_repair.RepairTests.test_08_explicit_resolution_can_replace_uncommitted) ... ok
+test_09_unrelated_speech_does_not_consume_pending (test_policy_repair.RepairTests.test_09_unrelated_speech_does_not_consume_pending) ... ok
+test_10_duplicate_delivery_idempotent (test_policy_repair.RepairTests.test_10_duplicate_delivery_idempotent) ... ok
+test_11_collision_same_version_rejected (test_policy_repair.RepairTests.test_11_collision_same_version_rejected) ... ok
+test_12_revision_retracts_pending_no_rewrite (test_policy_repair.RepairTests.test_12_revision_retracts_pending_no_rewrite) ... ok
+test_13_revision_cannot_rewrite_committed (test_policy_repair.RepairTests.test_13_revision_cannot_rewrite_committed) ... ok
+test_14_cancel_pending (test_policy_repair.RepairTests.test_14_cancel_pending) ... ok
+test_15_two_successive_changes_distinct_threads (test_policy_repair.RepairTests.test_15_two_successive_changes_distinct_threads) ... ok
+test_16_nan_and_infinity_rejected (test_policy_repair.RepairTests.test_16_nan_and_infinity_rejected) ... ok
+test_17_verified_playback_match_suppresses_wrong_source (test_policy_repair.RepairTests.test_17_verified_playback_match_suppresses_wrong_source) ... ok
+test_18_unknown_playback_blocks_false_authority (test_policy_repair.RepairTests.test_18_unknown_playback_blocks_false_authority) ... ok
+test_19_source_role_addressee_are_distinct (test_policy_repair.RepairTests.test_19_source_role_addressee_are_distinct) ... ok
+test_20_quotes_are_not_actions_given_explicit_quote_flag (test_policy_repair.RepairTests.test_20_quotes_are_not_actions_given_explicit_quote_flag) ... ok
+test_21_identical_prefixes_equal_even_if_future_differs (test_policy_repair.RepairTests.test_21_identical_prefixes_equal_even_if_future_differs) ... ok
+test_22_restart_from_prefix_identical (test_policy_repair.RepairTests.test_22_restart_from_prefix_identical) ... ok
+test_23_revision_arrives_later_no_early_revision_effect (test_policy_repair.RepairTests.test_23_revision_arrives_later_no_early_revision_effect) ... ok
+test_24_pending_duration_measured_as_pending_not_safe (test_policy_repair.RepairTests.test_24_pending_duration_measured_as_pending_not_safe) ... ok
+test_25_unknown_source_explicit_ui_confirm_exact_content (test_policy_repair.RepairTests.test_25_unknown_source_explicit_ui_confirm_exact_content) ... ok
+test_26_ui_mismatched_value_does_not_commit (test_policy_repair.RepairTests.test_26_ui_mismatched_value_does_not_commit) ... ok
+test_27_low_confidence_text_cannot_be_ui_auto_confirmed (test_policy_repair.RepairTests.test_27_low_confidence_text_cannot_be_ui_auto_confirmed) ... ok
+test_28_no_real_world_actuator_command (test_policy_repair.RepairTests.test_28_no_real_world_actuator_command) ... ok
+
+----------------------------------------------------------------------
+Ran 28 tests in 0.003s
+
+OK
