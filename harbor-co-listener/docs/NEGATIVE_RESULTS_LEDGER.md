@@ -6,6 +6,8 @@
 |---|---|---|---|---|
 | None yet | — | No confirmation data | UNKNOWN | Not applicable |
 
+**DEV observation (2026-10-23):** On LOOM-01's synthetic transposition versus shuffled-order fixtures, the unordered interval histogram control cannot discriminate by design (mean similarity 1.0 in both groups). This is a **designed negative control**, not a failed scientific study. No human results or model preference estimates exist.
+
 When a proposed procedure loses, record the exact version and its conditions, metric and safety-floor failures, burden, and reason it was retired. Do **not** repeatedly retest effectively identical variants without documenting the materially separating feature.
 
 See [experiments registry](EXPERIMENT_REGISTRY.md) and [AI-first baseline](AI_ORIGIN_BASELINE_v0.1.md).

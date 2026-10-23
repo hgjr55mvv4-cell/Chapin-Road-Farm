@@ -1,0 +1,15 @@
+Python 3.13.5 / Linux — executed locally 2026-10-23
+Command: python -m unittest discover -s tests -v
+test_bad_length_is_not_silently_scored (test_loom.LoomTests.test_bad_length_is_not_silently_scored) ... ok
+test_deterministic_replay (test_loom.LoomTests.test_deterministic_replay) ... ok
+test_histogram_control_does_not_see_order (test_loom.LoomTests.test_histogram_control_does_not_see_order) ... ok
+test_interval_transposition_invariant (test_loom.LoomTests.test_interval_transposition_invariant) ... ok
+test_no_label_filtering_for_null (test_loom.LoomTests.test_no_label_filtering_for_null) ... ok
+test_results_valid_and_counts (test_loom.LoomTests.test_results_valid_and_counts) ... ok
+test_zero_sets_rejected (test_loom.LoomTests.test_zero_sets_rejected) ... ok
+----------------------------------------------------------------------
+Ran 7 tests in 0.004s
+
+OK
+Exit status: 0
+NOTE: The local code was drafted separately and then transferred to the repository under the same algorithm. GitHub CI runs committed source separately; this receipt is a local run, not proof of CI.

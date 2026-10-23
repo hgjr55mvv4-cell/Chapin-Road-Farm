@@ -11,6 +11,10 @@
 | 4. Co-listening | An AI can attend, remain quiet, ask one well-timed question, and make corrections intelligibly | Fixed questions / no questions; interruptions and performative empathy fail |
 | 5. Transfer | Improvements persist across fresh songs, genres and circumstances without forgetting objections | Frozen incumbent, longitudinal opt-in comparisons; history overfit or unwanted recall fails |
 
+## Base-rate pattern-calibration track (engineering DEV)
+
+[Kimi's first-principles research](KIMI_ROUND01_RELAY_ARCHIVE.md) motivated [LOOM-01](../loom-01/README.md), a small **symbolic** test where an ordered interval descriptor sees transposition-invariant structures, while a matched histogram null is indistinguishable to an unordered descriptor. **No WAV audio, listener reports, model inference or scientifically held-out evaluation has occurred.** Follow-up would require audio synthesis and independently specified null generators, then prospective voluntary reports; this is not a shortcut to personal-affinity science.
+
 ## System sketch (modular, not implemented)
 
 **Local audio** → event/features detector → grounded time evidence → interpretation proposals → **uncertainty & provenance** → human response → consent-gated **listener ledger** → evaluation and correction.

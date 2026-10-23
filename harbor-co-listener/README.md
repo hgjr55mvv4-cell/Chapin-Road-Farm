@@ -33,6 +33,8 @@ These are separable questions. A moving answer is not proof the system heard sou
 | Muse's independent acoustic/attention hypotheses | [Round 01 relay](docs/MUSE_ROUND01_RELAY_ARCHIVE.md), [Round 02 relay](docs/MUSE_ROUND02_RELAY_ARCHIVE.md), [Sol Round 03 engineering handoff](docs/SOL_TO_MUSE_ROUND03.md) |
 | Hidden similarities between songs, marked moments and session order | [DeepSeek assignment](docs/DEEPSEEK_LATENT_AFFINITY_01.md), [Round 02 relay digest](docs/DEEPSEEK_ROUND02_RELAY_ARCHIVE.md), [Sol Round 03 critique](docs/SOL_TO_DEEPSEEK_ROUND03.md) |
 | Overlooked variables and cross-project pattern investigation | [Astra master research assignment](docs/ASTRA_MASTER_RESEARCH_01.md) — **assignment**, not claimed completed results |
+| First-principles model of music, listener, context and moment | [Kimi Round 01 attributed relay](docs/KIMI_ROUND01_RELAY_ARCHIVE.md), [Sol critique](docs/SOL_KIMI_R01_REVIEW.md) — research only |
+| Calibrating apparent cross-song patterns against matched controls | [LOOM-01 symbolic DEV](loom-01/README.md) — executable toy interval preflight, not audio perception or personal affinity |
 
 **Provenance rule:** Model correspondence passed through a human is labeled as **relayed** and does not authenticate claims about tools or experiments. Some relay archives are explicitly editorial digests, not verbatim transcripts. Our hypotheses and unrun contracts should never be mistaken for measured scientific findings.
 
