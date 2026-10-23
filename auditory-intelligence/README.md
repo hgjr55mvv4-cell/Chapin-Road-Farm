@@ -1,6 +1,6 @@
 # Auditory Intelligence — sound, language and situated interaction
 
-**Status: OPEN RESEARCH + SYNTHETIC ENGINEERING DEV. No deployed listening system.**
+**Status: OPEN RESEARCH + SYNTHETIC AND CONTROLLED REAL-RECORDING ENGINEERING DEV. No deployed listening system.**
 
 Research shared across Harbor Co-Listener and Virtual Farm Manager: can an AI distinguish what was **actually recorded**, what a transcript says, what an acoustic event suggests, what context remains unknown and what action is warranted?
 
@@ -21,6 +21,6 @@ Start with [AUDITORY-DEV-01 synthetic waveform preflight](dev-01/README.md), [Mu
 **Level 4:** contextual hypotheses about referents or the conversational situation.  
 **Level 5:** cautious wait, ask, abstain or verify actions; never automatic physical action on speculative inference.
 
-The current code covers Level 0 and **only a narrow Level 1 timing metric on non-speech tones**. A supplied transcript is an external symbolic label, not speech decoded from WAV.
+**Update (Oct 23):** [AUDITORY-EVENT-02](event-increment-02/README.md) handles constructed tone classes; [AUDITORY-REAL-01](real-audio-01/README.md) now uses actual rights-verified **ESC-10 environmental sound WAVs in operator-constructed mixtures**. Its [negative result](real-audio-01/RESULTS_REVIEW.md) found a simple ZCR method detected 3/6 planted sequences (all from one source group), while a 9-bin spectral prototype detected **0/6** with 22/48 abstaining queries. Both used *oracle insertion windows* and only two held-out source groups, so neither establishes spontaneous event localization or real-world classification. [Astra independent full audit assignment](ASTRA_REAL_AUDIO_01_REVIEW.md) published. Actual speech, physical emitter identity and fault diagnosis remain HOLD. A supplied transcript is an external symbolic label, not speech decoded from WAV.
 
 No microphone, bystander surveillance, speaker identification, emotion diagnosis, field operation, copyrighted audio, human labels or paid API inference. Every source/test case is public **EXPOSED DEV**, not scientific confirmation. 
