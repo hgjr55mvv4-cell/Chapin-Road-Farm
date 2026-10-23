@@ -29,6 +29,10 @@ Start with [AUDITORY-DEV-01 synthetic waveform preflight](dev-01/README.md), [Mu
 
 Astra's latest user-relayed audit challenged the original [duplex 15-session mock](SOL_DUPLEX_FACTORIAL_FINDINGS.md): the oracle changed source labels **and** confidence, earlier ASK events blocked later complete corrections, and non-finite confidence could bypass checks. [DUPLEX-POLICY-REPAIR-02](duplex-policy-repair-02/README.md) is a new **mock-only transactional implementation** with 28 local regression tests, explicit UI-only logical commits and a retained failure for confidently misattributed echo. Source, authority, addressee, playback status and quote tags remain **externally supplied fixture metadata**, not measured capabilities. [Sol → Astra/Muse independent audit](SOL_TO_ASTRA_MUSE_POLICY_REPAIR_02.md) and [PLAYBACK-REFERENCE-01 v0.2 acoustic design](duplex-policy-repair-02/PLAYBACK_REFERENCE_01_DESIGN.md) are ready. **No actual playback audio experiment has run; scientific and farm deployment HOLD.**
 
+## Duplex policy repair 03 — separate host control (Oct 23, 2026)
+
+[Astra/Muse mock-only audit](duplex-policy-repair-03/CONTRACT.md) exposed a potential **in-band confirmation trust boundary** in policy repair 02. [Versioned repair 03](duplex-policy-repair-03/README.md) now separates `Ledger.ingest(Speech)` from a **host-only** confirmation/manual-edit port, binds logical writes to exact referent and task-state versions, and requires explicit time-ordered supersession. [Independent challenge assignment](duplex-policy-repair-03/ASTRA_MUSE_REVIEW.md) asks auditors to falsify the boundary. **Host identity and actual UI actions remain scripted mocks, not production authentication**; no real acoustic source is recognized. The original v02 is preserved and [PLAYBACK-REFERENCE-01](duplex-policy-repair-02/PLAYBACK_REFERENCE_01_DESIGN.md) remains DESIGN ONLY.
+
 ## Evidence ladder
 
 **Level 0:** sensor validity (missing, clipping, interference, sample format).  
