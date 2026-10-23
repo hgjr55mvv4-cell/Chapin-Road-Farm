@@ -53,6 +53,7 @@ class Transaction:
     state_version:int=0
     original_value:str|None=None
     reason:str=''
+    supersedes_txid:str=''
 
 @dataclass(frozen=True)
 class Action:
@@ -183,7 +184,8 @@ class Ledger:
             if value and target.field and target.field!=field:
                 self._emit(e.available_ms,'REJECT_DIFFERENT_FIELD_SUPERSESSION',e.event_id)
                 return self.actions[start:]
-            self._void(target,e.event_id,e.available_ms,'Explicitly linked supersession')
+            # Link only: do NOT retract the prior transaction on untrusted speech.
+            # Retraction is deferred until a separate trusted host confirms this change.
         # No automatic same-thread supersession. Multiple proposals for same (field, referent) may not both proceed.
         if value:
             contenders=[t for t in self.transactions.values() if t.status not in TERMINAL and
@@ -197,7 +199,8 @@ class Ledger:
             status='AWAIT_CONFIRM'
         txid=f'{e.event_id}@{e.revision}'
         tx=Transaction(txid,e.event_id,e.thread_id,e.referent_id,field,status,e.observed_ms,e.available_ms,e.available_ms,
-                       value,self.versions.get(key,0),self.values.get(key),reason='Mock transcript, not trusted evidence')
+                       value,self.versions.get(key,0),self.values.get(key),
+                       reason='Mock transcript, not trusted evidence',supersedes_txid=e.supersedes_txid)
         self.transactions[txid]=tx;self.event_txids[e.event_id]=txid
         action={'ASK_TEXT':'ASK_TEXT_CLARIFICATION','ASK_SOURCE':'ASK_SOURCE_CONFIRMATION','AWAIT_CONFIRM':'PROPOSE_CHANGE'}[status]
         self._emit(e.available_ms,action,e.event_id,txid,value)
@@ -255,7 +258,18 @@ class Ledger:
         field,new,rejected=tx.proposal
         if rejected.startswith('not ') and current!=rejected[4:]:
             return self._emit(at_ms,'REJECT_REJECTED_VALUE_NOT_CURRENT',event_id,txid)
+        # A separate trusted host confirmation now authorizes supersession.
+        # Check pending target still refers to the same field/referent and predates us.
+        target=None
+        if tx.supersedes_txid:
+            target=self.transactions.get(tx.supersedes_txid)
+            if (target is None or target.status in TERMINAL or target.id==tx.id or
+                target.field not in ('',tx.field) or target.referent_id!=tx.referent_id or
+                target.thread_id!=tx.thread_id or target.observed_ms>=tx.observed_ms):
+                return self._emit(at_ms,'REJECT_STALE_SUPERSESSION',event_id,txid)
         self.values[key]=new;self.versions[key]=version+1
+        if target is not None:
+            self._void(target,event_id,at_ms,'Superseded by separately host-confirmed change')
         tx.status='COMMITTED';tx.updated_ms=at_ms
         return self._emit(at_ms,'COMMIT_LOGICAL_CHANGE',event_id,txid,tx.proposal,
                           'Trusted host asserted reviewed change; no physical action')

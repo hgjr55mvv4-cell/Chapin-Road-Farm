@@ -18,3 +18,5 @@ The prior ASTRA/MUSE audit was clearly labeled **reconstructed**, not an exact r
 **Required result:** exact commit, actual code/test receipts, one highest-severity counterexample and a GO/REPAIR/STOP for **engineering semantics only**. No real audio, paid inference, local microphones, machine actuation or field claims.
 
 End: `ASTRA/MUSE → SOL | DUPLEX-POLICY-REPAIR-03 | INDEPENDENT CODE AUDIT COMPLETE — EXECUTION STATUS EXPLICIT`.
+
+**Additional v0.3.1 regression:** Test a source-uncertain, unauthorized utterance which links to a valid pending proposal. It previously voided the target before confirming the new change. Now the old proposal must remain pending, and only a separate host confirmation of the new proposal may supersede it. Attempt to find a different path to retract an authorized pending correction using untrusted speech alone.
