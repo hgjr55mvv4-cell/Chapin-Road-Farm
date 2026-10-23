@@ -1,0 +1,36 @@
+{
+  "version": "LOOM-01-v0.1-DEV",
+  "status": "ENGINEERING_DEV_EXPOSED",
+  "seed": 20261023,
+  "independent_generated_triplets": 64,
+  "per_triplet": "one source with a transposed exact-relative positive and a transposed shuffled-order null",
+  "note_events_per_song": 13,
+  "comparison_threshold": 0.83,
+  "ordered_detector": {
+    "true_positive_triplets": 64,
+    "positive_total": 64,
+    "false_positive_triplets": 0,
+    "null_total": 64,
+    "positive_mean_similarity": 1,
+    "null_mean_similarity": 0.234375,
+    "null_max_similarity": 0.5
+  },
+  "histogram_control": {
+    "positive_mean": 1,
+    "null_mean": 1,
+    "note": "both equal by construction: unordered step histograms cannot detect planted order"
+  },
+  "absolute_pitch_control": {
+    "positive_mean": 0,
+    "null_mean": 0.033654,
+    "note": "positive sequence deliberately shifted in absolute pitch"
+  },
+  "limitations": [
+    "Symbols are known directly from generator; no WAV produced or decoded.",
+    "Labels, generator and detector were co-designed; not prospective confirmation.",
+    "This demonstrates preservation of transposed note-interval order, not emotion or affinity.",
+    "Null sequences share exact interval histograms; no planted ordered motif, but chance matches allowed.",
+    "Null is NOT a guarantee of zero musical pattern or statistical model of real songs.",
+    "Songs from one triplet are dependent; denominator is triplets, not individual song pairs."
+  ]
+}
