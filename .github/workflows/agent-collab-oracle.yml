@@ -1,0 +1,32 @@
+name: Agent Collaboration Lab oracle-integrity DEV
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'agent-collaboration-lab/oracle-integrity-dev/**'
+      - '.github/workflows/agent-collab-oracle.yml'
+  pull_request:
+    paths:
+      - 'agent-collaboration-lab/oracle-integrity-dev/**'
+      - '.github/workflows/agent-collab-oracle.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11', '3.13']
+    defaults:
+      run:
+        working-directory: agent-collaboration-lab/oracle-integrity-dev
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Test evaluator and planted mutations
+        run: |
+          python -m unittest discover -s tests -v
+          python verify_oracle.py
