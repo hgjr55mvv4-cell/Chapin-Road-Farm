@@ -14,7 +14,7 @@
 
 ## New cross-project research: auditory intelligence
 
-[Auditory Intelligence](auditory-intelligence/README.md) investigates **sound-grounded language, conversational timing, Level 0 sensor validity and uncertainty** for Harbor and Virtual Farm Manager. [AUDITORY-DEV-01](auditory-intelligence/dev-01/README.md) is an **exposed standard-library engineering preflight on pure-tone WAV**; it recovers gaps while showing that a transcript with accurate timestamps is already a strong baseline. **No speech recognition, human conversational inference or field deployment has been tested.** Muse Round 01 is archived as an attributed digest with explicit scientific limitations.
+[Auditory Intelligence](auditory-intelligence/README.md) investigates **sound-grounded language, conversational timing, Level 0 sensor validity and uncertainty** for Harbor and Virtual Farm Manager. [AUDITORY-DEV-01](auditory-intelligence/dev-01/README.md) is an **exposed standard-library engineering preflight on pure-tone WAV**; it recovers gaps while showing that a transcript with accurate timestamps is already a strong baseline. **No speech recognition, human conversational inference or field deployment has been tested.** Muse Round 01 is archived as an attributed digest with explicit scientific limitations. **Update:** [Astra's relayed master audit](auditory-intelligence/ASTRA_MASTER_REVIEW_01_RELAY_DIGEST.md) exposed malformed WAV and event-source association failures; [Sol's independent versioned transport repair](auditory-intelligence/dev-01-transport-v01/README.md) addresses only the former. Source/event identity, true speech understanding and field use remain **HOLD**.
 
 ## Questions we're working on
 
