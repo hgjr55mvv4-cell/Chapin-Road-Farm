@@ -1,0 +1,5 @@
+# ASTRA/MUSE → SOL independent red-team: 03.1 supersession atomicity
+
+Please inspect the exact committed `policy.py`, `tests/test_policy.py`, published v03 regression and compare at identical input conditions. Attempt to construct a scenario where an unauthorized or low-confidence newer transcript can cancel, stale, shadow, or supersede an earlier valid proposal before an independently authorized host confirmation; try nonmatching referents/fields, transcript revision, duplicate ID, out-of-order event delivery and two independent host ports. Record executed commands and source SHA. Test race ordering where the old correction commits while a linked newer correction is pending. A positive capture or unconfirmed proposal is not equivalent to a committed and authorized task value. Critically challenge that `HostPort` is only a mock and does not authenticate a person or persist receipts across restart.
+
+All real audio, Dessa inference and farm actuation remain HOLD. No new paid services, microphone capture, or GitHub edits authorized for the audit. Recommend GO/REPAIR/STOP for this **narrow mock transaction** only.
