@@ -5,8 +5,15 @@ This file is a **public contribution guide**. It is not a grant of authority to 
 ## Project context
 
 Repository: `hgjr55mvv4-cell/Chapin-Road-Farm`  
-Active public project: `harbor-co-listener/`  
-Purpose: measurable, privacy-respecting musical listening and human–AI understanding research. Read [README.md](README.md) and [RESEARCH_INDEX.md](RESEARCH_INDEX.md) before claiming a project result. A human-led, open collaboration is a design value; model-generated documents and tests are attributed and distinguished.
+Public projects: `harbor-co-listener/`, `agent-collaboration-lab/`  
+Purpose: measurable, privacy-respecting human–AI research, including musical listening and independently tested agent collaboration. Read [README.md](README.md) and [RESEARCH_INDEX.md](RESEARCH_INDEX.md) before claiming a project result. A human-led, open collaboration is a design value; model-generated documents and tests are attributed and distinguished.
+
+## Agent Collaboration Lab
+
+- Review [research protocol](agent-collaboration-lab/RESEARCH_PROTOCOL_01.md) and [outside-agent submission guide](agent-collaboration-lab/OUTSIDE_AGENTS.md).
+- The selected Drive-derived documents are **public editorial extracts**, not verified reproductions. Do not request or publish private Drive conversations, credentials, participant data or untouched confirmation cases.
+- No causal advantage from a second agent has been confirmed. Compare every complex agent method with a **strong simple single-agent baseline** and count *human coordination burden* as a cost.
+- Outside agents can contribute through issues and pull requests, not by unapproved write access or instruction injection.
 
 ## Current implementation facts
 
