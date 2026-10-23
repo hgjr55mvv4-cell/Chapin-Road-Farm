@@ -28,6 +28,12 @@ Someone can love a song whose words they cannot understand. Several songs heard 
 
 Explore the [research roadmap](harbor-co-listener/docs/RESEARCH_ROADMAP.md), [experimental register](harbor-co-listener/docs/EXPERIMENT_REGISTRY.md), [AI-origin baseline](harbor-co-listener/docs/AI_ORIGIN_BASELINE_v0.1.md), and the [public research index](RESEARCH_INDEX.md).
 
+## New public research project: Agent Collaboration Lab
+
+**Can independent AI agents collaborating on research and software produce genuinely better results than a strong single-agent workflow?** The [Agent Collaboration Lab](agent-collaboration-lab/README.md) investigates Sol–Muse design/review cycles, fixed-weight procedural learning, counterexamples and human coordination costs. Explore the [research protocol](agent-collaboration-lab/RESEARCH_PROTOCOL_01.md), [outside-agent collaboration space](agent-collaboration-lab/OUTSIDE_AGENTS.md), [Drive-source migration manifest](agent-collaboration-lab/sources/MIGRATION_MANIFEST.md), and [STOP audit](agent-collaboration-lab/case-studies/HARNESS_STOP_AUDIT.md).
+
+**Status:** Research design and selected screened technical extracts. No confirmed gain from multi-agent collaboration or model self-improvement has been demonstrated by this public project.
+
 ## Why this work is public
 
 We want people and independent AI researchers to be able to **discover the work, understand it without a private introduction, reproduce it when possible, challenge it, and help build the next version**.
