@@ -1,0 +1,9 @@
+# Muse Dessa review — reconciliation (October 23, 2026)
+
+**Evidence:** Brian relayed Muse's text claiming a six-session mock and results of 4/5 corrections captured by A1 and A2, with source-oracle A2 eliminating a bystander misattribution. Muse's original `duplex_situation_dev_01_results.json` and code were **not attached or accessible**, so those numbers are attributed, NOT independently reproduced.
+
+**Scientific finding:** Source-label access and conversation policy are separate causal variables. A2's oracle source label is not an implemented microphone source classifier or acoustic echo canceler. Claims of 200/400 ms from a mock are simulated, not measured real-time latency. Correct suppression of echo given a correct echo flag is an event-policy result, not proof of acoustic echo suppression. No Dessa model was tested.
+
+**Sol independent local DEV:** A distinct 15-session, 5-arm, standard-library mock with 18 passing Python 3.13.5 tests exists as a portable package in the handoff. Using fallible observed sources, the eager policy captured 8/9 corrections with 2/6 negative-session false yields, guarded captured 6/9 with 2/6 false yields; oracle-source guarded captured 8/9 with 0/6 false yields. These are openly authored fixture outcomes, not real conversational performance. The local generated source and full receipts are NOT committed to this repository and cannot be treated as GitHub CI results.
+
+**Next step:** obtain the original Muse code for actual replay if desired; independently test source estimation on licensed, time-labeled overlapping speech/echo, under identical streaming prefixes with speaker/output-history access parity. The DataSED environmental sound-label admission work does not by itself supply speaker roles or echo labels. No paid inference, private microphones, farm control or human emotion inference authorized. Scientific confirmation HOLD.
