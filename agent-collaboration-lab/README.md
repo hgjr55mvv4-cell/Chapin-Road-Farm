@@ -14,6 +14,8 @@ This is the second research project at Chapin Road Farm, alongside [Harbor Co-Li
 - [Muse Round 02 attributed relay](MUSE_ROUND02_RELAY_ARCHIVE.md) and [Sol → Muse Round 03](SOL_TO_MUSE_ROUND03.md) — independent criticism and refined requirements, model experiment NOT RUN.
 - [Muse Round 03 attributed digest](MUSE_ROUND03_RELAY_ARCHIVE.md) and [Sol → Muse Round 04](SOL_TO_MUSE_ROUND04.md) — source-grounded corrections, blind versus sequential review, selective-risk design.
 - [Muse Round 04 attributed digest](MUSE_ROUND04_RELAY_ARCHIVE.md) and [Sol → Muse Round 05](SOL_TO_MUSE_ROUND05.md) — property-test/ground-truth audit and three-way verification scoring, model study still HOLD.
+- [Muse Round 05 attributed digest](MUSE_ROUND05_RELAY_ARCHIVE.md) and [D1 feasibility gate v0.1](D1_FEASIBILITY_GATE_v0.1.md) — decision to freeze only engineering intake, NOT authorize an actual model comparison.
+- [Executable D1 intake preflight](d1-feasibility/README.md) — standard-library mock-only checks and CI; it cannot verify actual provider execution.
 - [Bounded property checks](oracle-integrity-dev/property_tests/README.md), [accept/reject/abstain scorer](oracle-integrity-dev/metric_tests/README.md), and [UNKNOWN/disputes ledger](ORACLE_UNKNOWN_LEDGER.md) — executable engineering DEV, not mathematical proof or scientific confirmation.
 - [Two shadow-mutant adversarial regression cases](oracle-integrity-dev/adversarial_tests/README.md) — actual code checks missing original test coverage; original case set/receipts preserved.
 - [Oracle Integrity DEV-01](oracle-integrity-dev/README.md) — **new executable synthetic demo** with verified planted-mutation checks and actual receipt; not a collaboration effect.
