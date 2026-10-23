@@ -11,6 +11,9 @@ This is the second research project at Chapin Road Farm, alongside [Harbor Co-Li
 - [Sol → Muse: first research handoff](MUSE_ROUND01_HANDOFF.md) — independently challengeable assignment for copy/paste correspondence.
 - [Muse Round 01 relayed response](MUSE_ROUND01_RELAY_ARCHIVE.md) — attributed editorial digest, not verified model execution.
 - [Sol → Muse Round 02](SOL_TO_MUSE_ROUND02.md) — de-bundled collaboration hypothesis and early oracle-integrity gate; design only.
+- [Muse Round 02 attributed relay](MUSE_ROUND02_RELAY_ARCHIVE.md) and [Sol → Muse Round 03](SOL_TO_MUSE_ROUND03.md) — independent criticism and refined requirements, model experiment NOT RUN.
+- [Oracle Integrity DEV-01](oracle-integrity-dev/README.md) — **new executable synthetic demo** with verified planted-mutation checks and actual receipt; not a collaboration effect.
+- [Exposed DEV case ledger](EXPOSED_CLASSES.md) — contamination boundaries for future scientific sampling.
 - [Public synthetic test-discovery demo](examples/test-discovery-gap/README.md) — actual Python 3.13.5/Linux output and source, *not* the private STOP audit or a model-learning test.
 - [Contributor/verification ledger](CONTRIBUTORS_LOG.md) — who proposed, challenged, implemented and verified each artifact.
 - [Research protocol v0.1](RESEARCH_PROTOCOL_01.md) — proposed strong-single versus early/late independent review arms. NOT RUN.
