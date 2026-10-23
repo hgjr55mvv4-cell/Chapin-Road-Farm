@@ -71,7 +71,8 @@ class Tests(unittest.TestCase):
     def test17_explicit_supersession_newer_observation_works(self):
         l=Ledger();l.ingest(speech('a',200))
         r=l.ingest(speech('b',300,text='No, I meant the left gate',supersedes_txid='a@1'))
-        self.assertEqual([x.kind for x in r],['RETRACT_PENDING','PROPOSE_CHANGE'])
+        self.assertEqual([x.kind for x in r],['PROPOSE_CHANGE'])
+        self.assertEqual(l.transactions['a@1'].status,'AWAIT_CONFIRM')
     def test18_wrong_referent_supersession_rejected(self):
         l=Ledger();l.ingest(speech('a',200))
         r=l.ingest(speech('b',300,referent_id='south_gate',supersedes_txid='a@1'))
@@ -83,7 +84,8 @@ class Tests(unittest.TestCase):
     def test20_incomplete_then_explicit_completion(self):
         l=Ledger();l.ingest(speech('a',200,text='No, I...'))
         r=l.ingest(speech('b',300,supersedes_txid='a@1'))
-        self.assertEqual([x.kind for x in r],['RETRACT_PENDING','PROPOSE_CHANGE'])
+        self.assertEqual([x.kind for x in r],['PROPOSE_CHANGE'])
+        self.assertEqual(l.transactions['a@1'].status,'ASK_TEXT')
     def test21_unrelated_event_leaves_pending(self):
         l=Ledger();l.ingest(speech('a',200,text='No, I...'))
         self.assertEqual(l.ingest(speech('b',300,text='nice weather')),[])
@@ -253,6 +255,35 @@ class Tests(unittest.TestCase):
         self.assertEqual(r.kind,'COMMIT_LOGICAL_CHANGE')
         self.assertEqual(l.values[('south_gate','gate')],'right')
 
+    def test55_unknown_source_link_cannot_retract_existing_proposal(self):
+        l=Ledger({('north_gate','gate'):'left'});l.ingest(speech('good',200))
+        x=l.ingest(speech('bad',300,observed_origin='unknown',authority='unauthorized',
+                          source_confidence=.1,supersedes_txid='good@1'))
+        self.assertEqual([r.kind for r in x],['ASK_SOURCE_CONFIRMATION'])
+        self.assertEqual(l.transactions['good@1'].status,'AWAIT_CONFIRM')
+        self.assertEqual(l.values[('north_gate','gate')],'left')
+    def test56_linked_change_voids_original_only_after_host_confirm(self):
+        l=Ledger({('north_gate','gate'):'left'});l.ingest(speech('good',200))
+        proposal=l.ingest(speech('later',300,text='No, I meant the left gate',supersedes_txid='good@1'))
+        self.assertEqual(proposal[0].kind,'PROPOSE_CHANGE')
+        self.assertEqual(l.transactions['good@1'].status,'AWAIT_CONFIRM')
+        port=host(l)
+        result=port.confirm(actor='verified_user',event_id='approve',at_ms=350,txid='later@1',
+                            shown_value=('gate','left',''),referent_id='north_gate',
+                            expected_current='left',expected_version=0)
+        self.assertEqual(result.kind,'COMMIT_LOGICAL_CHANGE')
+        self.assertEqual(l.transactions['good@1'].status,'VOID')
+    def test57_reject_linked_commit_after_target_committed(self):
+        l=Ledger({('north_gate','gate'):'left'});l.ingest(speech('good',200))
+        l.ingest(speech('later',300,text='No, I meant the left gate',supersedes_txid='good@1'))
+        p=host(l)
+        p.confirm(actor='verified_user',event_id='approve_old',at_ms=400,txid='good@1',
+                  shown_value=('gate','right',''),referent_id='north_gate',
+                  expected_current='left',expected_version=0)
+        result=p.confirm(actor='verified_user',event_id='approve_new',at_ms=500,txid='later@1',
+                         shown_value=('gate','left',''),referent_id='north_gate',
+                         expected_current='right',expected_version=1)
+        self.assertIn(result.kind,('REJECT_STALE_TASK_STATE','REJECT_STALE_SUPERSESSION'))
     def test54_one_false_proposal_cannot_mutate_task_without_host_port(self):
         l=Ledger({('north_gate','gate'):'left'})
         r=l.ingest(speech(observed_origin='task_user',playback_match='nonmatch'))
