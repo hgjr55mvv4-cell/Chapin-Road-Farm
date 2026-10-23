@@ -31,6 +31,12 @@ Local Python 3.13.5/Linux execution actually ran **7/7 standard-library tests** 
 
 Original [local unit-test stdout/stderr](receipts/local_unittest_2026-10-23.txt) and [evaluation JSON](receipts/local_eval_2026-10-23.json) are included. GitHub CI should independently execute the committed code on Python 3.11 and 3.13; do not claim CI passed before inspecting actual job output.
 
+## New adversarial evidence (reported, source replay pending)
+
+An independent Astra research run reports that a concentrated three-phrase symbolic null causes **565/2,048** independent null pairs to exceed this demonstration's fixed 0.83 threshold. Strict matching calibration reportedly removes those null alerts **but also removes every planted detection**. Original Astra ZIP/source were not available in this chat; these counts have **not** been independently reproduced by Sol. [Reported result and independent arithmetic check](../hard-null-01/README.md).
+
+**The original engineering demonstration remains valid within its planted fixture. Its threshold is not qualified as a general musical-kinship rarity test.** A structural match can be common; atypicality must be calibrated to a declared reference population and actual search multiplicity. These claims are separate from human meaning.
+
 ## What is next (NOT IMPLEMENTED)
 
 A scientifically meaningful follow-up would need (i) synthetic **audio waveform** rendering/decoding and known note extraction error, (ii) independently generated, more musically realistic null corpora and cultural/genre prior calibrations, (iii) true held-out generator families and locked metric/selection rules, and only later (iv) consented human response data with exposure, state and order alternatives. Instrumental cues and perceived meaning cannot be read off the symbolic melody alone.
