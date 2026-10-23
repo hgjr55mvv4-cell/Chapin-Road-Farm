@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-23",
+  "status": "ENGINEERING_DEV",
+  "python": "3.13.5",
+  "platform": "linux",
+  "tool_execution": "Actual local container Python execution using faithful manual transcriptions of the public repository modules; not a checkout or a model-comparison study.",
+  "command": "python /mnt/data/oracle_r04_dev/replay.py",
+  "result": "PASS",
+  "probes": [
+    {
+      "family": "interval",
+      "new_case": "((-8,-4),(-6,-2))",
+      "expected": true,
+      "bad_implementation": "Clamps overlap lower bound to 0",
+      "bad_passes_old_8": true,
+      "bad_new_result": false,
+      "original_intended_correct_variants_results": [
+        true,
+        true
+      ]
+    },
+    {
+      "family": "first_seen",
+      "new_case": "[('A',1),('a',2)]",
+      "expected": [
+        [
+          "A",
+          1
+        ],
+        [
+          "a",
+          2
+        ]
+      ],
+      "bad_implementation": "Case-folds keys",
+      "bad_passes_old_8": true,
+      "bad_new_result": [
+        [
+          "A",
+          1
+        ]
+      ],
+      "original_intended_correct_variants_results": [
+        [
+          [
+            "A",
+            1
+          ],
+          [
+            "a",
+            2
+          ]
+        ],
+        [
+          [
+            "A",
+            1
+          ],
+          [
+            "a",
+            2
+          ]
+        ]
+      ]
+    }
+  ],
+  "limits": "Both bad implementations and the new counterexamples were authored with knowledge of the original eight cases. They show selected fixture coverage gaps only, not prospective model performance or independent adjudication. The repo-importing regression suite was published separately and requires CI to validate it."
+}
