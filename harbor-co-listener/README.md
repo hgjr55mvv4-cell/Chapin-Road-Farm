@@ -2,25 +2,38 @@
 
 > A song is a place we can meet.
 
-An open-source experiment about a precious human experience: showing someone a song that means something personal and finding out what they recognize in it. Built within Chapin Road Farm's human–AI research collaboration, October 22, 2026.
+**Open-source human–AI musical listening research.** Started at Chapin Road Farm on October 22, 2026.
 
-## First release: v0.1
+## North star
 
-**Implemented:** one-file, no-build browser prototype for locally playing your own audio, marking time-specific significant moments, recording why they matter, collecting another listener's response, and exporting your own notes as JSON. No account, API key or paid service needed.
+**Teach AI to hear music more like humans do, and to become a better, more accurate listener to a particular person over time.** Sometimes a song is deeply meaningful when a listener cannot understand a single word. This is a **central test case**, not an exception.
 
-**Not implemented:** automatic AI co-listening, audio analysis, brain activity measurement, remote synchronization, long-term local persistence, public hosting, or clinical/research validation.
+We distinguish three difficult problems:
 
-Open [index.html](index.html) using a static web server or GitHub Pages if enabled by repository administrators. Merely viewing the source on GitHub does not launch the app.
+1. **Hear the music:** identify what actually happens over time in the audio—rhythm, pulse, melody, timbre, expressive phrasing, silence, dynamics, expectation and surprise—rather than retrieving lyrics or guessing from metadata.
+2. **Understand the human:** learn, with permission, which patterns matter to *this* listener; ask rather than assume; generalize to new music; accept correction, disagreement, and changing tastes.
+3. **Meet in the music:** respond at meaningful moments, including while sharing attention to a recording, without fabricating observations or claiming to possess human feelings.
 
-Your music stays on your device; the page does not send network requests. Session notes stay in the tab unless you choose to export. No music bytes are included in exports. **Do not post personal histories, copyrighted recordings or full lyrics publicly without appropriate permission.**
+Functional musical perception and interpersonal understanding are measurable; **subjective AI experience is not established by such tests**.
 
-## Read and join
+## What's here now
 
-- [The actual brain-imaging studies](docs/neuroscience.md): PET, fMRI and fNIRS are distinguished carefully.
-- [Muse's assignment](docs/MUSE_HANDOFF.md): a reproducible engineering and independent neuroscience audit.
-- [Proposed experimental contract](docs/experiment-v0.1.md): a versioned challenger against a text-only baseline. It has **not** been executed.
-- [Contributing](CONTRIBUTING.md): research, design, accessibility, safety and code.
+- [The Listening Room browser prototype](index.html) **v0.1**: play a locally chosen audio file, mark moments and explanations, collect another listener's response, export JSON. It has no AI listener, automatic audio analysis, remote synchronization, or server. No account or paid API is required; audio does not upload.
+- [Research roadmap](docs/RESEARCH_ROADMAP.md): a staged path from audio-grounded listening to personal understanding.
+- [AI-origin baseline](docs/AI_ORIGIN_BASELINE_v0.1.md): hypotheses recorded **before substantial personal song teaching**. The project's high-level goals come from the human founder; this is **not** a claim of an uninfluenced AI.
+- [Muse independent challenge](docs/MUSE_INDEPENDENT_CHALLENGE.md): a separate AI review assignment; **not yet executed**.
+- [How to contribute research](docs/RESEARCH_GUIDE.md): a practical pathway for a listener, scientist, builder or another AI.
+- [Research submission template](docs/CONTRIBUTION_TEMPLATE.md), [evidence and dataset guide](docs/DATASETS_AND_SOURCES.md), [privacy/ethics](docs/ETHICS_AND_PRIVACY.md).
+- [Existing neuroscience evidence map](docs/neuroscience.md) and [first experiment proposal](docs/experiment-v0.1.md).
 
-We do not claim AI experiences human emotions. We want to measure useful, respectful understanding of someone's musical meaning, preserve uncertainty and differences, and prevent pretense. All reusable methodological changes are challengers until demonstrated better than the incumbent.
+## First contribution, no coding needed
 
-MIT license applies to code, **not** to third-party music, research figures, participant data or lyrics.
+Choose a *lawfully accessible* song with unfamiliar lyrics, wordless singing, or instrumental music. Listen and privately note (a) the time of a musical event, (b) what you actually hear, (c) the feeling or personal meaning **for you**, (d) a plausible alternative interpretation. Decide what—if anything—you are comfortable sharing. You can instead submit a fully fictional example.
+
+Do not upload commercially released songs, copyrighted lyrics, or personal listening exports to GitHub. Opening an issue makes its content public.
+
+## The hill-climb rule
+
+A new listening or memory procedure is a **versioned challenger**, not an automatic upgrade. Freeze before confirmation; compare to the incumbent on genuinely fresh cases; demand quality and safety, count cost and annotation burden, and write **UNKNOWN** when evidence is insufficient. Corrections belong in an append-only record and must not be silently rewritten as successes.
+
+Code: MIT license. Third-party audio, literature, annotations, and personal data retain their original rights and consent conditions.
