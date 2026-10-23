@@ -1,0 +1,46 @@
+name: Auditory real ESC-10 controlled mixture DEV
+on:
+  pull_request:
+    paths:
+      - 'auditory-intelligence/real-audio-01/**'
+      - '.github/workflows/auditory-real-01.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'auditory-intelligence/real-audio-01/**'
+      - '.github/workflows/auditory-real-01.yml'
+permissions:
+  contents: read
+jobs:
+  real_audio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11','3.13']
+    defaults:
+      run:
+        working-directory: auditory-intelligence/real-audio-01
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Check offline source-code tests
+        run: python -m unittest discover -s tests -v
+      - name: Verify license and retrieve 10 pinned real WAV clips
+        run: python fetch_clips.py
+      - name: Run source-heldout real-audio controlled mixtures
+        run: python real_audio.py --audio-dir clip_cache --manifest sources.json --out results.json
+      - name: Verify case accounting and safety boundaries
+        run: |
+          python -c "import json;z=json.load(open('results.json'));assert z['design']['queries']==48 and z['design']['positives']==6 and z['design']['negatives']==42;assert sum(1 for x in z['sources'] if x['role']=='train')==4;assert len(z['rows'])==48;print('VERIFIED_48_ROWS_AND_SOURCE_IDS')"
+      - name: Verify archived raw JSON hash and every public CSV case
+        run: python verify_receipts.py
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: real-audio-01-structured-results-py${{ matrix.python-version }}
+          path: auditory-intelligence/real-audio-01/results.json
+          retention-days: 30

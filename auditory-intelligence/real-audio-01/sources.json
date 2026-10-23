@@ -1,0 +1,92 @@
+{
+  "provenance": {
+    "repository": "https://github.com/karolpiczak/ESC-50",
+    "commit": "33c8ce9eb2cf0b1c2f8bcf322eb349b6be34dbb6",
+    "subset": "ESC-10 (CC BY 3.0); original Freesound sources marked CC0",
+    "metadata": "meta/esc50.csv and LICENSE at exact commit",
+    "timing_annotation": "None from source clips; experimental insertion times only",
+    "redistribution": "Original WAV bytes downloaded only in CI; NOT committed"
+  },
+  "sources": [
+    {
+      "filename": "1-100032-A-0.wav",
+      "role": "train",
+      "category": "dog",
+      "source_id": "100032",
+      "author": "nfrae",
+      "license": "CC0"
+    },
+    {
+      "filename": "1-30226-A-0.wav",
+      "role": "train",
+      "category": "dog",
+      "source_id": "30226",
+      "author": "Heigh-hoo",
+      "license": "CC0"
+    },
+    {
+      "filename": "1-116765-A-41.wav",
+      "role": "train",
+      "category": "chainsaw",
+      "source_id": "116765",
+      "author": "UncleSigmund",
+      "license": "CC0"
+    },
+    {
+      "filename": "1-47250-A-41.wav",
+      "role": "train",
+      "category": "chainsaw",
+      "source_id": "47250",
+      "author": "stomachache",
+      "license": "CC0"
+    },
+    {
+      "filename": "2-114587-A-0.wav",
+      "role": "eval",
+      "category": "dog",
+      "source_id": "114587",
+      "author": "InDaHouse20",
+      "license": "CC0"
+    },
+    {
+      "filename": "3-144028-A-0.wav",
+      "role": "eval",
+      "category": "dog",
+      "source_id": "144028",
+      "author": "djym",
+      "license": "CC0"
+    },
+    {
+      "filename": "2-68391-A-41.wav",
+      "role": "eval",
+      "category": "chainsaw",
+      "source_id": "68391",
+      "author": "Ohrwurm",
+      "license": "CC0"
+    },
+    {
+      "filename": "3-118972-A-41.wav",
+      "role": "eval",
+      "category": "chainsaw",
+      "source_id": "118972",
+      "author": "esperri",
+      "license": "CC0"
+    },
+    {
+      "filename": "2-101676-A-10.wav",
+      "role": "eval",
+      "category": "rain",
+      "source_id": "101676",
+      "author": "nialldoran",
+      "license": "CC0"
+    },
+    {
+      "filename": "3-132852-A-10.wav",
+      "role": "eval",
+      "category": "rain",
+      "source_id": "132852",
+      "author": "inchadney",
+      "license": "CC0"
+    }
+  ]
+}
