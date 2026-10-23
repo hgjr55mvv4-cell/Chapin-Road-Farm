@@ -1,0 +1,32 @@
+name: Harbor hard-null arithmetic check
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'harbor-co-listener/hard-null-01/**'
+      - '.github/workflows/harbor-hard-null-arithmetic.yml'
+  pull_request:
+    paths:
+      - 'harbor-co-listener/hard-null-01/**'
+      - '.github/workflows/harbor-hard-null-arithmetic.yml'
+permissions:
+  contents: read
+jobs:
+  arithmetic:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11','3.13']
+    defaults:
+      run:
+        working-directory: harbor-co-listener/hard-null-01
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Check independent collision arithmetic, not upstream simulation
+        run: |
+          python -m unittest discover -s tests -v
+          python collision_check.py
