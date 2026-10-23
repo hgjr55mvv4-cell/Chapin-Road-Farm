@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-23",
+  "status": "INDEPENDENT_ARITHMETIC_ONLY",
+  "python": "3.13.5",
+  "platform": "linux",
+  "command_tests": "python -m unittest discover -s tests -v",
+  "test_methods": 5,
+  "test_errors": 0,
+  "test_failures": 0,
+  "expected_exact_collisions_in_2048": 260.4136967463556,
+  "exact_collision_probability_iid_three_phrases": 0.12715512536443144,
+  "reported_actual_exact_collisions": 274,
+  "reported_null_alerts": 565,
+  "reported_alert_proportion": 0.27587890625,
+  "reported_wilson_95": [
+    0.2569543021063191,
+    0.29564274047240624
+  ],
+  "archive_verified": false,
+  "upstream_reproduced": false,
+  "scope": "Arithmetic on user-relayed report numbers, not original Astra source or case-level CSV."
+}
