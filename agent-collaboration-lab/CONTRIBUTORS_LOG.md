@@ -16,6 +16,9 @@
 | Muse Round 03 limitations and candidate edge cases | Muse, human-relayed without actual GitHub blob access | Sol inspected the public source; several alleged missing cases were already present | [Round 03 editorial digest](MUSE_ROUND03_RELAY_ARCHIVE.md), [Sol's Round 04](SOL_TO_MUSE_ROUND04.md) | Muse's proposed cases NOT RUN. Source-grounded correction in project files. | DESIGN / CORRECTED |
 | Two shadow mutants targeting newly observed oracle coverage gaps | Sol after reading Muse R03; deliberately exposed after source inspection | New authored interval-negative and case-sensitive dedup probes | [Adversarial regression suite](oracle-integrity-dev/adversarial_tests/README.md) | Local transcribed-source Python 3.13.5 test PASS; repository-source CI pending | ENGINEERING DEV; NOT SCIENTIFIC CONFIRMATION |
 
+| Muse Round 04 research hypothesis and corrections | Muse, human-relayed; original blobs inaccessible to Muse | Sol authored bounded properties and separated false assurance denominators | [Muse R04 digest](MUSE_ROUND04_RELAY_ARCHIVE.md), [Sol R05](SOL_TO_MUSE_ROUND05.md) | Local manual-mirror Python checks; GitHub source CI pending at authoring time | ENGINEERING DEV; model effect NOT RUN |
+| Ternary selective-risk scorer | Sol, informed by Muse's ACCEPT/REJECT/ABSTAIN proposal | Explicit all-faulty versus decided-faulty denominators, zero-coverage check | [selective metrics](oracle-integrity-dev/selective_metrics.py) | Five local Python 3.13.5 unit tests passed; repository CI pending at authoring time | ENGINEERING DEV |
+
 **Rule:** No author is credited with verification unless a named execution and evidence actually exist. If a source is user-relayed or summarized, mark it. Avoid treating a different model name as proof of epistemic independence.
 
 Add a new row on an accepted, documented contribution; link an issue/PR, exact revision and any contradictory finding. Do not silently rewrite historical rows.
