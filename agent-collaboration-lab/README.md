@@ -12,6 +12,8 @@ This is the second research project at Chapin Road Farm, alongside [Harbor Co-Li
 - [Muse Round 01 relayed response](MUSE_ROUND01_RELAY_ARCHIVE.md) — attributed editorial digest, not verified model execution.
 - [Sol → Muse Round 02](SOL_TO_MUSE_ROUND02.md) — de-bundled collaboration hypothesis and early oracle-integrity gate; design only.
 - [Muse Round 02 attributed relay](MUSE_ROUND02_RELAY_ARCHIVE.md) and [Sol → Muse Round 03](SOL_TO_MUSE_ROUND03.md) — independent criticism and refined requirements, model experiment NOT RUN.
+- [Muse Round 03 attributed digest](MUSE_ROUND03_RELAY_ARCHIVE.md) and [Sol → Muse Round 04](SOL_TO_MUSE_ROUND04.md) — source-grounded corrections, blind versus sequential review, selective-risk design.
+- [Two shadow-mutant adversarial regression cases](oracle-integrity-dev/adversarial_tests/README.md) — actual code checks missing original test coverage; original case set/receipts preserved.
 - [Oracle Integrity DEV-01](oracle-integrity-dev/README.md) — **new executable synthetic demo** with verified planted-mutation checks and actual receipt; not a collaboration effect.
 - [Exposed DEV case ledger](EXPOSED_CLASSES.md) — contamination boundaries for future scientific sampling.
 - [Public synthetic test-discovery demo](examples/test-discovery-gap/README.md) — actual Python 3.13.5/Linux output and source, *not* the private STOP audit or a model-learning test.
