@@ -1,0 +1,34 @@
+name: Duplex policy repair v02 DEV
+on:
+  pull_request:
+    paths:
+      - 'auditory-intelligence/duplex-policy-repair-02/**'
+      - '.github/workflows/duplex-policy-repair-v02.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'auditory-intelligence/duplex-policy-repair-02/**'
+      - '.github/workflows/duplex-policy-repair-v02.yml'
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11','3.13']
+    defaults:
+      run:
+        working-directory: auditory-intelligence/duplex-policy-repair-02
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Verify mock transaction regression suite
+        run: python -m unittest discover -s tests -v
+      - name: Verify deterministic six-case demo without original audio
+        run: |
+          python demo.py > /tmp/duplex-v02-demo.json
+          python -c "import json;z=json.load(open('/tmp/duplex-v02-demo.json'));assert z['case_count']==6;assert z['no_audio_or_model_inference'];assert z['cases']['earlier_partial_then_complete']['actions'] == ['ASK_TEXT_CLARIFICATION', 'RETRACT_PENDING', 'PROPOSE_CHANGE'];assert z['cases']['confident_echo_bad_evidence']['actions'] == ['PROPOSE_CHANGE'];assert z['cases']['confident_echo_bad_evidence']['logical_task_state'] == {};assert all(x['physical_actions']==0 for x in z['cases'].values());print('VERIFIED_MOCK_GATES_AND_KNOWN_FALSE_PROPOSAL')"
