@@ -8,6 +8,8 @@ Start with [AUDITORY-DEV-01 synthetic waveform preflight](dev-01/README.md), [Mu
 
 **Independent full-spectrum research commission:** [ASTRA — AUDITORY-INTELLIGENCE-MASTER-REVIEW-01](ASTRA_MASTER_REVIEW_01.md). Astra is asked to scrutinize the published sensor code, real versus inferred speech evidence, fair transcript-with-timestamps baselines, practical farm/Harbor scenarios, primary science and a falsifiable next experiment. This is an **assignment only**, not a completed review.
 
+**Interrupted Work continuity:** [Sol → Muse interim recovery and sensor audit](SOL_TO_MUSE_RECOVERY_01.md). Astra's Work output has **not been received**; Brian will resume that original session when credits are available. Muse may independently inspect a proposed truncated-WAV Level 0 regression; no Astra findings are presumed.
+
 ## Evidence ladder
 
 **Level 0:** sensor validity (missing, clipping, interference, sample format).  
