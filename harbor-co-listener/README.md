@@ -19,6 +19,8 @@ We distinguish three research problems:
 
 These are separable questions. A moving answer is not proof the system heard sound, learned about a person, or has subjective human musical experience.
 
+**Related cross-project lane:** [Auditory Intelligence](../auditory-intelligence/README.md) explores Level 0 sensor reliability, vocal-interaction timing and timestamped sound evidence. Its [synthetic tone-burst prototype](../auditory-intelligence/dev-01/README.md) is engineering-only, **not speech perception or music-affinity confirmation**.
+
 ## What currently exists
 
 **Implemented:** [Browser listening prototype v0.1](index.html). Choose a local audio file, play it, mark a timestamped moment, record another person's perspective, and explicitly export session JSON. No integrated AI listener, server, cloud sync, or automatic long-term personal memory. Audio is not uploaded.
