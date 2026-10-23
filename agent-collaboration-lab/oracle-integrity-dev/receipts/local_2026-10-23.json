@@ -1,0 +1,78 @@
+{
+  "python": "3.13.5",
+  "platform": "linux",
+  "executed_by": "Sol tool execution in current session (not Muse or outside independent reviewer)",
+  "date": "2026-10-23",
+  "tests": {
+    "command": "python -m unittest discover -s tests -v",
+    "methods_discovered": 4,
+    "methods_passed": 4,
+    "exit_code": 0
+  },
+  "oracle": {
+    "command": "python verify_oracle.py",
+    "exit_code": 0,
+    "families": {
+      "interval": {
+        "truth_cases": 8,
+        "accepted_correct": [
+          "max_min",
+          "direct"
+        ],
+        "rejected_mutants": {
+          "touch_counts": [
+            "touching endpoints",
+            "zero length first",
+            "zero length second"
+          ],
+          "containment_only": [
+            "partial overlap",
+            "zero length first",
+            "zero length second",
+            "reverse partial"
+          ],
+          "inclusive_end": [
+            "touching endpoints",
+            "zero length first",
+            "zero length second"
+          ]
+        }
+      },
+      "first_seen": {
+        "truth_cases": 8,
+        "accepted_correct": [
+          "set_append",
+          "reverse_dict"
+        ],
+        "rejected_mutants": {
+          "last_wins": [
+            "adjacent duplicate",
+            "nonadjacent duplicate",
+            "repeated all",
+            "two-key second appearance"
+          ],
+          "sort_keys": [
+            "two in order",
+            "nonadjacent duplicate",
+            "repeated all",
+            "not sorted",
+            "two-key second appearance"
+          ],
+          "adjacent_only": [
+            "nonadjacent duplicate",
+            "repeated all"
+          ]
+        }
+      }
+    },
+    "summary": {
+      "correct_accepted": 4,
+      "correct_total": 4,
+      "mutants_rejected": 6,
+      "mutants_total": 6,
+      "mutation_detection": "PASS",
+      "correct_acceptance": "PASS"
+    }
+  },
+  "limits": "Labels/variants were authored jointly and publicly exposed. Counts apply only to these fixtures. No model inference or independent adjudication."
+}
