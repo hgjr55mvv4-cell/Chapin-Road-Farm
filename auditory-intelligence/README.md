@@ -16,6 +16,11 @@ Start with [AUDITORY-DEV-01 synthetic waveform preflight](dev-01/README.md), [Mu
 
 [Astra's independently reproduced AUDITORY-REAL-01 negative result](dataset-admission-01/ASTRA_AUDIT_RELAY_DIGEST.md) exposes clip-class and event-label uncertainty. The **[DATASED-ADMISSION-01 fail-closed checker](dataset-admission-01/README.md)** now tests provenance declarations, source overlap, audio hashes/WAV completeness, event-time validity, manual listening receipts and explicit verified negatives (**14 synthetic local tests; real DataSED candidates NOT RUN / HOLD**). The candidate filenames and original ZIP were not supplied to Sol. [Muse's bounded independent red-team assignment](SOL_TO_MUSE_DATASED_ADMISSION_01.md) is ready. The nine-frequency real-audio model remains STOP, and VFM mechanical diagnosis remains HOLD.
 
+
+## Dessa and speech-native full-duplex research (Oct 23, 2026)
+
+[Block announced Dessa](https://block.xyz/dessa), a **vendor-described** speech-only-pretrained, full-duplex conversation model. [Source/evidence assessment](DESSA_PUBLIC_RESEARCH_01.md) distinguishes public product claims from independently verified scientific behavior, and [Sol → Muse research handoff](SOL_TO_MUSE_DESSA_SPEECH_NATIVE_01.md) sets a falsifiable **streaming interruption / echo / bystander / correction** study with strong timestamp baselines. **No Dessa weights, access, public evaluation or inference execution obtained; no field deployment, phone capability or psychological interpretation established.** Keep this interaction-policy lane separate from the [DataSED ground-truth admission gate](dataset-admission-01/README.md) and [VFM machine diagnostics](real-audio-01/RESULTS_REVIEW.md).
+
 ## Evidence ladder
 
 **Level 0:** sensor validity (missing, clipping, interference, sample format).  
