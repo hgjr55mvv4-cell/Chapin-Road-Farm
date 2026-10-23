@@ -12,6 +12,10 @@ Start with [AUDITORY-DEV-01 synthetic waveform preflight](dev-01/README.md), [Mu
 
 **Current DEV-02 advancement:** [AUDITORY-EVENT-INCREMENT-02](event-increment-02/README.md) now compares a matched 440→620 Hz tone-class detector with an energy-only baseline on **400 constructed positive and 400 negative WAV recordings**. The [case-level ledger](event-increment-02/receipts/cases.csv), [dataset candidate register](event-increment-02/DATASETS.md), and [independent Muse handoff](SOL_TO_MUSE_EVENT_02_AUDIT.md) are public. This is **synthetic tone-class identification only**, not physical source identity or real-audio understanding.
 
+## Astra review: ground truth before model complexity
+
+[Astra's independently reproduced AUDITORY-REAL-01 negative result](dataset-admission-01/ASTRA_AUDIT_RELAY_DIGEST.md) exposes clip-class and event-label uncertainty. The **[DATASED-ADMISSION-01 fail-closed checker](dataset-admission-01/README.md)** now tests provenance declarations, source overlap, audio hashes/WAV completeness, event-time validity, manual listening receipts and explicit verified negatives (**14 synthetic local tests; real DataSED candidates NOT RUN / HOLD**). The candidate filenames and original ZIP were not supplied to Sol. [Muse's bounded independent red-team assignment](SOL_TO_MUSE_DATASED_ADMISSION_01.md) is ready. The nine-frequency real-audio model remains STOP, and VFM mechanical diagnosis remains HOLD.
+
 ## Evidence ladder
 
 **Level 0:** sensor validity (missing, clipping, interference, sample format).  
