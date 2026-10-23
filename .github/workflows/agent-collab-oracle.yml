@@ -31,3 +31,6 @@ jobs:
           python -m unittest discover -s tests -v
           python verify_oracle.py
           python -m unittest discover -s adversarial_tests -v
+          python -m unittest discover -s property_tests -v
+          python property_tests/test_properties.py
+          python -m unittest discover -s metric_tests -v
