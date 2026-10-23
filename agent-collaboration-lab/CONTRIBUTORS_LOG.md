@@ -13,6 +13,9 @@
 | Muse Round 02 research challenge | Muse (human-relayed attributed memo) | Sol: accepted oracle-integrity priority, rejected “fresh” status of exposed bug classes | [Round 02 digest](MUSE_ROUND02_RELAY_ARCHIVE.md), [Sol Round 03](SOL_TO_MUSE_ROUND03.md) | GitHub files verified; **no actual AI model study** | DESIGN |
 | New Oracle Integrity DEV-01 | Sol, informed by Muse proposal to verify oracle fidelity | Public source invites outside counterexamples | [Two synthetic contracts and 10 implementations](oracle-integrity-dev/README.md) | **Local Python 3.13.5/Linux**: 4 unittest methods; 4/4 intended correct accepted, 6/6 planted mutants rejected. Exposed DEV, not independently adjudicated. | ENGINEERING TESTED (one local environment) |
 
+| Muse Round 03 limitations and candidate edge cases | Muse, human-relayed without actual GitHub blob access | Sol inspected the public source; several alleged missing cases were already present | [Round 03 editorial digest](MUSE_ROUND03_RELAY_ARCHIVE.md), [Sol's Round 04](SOL_TO_MUSE_ROUND04.md) | Muse's proposed cases NOT RUN. Source-grounded correction in project files. | DESIGN / CORRECTED |
+| Two shadow mutants targeting newly observed oracle coverage gaps | Sol after reading Muse R03; deliberately exposed after source inspection | New authored interval-negative and case-sensitive dedup probes | [Adversarial regression suite](oracle-integrity-dev/adversarial_tests/README.md) | Local transcribed-source Python 3.13.5 test PASS; repository-source CI pending | ENGINEERING DEV; NOT SCIENTIFIC CONFIRMATION |
+
 **Rule:** No author is credited with verification unless a named execution and evidence actually exist. If a source is user-relayed or summarized, mark it. Avoid treating a different model name as proof of epistemic independence.
 
 Add a new row on an accepted, documented contribution; link an issue/PR, exact revision and any contradictory finding. Do not silently rewrite historical rows.
