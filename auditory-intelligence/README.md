@@ -21,6 +21,10 @@ Start with [AUDITORY-DEV-01 synthetic waveform preflight](dev-01/README.md), [Mu
 
 [Block announced Dessa](https://block.xyz/dessa), a **vendor-described** speech-only-pretrained, full-duplex conversation model. [Source/evidence assessment](DESSA_PUBLIC_RESEARCH_01.md) distinguishes public product claims from independently verified scientific behavior, and [Sol → Muse research handoff](SOL_TO_MUSE_DESSA_SPEECH_NATIVE_01.md) sets a falsifiable **streaming interruption / echo / bystander / correction** study with strong timestamp baselines. **No Dessa weights, access, public evaluation or inference execution obtained; no field deployment, phone capability or psychological interpretation established.** Keep this interaction-policy lane separate from the [DataSED ground-truth admission gate](dataset-admission-01/README.md) and [VFM machine diagnostics](real-audio-01/RESULTS_REVIEW.md).
 
+## Duplex implementation replay and playback-reference proposal
+
+[Sol's actual-byte ZIP replay and independent diagnostic probes](SOL_DUPLEX_IMPLEMENTATION_REPLAY_01.md) confirmed 18/18 original tests and found three actionable mock issues: **the oracle changes both source and confidence**, a confidently misclassified echo causes a false correction yield, and an unresolved older clarification blocks a later valid correction. [Astra/Muse review and PLAYBACK-REFERENCE-01 handoff](SOL_TO_ASTRA_PLAYBACK_REFERENCE_01.md) distinguishes implementation fixes from a **design-only** echo-versus-independent-speech acoustic experiment. **Neither source authorization nor actual audio listening is qualified.**
+
 ## Evidence ladder
 
 **Level 0:** sensor validity (missing, clipping, interference, sample format).  
