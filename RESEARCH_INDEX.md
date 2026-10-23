@@ -12,6 +12,10 @@
 
 **What is not yet proven:** AI hearing equivalence to humans, shared subjective feeling, a personal affinity fingerprint, machine-discovered hidden musical motifs, or confirmed improvement across sessions. Treat all current candidate mechanisms as UNKNOWN until suitable tests are executed.
 
+## New cross-project research: auditory intelligence
+
+[Auditory Intelligence](auditory-intelligence/README.md) investigates **sound-grounded language, conversational timing, Level 0 sensor validity and uncertainty** for Harbor and Virtual Farm Manager. [AUDITORY-DEV-01](auditory-intelligence/dev-01/README.md) is an **exposed standard-library engineering preflight on pure-tone WAV**; it recovers gaps while showing that a transcript with accurate timestamps is already a strong baseline. **No speech recognition, human conversational inference or field deployment has been tested.** Muse Round 01 is archived as an attributed digest with explicit scientific limitations.
+
 ## Questions we're working on
 
 1. How can software demonstrate it actually observed a **sound event**, rather than inferring it from lyrics, title or a person's description?
