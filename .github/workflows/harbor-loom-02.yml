@@ -1,0 +1,32 @@
+name: Harbor LOOM-02 choice-set rarity DEV
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'harbor-co-listener/loom-02/**'
+      - '.github/workflows/harbor-loom-02.yml'
+  pull_request:
+    paths:
+      - 'harbor-co-listener/loom-02/**'
+      - '.github/workflows/harbor-loom-02.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11', '3.13']
+    defaults:
+      run:
+        working-directory: harbor-co-listener/loom-02
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run analytic and source-conditional null tests
+        run: |
+          python -m unittest discover -s tests -v
+          python loom02.py --queries 8192 --seed 20261023 --out ci_results.json

@@ -1,0 +1,260 @@
+{
+  "version": "LOOM-02A-v0.1-EXPOSED-DEV",
+  "status": "ENGINEERING_DEV_ONLY",
+  "alpha_per_query": 0.05,
+  "seed": 20261023,
+  "templates": 8,
+  "phrases_per_song": 3,
+  "comparison_unit": "query (one source, m candidate songs), NOT candidate pairs",
+  "scenarios": [
+    {
+      "null_generator": "uniform",
+      "assumed_calibration_family": "uniform",
+      "candidates_per_query": 1,
+      "queries_per_condition": 8192,
+      "analytical": {
+        "raw_exact": {
+          "null_alert_probability": 0.001953125,
+          "planted_detection_probability": 1.0
+        },
+        "pair_calibrated": {
+          "null_alert_probability": 0.001953125,
+          "planted_detection_probability": 1.0
+        },
+        "query_calibrated": {
+          "null_alert_probability": 0.001953125,
+          "planted_detection_probability": 1.0
+        }
+      },
+      "observed": {
+        "raw_exact": {
+          "null_alerts": 12,
+          "positive_detections": 8192,
+          "null_alert_fraction": 0.00146484375,
+          "positive_detection_fraction": 1.0
+        },
+        "pair_calibrated": {
+          "null_alerts": 12,
+          "positive_detections": 8192,
+          "null_alert_fraction": 0.00146484375,
+          "positive_detection_fraction": 1.0
+        },
+        "query_calibrated": {
+          "null_alerts": 12,
+          "positive_detections": 8192,
+          "null_alert_fraction": 0.00146484375,
+          "positive_detection_fraction": 1.0
+        }
+      }
+    },
+    {
+      "null_generator": "uniform",
+      "assumed_calibration_family": "uniform",
+      "candidates_per_query": 16,
+      "queries_per_condition": 8192,
+      "analytical": {
+        "raw_exact": {
+          "null_alert_probability": 0.030796382292475943,
+          "planted_detection_probability": 1.0
+        },
+        "pair_calibrated": {
+          "null_alert_probability": 0.030796382292475943,
+          "planted_detection_probability": 1.0
+        },
+        "query_calibrated": {
+          "null_alert_probability": 0.030796382292475943,
+          "planted_detection_probability": 1.0
+        }
+      },
+      "observed": {
+        "raw_exact": {
+          "null_alerts": 252,
+          "positive_detections": 8192,
+          "null_alert_fraction": 0.03076171875,
+          "positive_detection_fraction": 1.0
+        },
+        "pair_calibrated": {
+          "null_alerts": 252,
+          "positive_detections": 8192,
+          "null_alert_fraction": 0.03076171875,
+          "positive_detection_fraction": 1.0
+        },
+        "query_calibrated": {
+          "null_alerts": 252,
+          "positive_detections": 8192,
+          "null_alert_fraction": 0.03076171875,
+          "positive_detection_fraction": 1.0
+        }
+      }
+    },
+    {
+      "null_generator": "concentrated",
+      "assumed_calibration_family": "concentrated",
+      "candidates_per_query": 1,
+      "queries_per_condition": 8192,
+      "analytical": {
+        "raw_exact": {
+          "null_alert_probability": 0.12715512536442994,
+          "planted_detection_probability": 0.9999999999999952
+        },
+        "pair_calibrated": {
+          "null_alert_probability": 0.009506125364431496,
+          "planted_detection_probability": 0.6569999999999981
+        },
+        "query_calibrated": {
+          "null_alert_probability": 0.009506125364431496,
+          "planted_detection_probability": 0.6569999999999981
+        }
+      },
+      "observed": {
+        "raw_exact": {
+          "null_alerts": 1058,
+          "positive_detections": 8192,
+          "null_alert_fraction": 0.129150390625,
+          "positive_detection_fraction": 1.0
+        },
+        "pair_calibrated": {
+          "null_alerts": 90,
+          "positive_detections": 5378,
+          "null_alert_fraction": 0.010986328125,
+          "positive_detection_fraction": 0.656494140625
+        },
+        "query_calibrated": {
+          "null_alerts": 90,
+          "positive_detections": 5378,
+          "null_alert_fraction": 0.010986328125,
+          "positive_detection_fraction": 0.656494140625
+        }
+      }
+    },
+    {
+      "null_generator": "concentrated",
+      "assumed_calibration_family": "uniform",
+      "candidates_per_query": 1,
+      "queries_per_condition": 8192,
+      "analytical": {
+        "raw_exact": {
+          "null_alert_probability": 0.12715512536442994,
+          "planted_detection_probability": 0.9999999999999952
+        },
+        "pair_calibrated": {
+          "null_alert_probability": 0.12715512536442994,
+          "planted_detection_probability": 0.9999999999999952
+        },
+        "query_calibrated": {
+          "null_alert_probability": 0.12715512536442994,
+          "planted_detection_probability": 0.9999999999999952
+        }
+      },
+      "observed": {
+        "raw_exact": {
+          "null_alerts": 1058,
+          "positive_detections": 8192,
+          "null_alert_fraction": 0.129150390625,
+          "positive_detection_fraction": 1.0
+        },
+        "pair_calibrated": {
+          "null_alerts": 1058,
+          "positive_detections": 8192,
+          "null_alert_fraction": 0.129150390625,
+          "positive_detection_fraction": 1.0
+        },
+        "query_calibrated": {
+          "null_alerts": 1058,
+          "positive_detections": 8192,
+          "null_alert_fraction": 0.129150390625,
+          "positive_detection_fraction": 1.0
+        }
+      }
+    },
+    {
+      "null_generator": "concentrated",
+      "assumed_calibration_family": "concentrated",
+      "candidates_per_query": 16,
+      "queries_per_condition": 8192,
+      "analytical": {
+        "raw_exact": {
+          "null_alert_probability": 0.473448202683585,
+          "planted_detection_probability": 0.9999999999999952
+        },
+        "pair_calibrated": {
+          "null_alert_probability": 0.13086157370979143,
+          "planted_detection_probability": 0.6569999999999981
+        },
+        "query_calibrated": {
+          "null_alert_probability": 0.003884718344878144,
+          "planted_detection_probability": 0.21599999999999853
+        }
+      },
+      "observed": {
+        "raw_exact": {
+          "null_alerts": 3965,
+          "positive_detections": 8192,
+          "null_alert_fraction": 0.4840087890625,
+          "positive_detection_fraction": 1.0
+        },
+        "pair_calibrated": {
+          "null_alerts": 1082,
+          "positive_detections": 5359,
+          "null_alert_fraction": 0.132080078125,
+          "positive_detection_fraction": 0.6541748046875
+        },
+        "query_calibrated": {
+          "null_alerts": 28,
+          "positive_detections": 1748,
+          "null_alert_fraction": 0.00341796875,
+          "positive_detection_fraction": 0.21337890625
+        }
+      }
+    },
+    {
+      "null_generator": "concentrated",
+      "assumed_calibration_family": "uniform",
+      "candidates_per_query": 16,
+      "queries_per_condition": 8192,
+      "analytical": {
+        "raw_exact": {
+          "null_alert_probability": 0.473448202683585,
+          "planted_detection_probability": 0.9999999999999952
+        },
+        "pair_calibrated": {
+          "null_alert_probability": 0.473448202683585,
+          "planted_detection_probability": 0.9999999999999952
+        },
+        "query_calibrated": {
+          "null_alert_probability": 0.473448202683585,
+          "planted_detection_probability": 0.9999999999999952
+        }
+      },
+      "observed": {
+        "raw_exact": {
+          "null_alerts": 3965,
+          "positive_detections": 8192,
+          "null_alert_fraction": 0.4840087890625,
+          "positive_detection_fraction": 1.0
+        },
+        "pair_calibrated": {
+          "null_alerts": 3965,
+          "positive_detections": 8192,
+          "null_alert_fraction": 0.4840087890625,
+          "positive_detection_fraction": 1.0
+        },
+        "query_calibrated": {
+          "null_alerts": 3965,
+          "positive_detections": 8192,
+          "null_alert_fraction": 0.4840087890625,
+          "positive_detection_fraction": 1.0
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "This is a NEW independent toy program, not a reproduction of Astra hard-null source or results.",
+    "The assumed calibration family is deliberately known from the generator (oracle model).",
+    "Exact sequence identity only; ignores rhythm, phrasing in actual audio, emotion and experience.",
+    "The source-conditioned probability measures chance coincidence, not the causal history of copying.",
+    "Concentrated template probabilities are artificial; NOT an empirical distribution of human music.",
+    "Null and positive examples use independent seeded draws; no outputs discarded or tuned after seeing results.",
+    "All generated data are exposed DEV; results cannot confirm individual listening significance."
+  ]
+}

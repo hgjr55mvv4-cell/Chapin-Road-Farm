@@ -36,6 +36,7 @@ These are separable questions. A moving answer is not proof the system heard sou
 | First-principles model of music, listener, context and moment | [Kimi Round 01 attributed relay](docs/KIMI_ROUND01_RELAY_ARCHIVE.md), [Sol critique](docs/SOL_KIMI_R01_REVIEW.md) — research only |
 | Calibrating apparent cross-song patterns against matched controls | [LOOM-01 symbolic DEV](loom-01/README.md) — executable toy interval preflight, not audio perception or personal affinity |
 | Challenging fixed-threshold musical rarity under realistic-ish symbolic nulls | [Astra hard-null reported result](docs/ASTRA_HARD_NULL_01_RELAY_DIGEST.md), [Sol adjudication and independent arithmetic](hard-null-01/README.md) — upstream ZIP **not received/replayed**; fixed 0.83 is not a qualified rarity cutoff |
+| Choice-set conditioned musical rarity and search multiplicity | [LOOM-02A DEV](loom-02/README.md) — executable oracle-known symbolic grammar, 1 vs 16 candidates, modeled false alerts **and planted sensitivity**; not real music or emotion |
 
 **Provenance rule:** Model correspondence passed through a human is labeled as **relayed** and does not authenticate claims about tools or experiments. Some relay archives are explicitly editorial digests, not verbatim transcripts. Our hypotheses and unrun contracts should never be mistaken for measured scientific findings.
 

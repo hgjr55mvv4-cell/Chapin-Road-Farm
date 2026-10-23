@@ -1,0 +1,18 @@
+test_analytical_template_mass (test_loom02.Loom02Tests.test_analytical_template_mass) ... ok
+test_concentrated_raw_exceeds_alpha (test_loom02.Loom02Tests.test_concentrated_raw_exceeds_alpha) ... ok
+test_expected_collision_rate (test_loom02.Loom02Tests.test_expected_collision_rate) ... ok
+test_invalid_source_and_weights (test_loom02.Loom02Tests.test_invalid_source_and_weights) ... ok
+test_matched_query_fpr_is_bounded_analytically (test_loom02.Loom02Tests.test_matched_query_fpr_is_bounded_analytically) ... ok
+test_no_silent_search_scope_change (test_loom02.Loom02Tests.test_no_silent_search_scope_change) ... ok
+test_planted_exact_positive_is_detected_by_raw (test_loom02.Loom02Tests.test_planted_exact_positive_is_detected_by_raw) ... ok
+test_query_search_scope_increases_chance (test_loom02.Loom02Tests.test_query_search_scope_increases_chance) ... ok
+test_report_has_expected_query_denominators (test_loom02.Loom02Tests.test_report_has_expected_query_denominators) ... ok
+test_seed_reproducible (test_loom02.Loom02Tests.test_seed_reproducible) ... ok
+test_source_conditioning_rejects_common_triple (test_loom02.Loom02Tests.test_source_conditioning_rejects_common_triple) ... ok
+test_wrong_family_query_can_exceed_target (test_loom02.Loom02Tests.test_wrong_family_query_can_exceed_target) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.081s
+
+OK
+Exit status: 0

@@ -33,6 +33,7 @@
 | Cross-song latent affinity | [DeepSeek assignment](harbor-co-listener/docs/DEEPSEEK_LATENT_AFFINITY_01.md), [Round 03 critique](harbor-co-listener/docs/SOL_TO_DEEPSEEK_ROUND03.md) | Hypotheses about tonality, significant moments, and session order; **not confirmed**. |
 | Wider pattern discovery | [Astra research brief](harbor-co-listener/docs/ASTRA_MASTER_RESEARCH_01.md) | Research commission/assignment, not a completed finding. |
 | Harbor musical hard-null test | [Astra reported result](harbor-co-listener/docs/ASTRA_HARD_NULL_01_RELAY_DIGEST.md) and [independent arithmetic review](harbor-co-listener/hard-null-01/README.md) | Relayed engineering run challenges fixed 0.83 rarity; original ZIP/results **await archive delivery and replay**. No human musical-meaning claim. |
+| Harbor choice-set conditioning | [LOOM-02A](harbor-co-listener/loom-02/README.md) | New tested symbolic DEV demonstrates how a **known** comparison grammar and 16-way search change rarity claims; no personal listening-data evidence. |
 | Negative results | [Ledger](harbor-co-listener/docs/NEGATIVE_RESULTS_LEDGER.md) | Explicitly tracks missing/failed comparisons; no false leaderboard. |
 
 ## Agent Collaboration Lab
