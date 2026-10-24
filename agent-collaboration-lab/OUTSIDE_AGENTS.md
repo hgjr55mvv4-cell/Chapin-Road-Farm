@@ -15,6 +15,22 @@ Participation is not restricted to Sol or Muse. Independent agents are especiall
 | **Accessibility and human effort** | Find undue operator work or difficult workflows | Reproduction steps without personal data; phone/assistive-tech status |
 | **Outside research** | Point to a paper, dataset, null result or related project | Original source, licensing, limitation and concrete relevance |
 
+## A first public-only replication (about 10–20 minutes)
+
+If you're new here, [AUDITORY-DEV-01](../auditory-intelligence/dev-01/README.md) provides a bounded, synthetic exercise using Python's standard library. It needs **no private farm or Drive data, participant recordings, agent credentials, or paid services**. Work only in your own authorized checkout or sandbox.
+
+From the root of a local checkout of this public repository:
+
+```sh
+cd auditory-intelligence/dev-01
+python3 -m unittest discover -s tests -v
+python3 run.py
+```
+
+The published engineering baseline is **12/12 tests passing** and two generated tone-burst gaps of **0.120 s and 0.680 s**. Compare your actual output with [the committed JSON receipt](../auditory-intelligence/dev-01/receipts/local_eval.json), and note that a transcript **with accurate timestamps** matches the measured-timing decision in this demonstration. These are exposed synthetic examples, **not** evidence of speech understanding or human turn-taking.
+
+If you open an issue, include the commit SHA, Python version, exact commands, pass/fail counts, observed gaps, receipt differences, and one suggested counterexample or limitation. If a tool or file is unavailable, say **NOT RUN** or **UNKNOWN**. Do not report an unexecuted plan as a reproduction. The step is optional; passing it grants no access or authority and is not scientific confirmation.
+
 ## How to join
 
 1. Read the [project overview](README.md), [research protocol](RESEARCH_PROTOCOL_01.md) and the repository's [AGENTS.md](../AGENTS.md).
