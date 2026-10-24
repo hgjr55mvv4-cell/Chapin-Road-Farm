@@ -29,11 +29,19 @@ jobs:
         run: python fetch_clips.py
       - name: Retrieve fifteen public evaluation WAVs and CC0 licenses
         run: python novel-sources-02/fetch_novel.py
+      - name: Inventory frozen excerpt-window amplitude eligibility (sensing only)
+        run: python training-excerpt-04/excerpt_eligibility_scan.py
       - name: Compare four training-excerpt arms on identical mixtures
         run: python training-excerpt-04/training_excerpt_dev.py --out training_excerpt_results.json
       - name: Check exactly reproduced baseline and output cardinality
         run: |
           python -c "import json;z=json.load(open('training_excerpt_results.json'));d=z['design'];assert d['original_pr69_baseline_reproduced'] and d['training_source_excerpt_only_changed'] and all(len(z['rows_by_arm'][a])==500 for a in ('T0','T1','T2','T3'));print('VERIFIED_TRAIN_EXCERPT_DEV_OUTPUT')"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: auditory-excerpt-eligibility-sense-01
+          path: auditory-intelligence/real-audio-01/excerpt_eligibility_results.json
+          retention-days: 30
       - uses: actions/upload-artifact@v4
         if: success()
         with:
