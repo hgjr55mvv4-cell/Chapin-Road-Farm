@@ -1,0 +1,38 @@
+name: Auditory source crossing exploratory DEV
+on:
+  pull_request:
+    paths:
+      - 'auditory-intelligence/real-audio-01/source-crossing-01/**'
+      - '.github/workflows/auditory-source-crossing-dev01.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  crossing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: auditory-intelligence/real-audio-01
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Original real-audio offline tests
+        run: python -m unittest discover -s tests -v
+      - name: Verify frozen crossing plan offline
+        run: python -m unittest discover -s source-crossing-01/tests -v
+      - name: Retrieve and license-check ten pinned real WAVs
+        run: python fetch_clips.py
+      - name: Execute eight-source-cross DEV diagnostic with diagonal regression
+        run: python source-crossing-01/source_crossing_dev.py --out crossed_results.json
+      - name: Validate output cardinality and provenance
+        run: |
+          python -c "import json;z=json.load(open('crossed_results.json'));d=z['design'];assert d['constructed_rows']==192 and d['crossed_configurations']==8 and d['distinct_eval_recordings']==6 and d['diagonal_original_48_rows_reproduced'];print('VERIFIED_EXPOSED_CROSSING_OUTPUT')"
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: auditory-source-crossing-dev-01
+          path: auditory-intelligence/real-audio-01/crossed_results.json
+          retention-days: 30
