@@ -1,0 +1,38 @@
+{
+  "research_id": "AUDITORY-DEV-01",
+  "status": "EXPOSED_ENGINEERING_DEV",
+  "sample_rate_hz": 8000,
+  "frame_resolution_ms": 10,
+  "cases": [
+    {
+      "case": "short",
+      "external_transcript": "I thought you knew.",
+      "waveform_is_real_speech": false,
+      "gold_gap_s": 0.12,
+      "sensor_status": "OK",
+      "observed_gap_s": 0.12,
+      "gap_absolute_error_s": 0.0,
+      "audio_activity_action": "WAIT",
+      "transcript_only_action": "UNKNOWN_WAIT",
+      "transcript_with_gold_timestamps_action": "WAIT"
+    },
+    {
+      "case": "long",
+      "external_transcript": "I thought you knew.",
+      "waveform_is_real_speech": false,
+      "gold_gap_s": 0.68,
+      "sensor_status": "OK",
+      "observed_gap_s": 0.68,
+      "gap_absolute_error_s": 0.0,
+      "audio_activity_action": "READY_NOT_OBLIGATED_TO_REPLY",
+      "transcript_only_action": "UNKNOWN_WAIT",
+      "transcript_with_gold_timestamps_action": "READY_NOT_OBLIGATED_TO_REPLY"
+    }
+  ],
+  "nonclaims": [
+    "No intelligible speech is generated or decoded; transcript text is an external label.",
+    "No turn-end prediction before a future event; this measures a completed inter-burst gap offline.",
+    "No real user preference, intent, mental state, or AI conversation effect is measured.",
+    "Transcript plus accurate timestamps is a fair strong baseline that matches audio-derived timing when detection works."
+  ]
+}
