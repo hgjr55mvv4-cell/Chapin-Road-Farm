@@ -1,0 +1,213 @@
+{
+  "research_id": "AUDITORY-NOVEL-SOURCES-DEV-02",
+  "status": "FROZEN_SELECTION_DESIGN_DEV",
+  "original_baseline_commit": "0514ddca9b1f6c2067d2edd9ad4b187808ca776f",
+  "dataset_commit": "33c8ce9eb2cf0b1c2f8bcf322eb349b6be34dbb6",
+  "selection_rule": "Among all non-fold-1 ESC-10 WAV entries with original source [CC0] and Freesound source ID absent from the original ten-source manifest, keep the lexicographically first WAV per source ID. For chainsaw use all five remaining unique source IDs; for dog and rain choose the numerically smallest source ID in each fold 2,3,4,5 plus the numerically smallest remaining source ID. All selections fixed before any new recordings are evaluated.",
+  "train_sources": [
+    {
+      "filename": "1-100032-A-0.wav",
+      "role": "train",
+      "category": "dog",
+      "source_id": "100032",
+      "author": "nfrae",
+      "license": "CC0"
+    },
+    {
+      "filename": "1-30226-A-0.wav",
+      "role": "train",
+      "category": "dog",
+      "source_id": "30226",
+      "author": "Heigh-hoo",
+      "license": "CC0"
+    },
+    {
+      "filename": "1-116765-A-41.wav",
+      "role": "train",
+      "category": "chainsaw",
+      "source_id": "116765",
+      "author": "UncleSigmund",
+      "license": "CC0"
+    },
+    {
+      "filename": "1-47250-A-41.wav",
+      "role": "train",
+      "category": "chainsaw",
+      "source_id": "47250",
+      "author": "stomachache",
+      "license": "CC0"
+    }
+  ],
+  "new_eval_sources": [
+    {
+      "filename": "2-117271-A-0.wav",
+      "role": "eval",
+      "category": "dog",
+      "source_id": "117271",
+      "fold": 2,
+      "author": "polipa",
+      "license": "CC0"
+    },
+    {
+      "filename": "3-136288-A-0.wav",
+      "role": "eval",
+      "category": "dog",
+      "source_id": "136288",
+      "fold": 3,
+      "author": "felix.blume",
+      "license": "CC0"
+    },
+    {
+      "filename": "4-183992-A-0.wav",
+      "role": "eval",
+      "category": "dog",
+      "source_id": "183992",
+      "fold": 4,
+      "author": "qubodup",
+      "license": "CC0"
+    },
+    {
+      "filename": "5-9032-A-0.wav",
+      "role": "eval",
+      "category": "dog",
+      "source_id": "9032",
+      "fold": 5,
+      "author": "MisterTood",
+      "license": "CC0"
+    },
+    {
+      "filename": "2-118072-A-0.wav",
+      "role": "eval",
+      "category": "dog",
+      "source_id": "118072",
+      "fold": 2,
+      "author": "ipears1",
+      "license": "CC0"
+    },
+    {
+      "filename": "4-149294-A-41.wav",
+      "role": "eval",
+      "category": "chainsaw",
+      "source_id": "149294",
+      "fold": 4,
+      "author": "Vocalphobic",
+      "license": "CC0"
+    },
+    {
+      "filename": "4-157611-A-41.wav",
+      "role": "eval",
+      "category": "chainsaw",
+      "source_id": "157611",
+      "fold": 4,
+      "author": "DJillcom",
+      "license": "CC0"
+    },
+    {
+      "filename": "4-169127-A-41.wav",
+      "role": "eval",
+      "category": "chainsaw",
+      "source_id": "169127",
+      "fold": 4,
+      "author": "fkurz",
+      "license": "CC0"
+    },
+    {
+      "filename": "5-170338-A-41.wav",
+      "role": "eval",
+      "category": "chainsaw",
+      "source_id": "170338",
+      "fold": 5,
+      "author": "micadoe",
+      "license": "CC0"
+    },
+    {
+      "filename": "5-222524-A-41.wav",
+      "role": "eval",
+      "category": "chainsaw",
+      "source_id": "222524",
+      "fold": 5,
+      "author": "Darrenlibrarian",
+      "license": "CC0"
+    },
+    {
+      "filename": "2-72970-A-10.wav",
+      "role": "eval",
+      "category": "rain",
+      "source_id": "72970",
+      "fold": 2,
+      "author": "bsyapril88",
+      "license": "CC0"
+    },
+    {
+      "filename": "3-140774-A-10.wav",
+      "role": "eval",
+      "category": "rain",
+      "source_id": "140774",
+      "fold": 3,
+      "author": "Sam80",
+      "license": "CC0"
+    },
+    {
+      "filename": "4-160999-A-10.wav",
+      "role": "eval",
+      "category": "rain",
+      "source_id": "160999",
+      "fold": 4,
+      "author": "Mafon2",
+      "license": "CC0"
+    },
+    {
+      "filename": "5-181766-A-10.wav",
+      "role": "eval",
+      "category": "rain",
+      "source_id": "181766",
+      "fold": 5,
+      "author": "laura222",
+      "license": "CC0"
+    },
+    {
+      "filename": "2-73027-A-10.wav",
+      "role": "eval",
+      "category": "rain",
+      "source_id": "73027",
+      "fold": 2,
+      "author": "j1987",
+      "license": "CC0"
+    }
+  ],
+  "analysis_design": {
+    "new_eval_source_ids": 15,
+    "distinct_per_category": 5,
+    "crosses": 125,
+    "schedules": [
+      [
+        "dog",
+        "chainsaw"
+      ],
+      [
+        "chainsaw",
+        "dog"
+      ],
+      [
+        "dog",
+        "dog"
+      ],
+      [
+        "chainsaw",
+        "chainsaw"
+      ]
+    ],
+    "gain": 0.5,
+    "rows": 500,
+    "oracle_insertion_slots": true,
+    "excerpt": "frozen highest-RMS 0.8 seconds",
+    "analysis_unit": "Freesound original source ID; triples reuse each source and are not independent"
+  },
+  "nonclaims": [
+    "ESC-10 clip-level class tags are not event annotations.",
+    "All methods receive imposed 0.4s/1.6s slot boundaries.",
+    "The five-source class samples are deliberately bounded convenience selections, not probability draws.",
+    "125 mixed combinations and 500 constructed rows are not 125/500 independent recordings.",
+    "New source evaluation is exposed development, not scientific confirmation, human listening validation or field deployment."
+  ]
+}
