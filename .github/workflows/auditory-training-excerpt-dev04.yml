@@ -1,0 +1,42 @@
+name: Auditory training-excerpt sensitivity DEV
+on:
+  pull_request:
+    paths:
+      - 'auditory-intelligence/real-audio-01/training-excerpt-04/**'
+      - '.github/workflows/auditory-training-excerpt-dev04.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  training-excerpts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    defaults:
+      run:
+        working-directory: auditory-intelligence/real-audio-01
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Original acoustic tests
+        run: python -m unittest discover -s tests -v
+      - name: Prior new-source plan tests
+        run: python -m unittest discover -s novel-sources-02/tests -v
+      - name: Frozen training-excerpt checks
+        run: python -m unittest discover -s training-excerpt-04/tests -v
+      - name: Retrieve original ten source WAVs and licenses
+        run: python fetch_clips.py
+      - name: Retrieve fifteen public evaluation WAVs and CC0 licenses
+        run: python novel-sources-02/fetch_novel.py
+      - name: Compare four training-excerpt arms on identical mixtures
+        run: python training-excerpt-04/training_excerpt_dev.py --out training_excerpt_results.json
+      - name: Check exactly reproduced baseline and output cardinality
+        run: |
+          python -c "import json;z=json.load(open('training_excerpt_results.json'));d=z['design'];assert d['original_pr69_baseline_reproduced'] and d['training_source_excerpt_only_changed'] and all(len(z['rows_by_arm'][a])==500 for a in ('T0','T1','T2','T3'));print('VERIFIED_TRAIN_EXCERPT_DEV_OUTPUT')"
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: auditory-training-excerpt-dev-04
+          path: auditory-intelligence/real-audio-01/training_excerpt_results.json
+          retention-days: 30
