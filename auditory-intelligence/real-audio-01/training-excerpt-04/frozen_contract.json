@@ -1,0 +1,73 @@
+{
+  "research_id": "AUDITORY-TRAIN-EXCERPT-DEV-04",
+  "version": "v0.1-frozen-before-execution",
+  "status": "EXPOSED_ENGINEERING_DEV",
+  "parent_pr_69_head": "8f80c77929054e397c21dd537f37f61306fd3ea0",
+  "baseline_real_audio_sha256": "3dc01418d91546e373b21520b25f22b4ae4909070df2903a70d54da479c3e014",
+  "source_manifest_sha256": "bb6d17f2fb8f81db7b74f45ea0120716433263bf8edf088bdb0b83524de38b11",
+  "selection_method": "random.Random(20261024 + int(source_id)).sample(range(17),3) on the fixed 0.25-second grid, 0.8-second windows, Python 3.11; selection was performed without inspecting acoustic outcomes and explicit offsets are authoritative",
+  "training_offsets_seconds": {
+    "30226": [
+      0.5,
+      4,
+      1.25
+    ],
+    "47250": [
+      0.25,
+      1,
+      0.5
+    ],
+    "100032": [
+      2.75,
+      3,
+      4
+    ],
+    "116765": [
+      2.5,
+      0.5,
+      0.25
+    ]
+  },
+  "arms": [
+    "T0-original-highest-RMS",
+    "T1-seeded-position-1",
+    "T2-seeded-position-2",
+    "T3-seeded-position-3"
+  ],
+  "frozen_conditions": {
+    "training_source_ids": [
+      "100032",
+      "30226",
+      "116765",
+      "47250"
+    ],
+    "all_evaluation_source_ids_from_pr_69": true,
+    "training_source_count": 4,
+    "new_eval_sources_count": 15,
+    "evaluation_source_triples": 125,
+    "evaluation_schedules": 4,
+    "constructed_rows_per_arm": 500,
+    "seed": 20261024,
+    "normalized_peak": 0.8,
+    "original_algorithms_unchanged": true,
+    "gain": 0.5
+  },
+  "success": "Faithfully reproduce all PR69 baseline source hashes, method counts, per-dog source results, and 500 constructed rows for T0; then quantify training-excerpt-driven changes in identical evaluation mixtures under T1/T2/T3.",
+  "falsifiers": [
+    "Any original baseline/manifest/training source hash mismatch",
+    "Any training WAV absent, malformed, invalid window, or low peak below frozen excerpt validity threshold",
+    "Any evaluation mixture or original method/threshold change",
+    "Any PR69 T0 per-source or aggregate mismatch",
+    "Any source ID overlap or reporting of 125 triples as independent WAVs"
+  ],
+  "absolute_floor": "No changed originals, no hidden case selection, no private audio, no model training beyond recomputing four fixed prototypes, no natural onset/physical identity claim.",
+  "cost_ceiling": "$0; <=12 minutes public CI; <=2,000 constructed evaluations across four training arms; one frozen random selection and no retry.",
+  "case_selection": "All 125 preexisting PR69 source triples and four preexisting active-slot schedules; repeated source IDs acknowledged; development diagnostic, not prospective scientific confirmation.",
+  "interpretation_limits": [
+    "A change under alternate training excerpts only establishes training-excerpt sensitivity, not whether a dog/csaw is present in the selected training interval.",
+    "Clip-level labels cannot validate each 0.8s training or evaluation excerpt.",
+    "All evaluation sources and their prior outcomes are already exposed; these are DEV cases.",
+    "Training offsets may coincide with peak-RMS excerpts by chance; do not reroll."
+  ],
+  "baseline_ci_source_receipt_sha256": "b11e089a5a039d37043b5d2e2735ff0fdbb97c24849d1ed1f11820662b3a5f9e"
+}
