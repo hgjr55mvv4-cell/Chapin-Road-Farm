@@ -1,0 +1,291 @@
+{
+  "research_id": "AUDITORY-SOURCE-CROSSING-DEV-01",
+  "status": "EXPOSED_ENGINEERING_DEV",
+  "evidence_kind": "CI stdout-retrieved per-configuration scoreboard; full row-level JSON retained separately as expiring Actions artifact",
+  "observation_date": "2026-10-24",
+  "source_repository": "https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm",
+  "source_pull_request": "https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/pull/68",
+  "exact_head_sha": "3b60f277fce4c953e8b7434e2940385fc269db26",
+  "workflow_run_id": 40127243758,
+  "workflow_job_id": 120971180687,
+  "workflow_conclusion": "success",
+  "ci_original_tests": "8/8",
+  "ci_crossed_plan_tests": "4/4",
+  "retrieval_basis": "Actual successful GitHub Actions job logs retrieved via API, parsed mechanically (not a local WAV execution)",
+  "source_license_sha_checked_in_ci": true,
+  "original_diagonal_rows_compared_in_ci": 48,
+  "design": {
+    "constructed_rows": 192,
+    "crossed_configurations": 8,
+    "diagonal_original_48_rows_reproduced": true,
+    "distinct_eval_recordings": 6,
+    "independent_source_count_does_not_increase": true,
+    "negative_rows": 168,
+    "positive_rows": 24,
+    "thresholds_and_prototypes_unchanged": true
+  },
+  "configuration_scores": [
+    {
+      "cross_index": [
+        0,
+        0,
+        0
+      ],
+      "scores": {
+        "energy": {
+          "abstaining_queries_of_24": 0,
+          "false_alerts_of_21": 7,
+          "positive_hits_of_3": 2
+        },
+        "multiband": {
+          "abstaining_queries_of_24": 10,
+          "false_alerts_of_21": 0,
+          "positive_hits_of_3": 0
+        },
+        "zcr": {
+          "abstaining_queries_of_24": 0,
+          "false_alerts_of_21": 0,
+          "positive_hits_of_3": 0
+        }
+      },
+      "source_filenames": {
+        "chainsaw": "2-68391-A-41.wav",
+        "dog": "2-114587-A-0.wav",
+        "rain": "2-101676-A-10.wav"
+      }
+    },
+    {
+      "cross_index": [
+        0,
+        0,
+        1
+      ],
+      "scores": {
+        "energy": {
+          "abstaining_queries_of_24": 0,
+          "false_alerts_of_21": 7,
+          "positive_hits_of_3": 2
+        },
+        "multiband": {
+          "abstaining_queries_of_24": 14,
+          "false_alerts_of_21": 0,
+          "positive_hits_of_3": 0
+        },
+        "zcr": {
+          "abstaining_queries_of_24": 0,
+          "false_alerts_of_21": 0,
+          "positive_hits_of_3": 0
+        }
+      },
+      "source_filenames": {
+        "chainsaw": "2-68391-A-41.wav",
+        "dog": "2-114587-A-0.wav",
+        "rain": "3-132852-A-10.wav"
+      }
+    },
+    {
+      "cross_index": [
+        0,
+        1,
+        0
+      ],
+      "scores": {
+        "energy": {
+          "abstaining_queries_of_24": 0,
+          "false_alerts_of_21": 9,
+          "positive_hits_of_3": 3
+        },
+        "multiband": {
+          "abstaining_queries_of_24": 0,
+          "false_alerts_of_21": 0,
+          "positive_hits_of_3": 3
+        },
+        "zcr": {
+          "abstaining_queries_of_24": 0,
+          "false_alerts_of_21": 0,
+          "positive_hits_of_3": 0
+        }
+      },
+      "source_filenames": {
+        "chainsaw": "3-118972-A-41.wav",
+        "dog": "2-114587-A-0.wav",
+        "rain": "2-101676-A-10.wav"
+      }
+    },
+    {
+      "cross_index": [
+        0,
+        1,
+        1
+      ],
+      "scores": {
+        "energy": {
+          "abstaining_queries_of_24": 0,
+          "false_alerts_of_21": 9,
+          "positive_hits_of_3": 3
+        },
+        "multiband": {
+          "abstaining_queries_of_24": 4,
+          "false_alerts_of_21": 0,
+          "positive_hits_of_3": 2
+        },
+        "zcr": {
+          "abstaining_queries_of_24": 0,
+          "false_alerts_of_21": 0,
+          "positive_hits_of_3": 2
+        }
+      },
+      "source_filenames": {
+        "chainsaw": "3-118972-A-41.wav",
+        "dog": "2-114587-A-0.wav",
+        "rain": "3-132852-A-10.wav"
+      }
+    },
+    {
+      "cross_index": [
+        1,
+        0,
+        0
+      ],
+      "scores": {
+        "energy": {
+          "abstaining_queries_of_24": 0,
+          "false_alerts_of_21": 7,
+          "positive_hits_of_3": 2
+        },
+        "multiband": {
+          "abstaining_queries_of_24": 18,
+          "false_alerts_of_21": 0,
+          "positive_hits_of_3": 0
+        },
+        "zcr": {
+          "abstaining_queries_of_24": 0,
+          "false_alerts_of_21": 0,
+          "positive_hits_of_3": 2
+        }
+      },
+      "source_filenames": {
+        "chainsaw": "2-68391-A-41.wav",
+        "dog": "3-144028-A-0.wav",
+        "rain": "2-101676-A-10.wav"
+      }
+    },
+    {
+      "cross_index": [
+        1,
+        0,
+        1
+      ],
+      "scores": {
+        "energy": {
+          "abstaining_queries_of_24": 0,
+          "false_alerts_of_21": 7,
+          "positive_hits_of_3": 2
+        },
+        "multiband": {
+          "abstaining_queries_of_24": 18,
+          "false_alerts_of_21": 0,
+          "positive_hits_of_3": 0
+        },
+        "zcr": {
+          "abstaining_queries_of_24": 0,
+          "false_alerts_of_21": 0,
+          "positive_hits_of_3": 1
+        }
+      },
+      "source_filenames": {
+        "chainsaw": "2-68391-A-41.wav",
+        "dog": "3-144028-A-0.wav",
+        "rain": "3-132852-A-10.wav"
+      }
+    },
+    {
+      "cross_index": [
+        1,
+        1,
+        0
+      ],
+      "scores": {
+        "energy": {
+          "abstaining_queries_of_24": 0,
+          "false_alerts_of_21": 9,
+          "positive_hits_of_3": 3
+        },
+        "multiband": {
+          "abstaining_queries_of_24": 12,
+          "false_alerts_of_21": 0,
+          "positive_hits_of_3": 0
+        },
+        "zcr": {
+          "abstaining_queries_of_24": 0,
+          "false_alerts_of_21": 0,
+          "positive_hits_of_3": 2
+        }
+      },
+      "source_filenames": {
+        "chainsaw": "3-118972-A-41.wav",
+        "dog": "3-144028-A-0.wav",
+        "rain": "2-101676-A-10.wav"
+      }
+    },
+    {
+      "cross_index": [
+        1,
+        1,
+        1
+      ],
+      "scores": {
+        "energy": {
+          "abstaining_queries_of_24": 0,
+          "false_alerts_of_21": 9,
+          "positive_hits_of_3": 3
+        },
+        "multiband": {
+          "abstaining_queries_of_24": 12,
+          "false_alerts_of_21": 0,
+          "positive_hits_of_3": 0
+        },
+        "zcr": {
+          "abstaining_queries_of_24": 0,
+          "false_alerts_of_21": 0,
+          "positive_hits_of_3": 3
+        }
+      },
+      "source_filenames": {
+        "chainsaw": "3-118972-A-41.wav",
+        "dog": "3-144028-A-0.wav",
+        "rain": "3-132852-A-10.wav"
+      }
+    }
+  ],
+  "totals": {
+    "energy": {
+      "positive_hits_of_24": 20,
+      "false_alerts_of_168": 64,
+      "abstaining_queries_of_192": 0
+    },
+    "zcr": {
+      "positive_hits_of_24": 10,
+      "false_alerts_of_168": 0,
+      "abstaining_queries_of_192": 0
+    },
+    "multiband": {
+      "positive_hits_of_24": 5,
+      "false_alerts_of_168": 0,
+      "abstaining_queries_of_192": 88
+    }
+  },
+  "artifact": {
+    "id": 12572698744,
+    "name": "auditory-source-crossing-dev-01",
+    "expires_on": "2026-11-23",
+    "archive_sha256": "33d7e66428be97c465f770e4df5464e79460270ee1fb491da3090dcac72080f9"
+  },
+  "limitations": [
+    "Reusing six WAV recordings across eight crosses does not increase independent source count.",
+    "Totals across crosses are descriptive only, not binomial trials, confidence intervals or population evidence.",
+    "CI logs expose grouped scores; this receipt does not include the full 192-row artifact bytes.",
+    "Original methods use experimenter-known slots and peak-energy excerpts from ESC-10 clip-level labels.",
+    "No natural onset, physical emitter identity, acoustic generalization, human listening, field mechanics, deployment or scientific confirmation established."
+  ]
+}
