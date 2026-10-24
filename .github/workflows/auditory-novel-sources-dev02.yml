@@ -1,0 +1,40 @@
+name: Auditory novel-source-ID engineering DEV
+on:
+  pull_request:
+    paths:
+      - 'auditory-intelligence/real-audio-01/novel-sources-02/**'
+      - '.github/workflows/auditory-novel-sources-dev02.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  novel-sources:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    defaults:
+      run:
+        working-directory: auditory-intelligence/real-audio-01
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Original AUDITORY-REAL-01 tests
+        run: python -m unittest discover -s tests -v
+      - name: Frozen new source-ID selection tests
+        run: python -m unittest discover -s novel-sources-02/tests -v
+      - name: Retrieve and license-check original pinned ESC-10 recordings
+        run: python fetch_clips.py
+      - name: Retrieve fifteen independently sourced CC0 originals
+        run: python novel-sources-02/fetch_novel.py
+      - name: Execute held-out source expansion without retuning
+        run: python novel-sources-02/novel_source_dev.py --out novel_source_results.json
+      - name: Verify complete descriptive result
+        run: |
+          python -c "import json;z=json.load(open('novel_source_results.json'));d=z['design'];assert d['new_unique_freesound_eval_source_ids']==15 and d['crossed_source_triples']==125 and d['constructed_rows']==500 and len(z['constructed_rows'])==500;print('VERIFIED_EXPOSED_NOVEL_SOURCE_OUTPUT')"
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: auditory-novel-sources-dev-02
+          path: auditory-intelligence/real-audio-01/novel_source_results.json
+          retention-days: 30
