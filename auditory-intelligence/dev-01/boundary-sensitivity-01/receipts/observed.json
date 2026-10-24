@@ -1,0 +1,128 @@
+{
+  "baseline_audio_dev_sha256": "ec824b080e73209c05053bed259c1105c93d9c1d009f88a5272fdb9dea41c021",
+  "baseline_control_wav_identical": true,
+  "cases": [
+    {
+      "action_differs_from_programmed_gap": false,
+      "attenuated_tail_rms_max": 0.300042,
+      "attenuated_tail_rms_min": 0.29443,
+      "energy_gap_band": "AMBIGUOUS",
+      "energy_gap_s": 0.48,
+      "energy_intervals_s": [
+        [
+          0.2,
+          0.62
+        ],
+        [
+          1.1,
+          1.52
+        ]
+      ],
+      "energy_minus_programmed_gap_s": 0.0,
+      "illustrative_energy_action": "WAIT",
+      "sensor_status": "OK",
+      "tail_amplitude_factor": 1.0
+    },
+    {
+      "action_differs_from_programmed_gap": false,
+      "attenuated_tail_rms_max": 0.150043,
+      "attenuated_tail_rms_min": 0.14703,
+      "energy_gap_band": "AMBIGUOUS",
+      "energy_gap_s": 0.48,
+      "energy_intervals_s": [
+        [
+          0.2,
+          0.62
+        ],
+        [
+          1.1,
+          1.52
+        ]
+      ],
+      "energy_minus_programmed_gap_s": 0.0,
+      "illustrative_energy_action": "WAIT",
+      "sensor_status": "OK",
+      "tail_amplitude_factor": 0.5
+    },
+    {
+      "action_differs_from_programmed_gap": false,
+      "attenuated_tail_rms_max": 0.090072,
+      "attenuated_tail_rms_min": 0.088075,
+      "energy_gap_band": "AMBIGUOUS",
+      "energy_gap_s": 0.48,
+      "energy_intervals_s": [
+        [
+          0.2,
+          0.62
+        ],
+        [
+          1.1,
+          1.52
+        ]
+      ],
+      "energy_minus_programmed_gap_s": 0.0,
+      "illustrative_energy_action": "WAIT",
+      "sensor_status": "OK",
+      "tail_amplitude_factor": 0.3
+    },
+    {
+      "action_differs_from_programmed_gap": true,
+      "attenuated_tail_rms_max": 0.030548,
+      "attenuated_tail_rms_min": 0.029298,
+      "energy_gap_band": "LONG",
+      "energy_gap_s": 0.56,
+      "energy_intervals_s": [
+        [
+          0.2,
+          0.54
+        ],
+        [
+          1.1,
+          1.52
+        ]
+      ],
+      "energy_minus_programmed_gap_s": 0.08,
+      "illustrative_energy_action": "READY_NOT_OBLIGATED_TO_REPLY",
+      "sensor_status": "OK",
+      "tail_amplitude_factor": 0.1
+    },
+    {
+      "action_differs_from_programmed_gap": true,
+      "attenuated_tail_rms_max": 0.004899,
+      "attenuated_tail_rms_min": 0.004289,
+      "energy_gap_band": "LONG",
+      "energy_gap_s": 0.56,
+      "energy_intervals_s": [
+        [
+          0.2,
+          0.54
+        ],
+        [
+          1.1,
+          1.52
+        ]
+      ],
+      "energy_minus_programmed_gap_s": 0.08,
+      "illustrative_energy_action": "READY_NOT_OBLIGATED_TO_REPLY",
+      "sensor_status": "OK",
+      "tail_amplitude_factor": 0.0
+    }
+  ],
+  "energy_threshold_rms": 0.08,
+  "frame_duration_ms": 10,
+  "illustrative_programmed_gap_action": "WAIT",
+  "modified_tail_start_s": 0.54,
+  "nonclaims": [
+    "Generated pure tones, not speech, field audio, or a listening participant.",
+    "Programmed synthesizer boundaries are not perceptual ground truth.",
+    "The detector measures an RMS-threshold boundary, not a physical event identity.",
+    "The illustrative routing action is not a validated human turn-taking policy.",
+    "This exposed development counterexample is not independent scientific confirmation."
+  ],
+  "perceptual_event_boundary": "NOT MEASURED",
+  "programmed_first_tone_end_s": 0.62,
+  "programmed_gap_s": 0.48,
+  "programmed_second_tone_start_s": 1.1,
+  "research_id": "AUDITORY-BOUNDARY-DEV-01",
+  "status": "EXPOSED_ENGINEERING_DEV"
+}
