@@ -1,0 +1,581 @@
+{
+  "research_id": "AUDITORY-NOVEL-SOURCES-DEV-02",
+  "status": "EXPOSED_ENGINEERING_DEV",
+  "recorded_on": "2026-10-24",
+  "receipt_type": "machine-parsed GitHub Actions stdout group and identity summaries, not full 500-row JSON artifact",
+  "repository": "https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm",
+  "pull_request": "https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/pull/69",
+  "exact_executed_commit": "8a12c35f9d384aaa5797589cd609ecf5ad9b0dd0",
+  "workflow_run_id": 40127677763,
+  "workflow_job_id": 120972494872,
+  "workflow_conclusion": "success",
+  "original_tests_passed": 8,
+  "new_plan_tests_passed": 5,
+  "licensed_original_count": 10,
+  "licensed_novel_count": 15,
+  "selection_manifest_sha256": "bb6d17f2fb8f81db7b74f45ea0120716433263bf8edf088bdb0b83524de38b11",
+  "unchanged_real_audio_sha256": "3dc01418d91546e373b21520b25f22b4ae4909070df2903a70d54da479c3e014",
+  "source_identity_and_byte_checks": {
+    "license_and_metadata_in_ci": true,
+    "downloaded_equals_evaluated_shas": true,
+    "per_source_rollups_equal_total": true
+  },
+  "design": {
+    "constructed_rows": 500,
+    "crossed_source_triples": 125,
+    "frozen_methods": true,
+    "gain": 0.5,
+    "independent_crosses_claim": false,
+    "negative_rows": 375,
+    "new_unique_freesound_eval_source_ids": 15,
+    "oracle_slot_boundaries": true,
+    "per_class_eval_source_ids": 5,
+    "positive_rows": 125
+  },
+  "method_totals": {
+    "energy": {
+      "constructed_rows": 500,
+      "false_alerts": 375,
+      "negative_cases": 375,
+      "positive_cases": 125,
+      "positive_hits": 125,
+      "rows_with_abstention": 0
+    },
+    "multiband": {
+      "constructed_rows": 500,
+      "false_alerts": 0,
+      "negative_cases": 375,
+      "positive_cases": 125,
+      "positive_hits": 8,
+      "rows_with_abstention": 253
+    },
+    "zcr": {
+      "constructed_rows": 500,
+      "false_alerts": 33,
+      "negative_cases": 375,
+      "positive_cases": 125,
+      "positive_hits": 21,
+      "rows_with_abstention": 0
+    }
+  },
+  "per_source_summaries": [
+    {
+      "category": "dog",
+      "filename": "2-117271-A-0.wav",
+      "fold": 2,
+      "scores": {
+        "energy": {
+          "constructed_rows": 100,
+          "false_alerts": 75,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 25,
+          "rows_with_abstention": 0
+        },
+        "multiband": {
+          "constructed_rows": 100,
+          "false_alerts": 0,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 0,
+          "rows_with_abstention": 63
+        },
+        "zcr": {
+          "constructed_rows": 100,
+          "false_alerts": 0,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 13,
+          "rows_with_abstention": 0
+        }
+      },
+      "source_id": "117271"
+    },
+    {
+      "category": "dog",
+      "filename": "3-136288-A-0.wav",
+      "fold": 3,
+      "scores": {
+        "energy": {
+          "constructed_rows": 100,
+          "false_alerts": 75,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 25,
+          "rows_with_abstention": 0
+        },
+        "multiband": {
+          "constructed_rows": 100,
+          "false_alerts": 0,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 0,
+          "rows_with_abstention": 15
+        },
+        "zcr": {
+          "constructed_rows": 100,
+          "false_alerts": 11,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 0,
+          "rows_with_abstention": 0
+        }
+      },
+      "source_id": "136288"
+    },
+    {
+      "category": "dog",
+      "filename": "4-183992-A-0.wav",
+      "fold": 4,
+      "scores": {
+        "energy": {
+          "constructed_rows": 100,
+          "false_alerts": 75,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 25,
+          "rows_with_abstention": 0
+        },
+        "multiband": {
+          "constructed_rows": 100,
+          "false_alerts": 0,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 0,
+          "rows_with_abstention": 54
+        },
+        "zcr": {
+          "constructed_rows": 100,
+          "false_alerts": 6,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 4,
+          "rows_with_abstention": 0
+        }
+      },
+      "source_id": "183992"
+    },
+    {
+      "category": "dog",
+      "filename": "5-9032-A-0.wav",
+      "fold": 5,
+      "scores": {
+        "energy": {
+          "constructed_rows": 100,
+          "false_alerts": 75,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 25,
+          "rows_with_abstention": 0
+        },
+        "multiband": {
+          "constructed_rows": 100,
+          "false_alerts": 0,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 8,
+          "rows_with_abstention": 54
+        },
+        "zcr": {
+          "constructed_rows": 100,
+          "false_alerts": 8,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 2,
+          "rows_with_abstention": 0
+        }
+      },
+      "source_id": "9032"
+    },
+    {
+      "category": "dog",
+      "filename": "2-118072-A-0.wav",
+      "fold": 2,
+      "scores": {
+        "energy": {
+          "constructed_rows": 100,
+          "false_alerts": 75,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 25,
+          "rows_with_abstention": 0
+        },
+        "multiband": {
+          "constructed_rows": 100,
+          "false_alerts": 0,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 0,
+          "rows_with_abstention": 67
+        },
+        "zcr": {
+          "constructed_rows": 100,
+          "false_alerts": 8,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 2,
+          "rows_with_abstention": 0
+        }
+      },
+      "source_id": "118072"
+    },
+    {
+      "category": "chainsaw",
+      "filename": "4-149294-A-41.wav",
+      "fold": 4,
+      "scores": {
+        "energy": {
+          "constructed_rows": 100,
+          "false_alerts": 75,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 25,
+          "rows_with_abstention": 0
+        },
+        "multiband": {
+          "constructed_rows": 100,
+          "false_alerts": 0,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 2,
+          "rows_with_abstention": 41
+        },
+        "zcr": {
+          "constructed_rows": 100,
+          "false_alerts": 1,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 3,
+          "rows_with_abstention": 0
+        }
+      },
+      "source_id": "149294"
+    },
+    {
+      "category": "chainsaw",
+      "filename": "4-157611-A-41.wav",
+      "fold": 4,
+      "scores": {
+        "energy": {
+          "constructed_rows": 100,
+          "false_alerts": 75,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 25,
+          "rows_with_abstention": 0
+        },
+        "multiband": {
+          "constructed_rows": 100,
+          "false_alerts": 0,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 2,
+          "rows_with_abstention": 41
+        },
+        "zcr": {
+          "constructed_rows": 100,
+          "false_alerts": 16,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 0,
+          "rows_with_abstention": 0
+        }
+      },
+      "source_id": "157611"
+    },
+    {
+      "category": "chainsaw",
+      "filename": "4-169127-A-41.wav",
+      "fold": 4,
+      "scores": {
+        "energy": {
+          "constructed_rows": 100,
+          "false_alerts": 75,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 25,
+          "rows_with_abstention": 0
+        },
+        "multiband": {
+          "constructed_rows": 100,
+          "false_alerts": 0,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 0,
+          "rows_with_abstention": 89
+        },
+        "zcr": {
+          "constructed_rows": 100,
+          "false_alerts": 0,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 9,
+          "rows_with_abstention": 0
+        }
+      },
+      "source_id": "169127"
+    },
+    {
+      "category": "chainsaw",
+      "filename": "5-170338-A-41.wav",
+      "fold": 5,
+      "scores": {
+        "energy": {
+          "constructed_rows": 100,
+          "false_alerts": 75,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 25,
+          "rows_with_abstention": 0
+        },
+        "multiband": {
+          "constructed_rows": 100,
+          "false_alerts": 0,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 2,
+          "rows_with_abstention": 41
+        },
+        "zcr": {
+          "constructed_rows": 100,
+          "false_alerts": 16,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 0,
+          "rows_with_abstention": 0
+        }
+      },
+      "source_id": "170338"
+    },
+    {
+      "category": "chainsaw",
+      "filename": "5-222524-A-41.wav",
+      "fold": 5,
+      "scores": {
+        "energy": {
+          "constructed_rows": 100,
+          "false_alerts": 75,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 25,
+          "rows_with_abstention": 0
+        },
+        "multiband": {
+          "constructed_rows": 100,
+          "false_alerts": 0,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 2,
+          "rows_with_abstention": 41
+        },
+        "zcr": {
+          "constructed_rows": 100,
+          "false_alerts": 0,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 9,
+          "rows_with_abstention": 0
+        }
+      },
+      "source_id": "222524"
+    },
+    {
+      "category": "rain",
+      "filename": "2-72970-A-10.wav",
+      "fold": 2,
+      "scores": {
+        "energy": {
+          "constructed_rows": 100,
+          "false_alerts": 75,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 25,
+          "rows_with_abstention": 0
+        },
+        "multiband": {
+          "constructed_rows": 100,
+          "false_alerts": 0,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 4,
+          "rows_with_abstention": 54
+        },
+        "zcr": {
+          "constructed_rows": 100,
+          "false_alerts": 8,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 3,
+          "rows_with_abstention": 0
+        }
+      },
+      "source_id": "72970"
+    },
+    {
+      "category": "rain",
+      "filename": "3-140774-A-10.wav",
+      "fold": 3,
+      "scores": {
+        "energy": {
+          "constructed_rows": 100,
+          "false_alerts": 75,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 25,
+          "rows_with_abstention": 0
+        },
+        "multiband": {
+          "constructed_rows": 100,
+          "false_alerts": 0,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 0,
+          "rows_with_abstention": 28
+        },
+        "zcr": {
+          "constructed_rows": 100,
+          "false_alerts": 3,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 8,
+          "rows_with_abstention": 0
+        }
+      },
+      "source_id": "140774"
+    },
+    {
+      "category": "rain",
+      "filename": "4-160999-A-10.wav",
+      "fold": 4,
+      "scores": {
+        "energy": {
+          "constructed_rows": 100,
+          "false_alerts": 75,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 25,
+          "rows_with_abstention": 0
+        },
+        "multiband": {
+          "constructed_rows": 100,
+          "false_alerts": 0,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 4,
+          "rows_with_abstention": 54
+        },
+        "zcr": {
+          "constructed_rows": 100,
+          "false_alerts": 8,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 3,
+          "rows_with_abstention": 0
+        }
+      },
+      "source_id": "160999"
+    },
+    {
+      "category": "rain",
+      "filename": "5-181766-A-10.wav",
+      "fold": 5,
+      "scores": {
+        "energy": {
+          "constructed_rows": 100,
+          "false_alerts": 75,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 25,
+          "rows_with_abstention": 0
+        },
+        "multiband": {
+          "constructed_rows": 100,
+          "false_alerts": 0,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 0,
+          "rows_with_abstention": 67
+        },
+        "zcr": {
+          "constructed_rows": 100,
+          "false_alerts": 8,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 3,
+          "rows_with_abstention": 0
+        }
+      },
+      "source_id": "181766"
+    },
+    {
+      "category": "rain",
+      "filename": "2-73027-A-10.wav",
+      "fold": 2,
+      "scores": {
+        "energy": {
+          "constructed_rows": 100,
+          "false_alerts": 75,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 25,
+          "rows_with_abstention": 0
+        },
+        "multiband": {
+          "constructed_rows": 100,
+          "false_alerts": 0,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 0,
+          "rows_with_abstention": 50
+        },
+        "zcr": {
+          "constructed_rows": 100,
+          "false_alerts": 6,
+          "negative_cases": 75,
+          "positive_cases": 25,
+          "positive_hits": 4,
+          "rows_with_abstention": 0
+        }
+      },
+      "source_id": "73027"
+    }
+  ],
+  "new_eval_wav_sha256s": {
+    "2-117271-A-0.wav": "636eb41093489304bb85802fdf2e8ac8b911500516e210e01f3b0b92f156c01d",
+    "2-118072-A-0.wav": "c2003f5ce159e77c3a0e52ff042567d159ea8eab6cd3081e64c0b709556dcb4e",
+    "2-72970-A-10.wav": "f6d91324daa8863100c7f922b20727c86d46c27249cce9e15d66305e623e56b8",
+    "2-73027-A-10.wav": "42eba8ebc797e9fa843e8dbfb907c58ea8c8976277997d5f6e726b1bd3fe4111",
+    "3-136288-A-0.wav": "8293b4fe3c40cf9bbe243fa27d153bbef86217f855e4295e89f41411267c9f8d",
+    "3-140774-A-10.wav": "1dd994fb071b52e4232b0cbd06558dd8d179008be2e4cf1f41d4abdca4f390fe",
+    "4-149294-A-41.wav": "6f17cda330dc854816ff6fa810a4535882077f1db34f7da8f6a046661164b958",
+    "4-157611-A-41.wav": "9a71c693e78177287023ad26d3192535104f8a5fa45290150a3f4db647ae5226",
+    "4-160999-A-10.wav": "c85ef3d5cbd86ba80a7f089277d66f165e36b8dcf8070643ddc7ec73eb4f5dcb",
+    "4-169127-A-41.wav": "039a8b4ff220493783bc34bbf5f08126f28ea061a50f723f5f334437669484ee",
+    "4-183992-A-0.wav": "96bf2e0efce166f347db6ae02b3c17d24acadffc45d67ad6015de7b1162f54dc",
+    "5-170338-A-41.wav": "db6e46d327b67ba496c758b58e18dcbef90ab832ed84596985ff84ad5bce8538",
+    "5-181766-A-10.wav": "608fcc0bef32512e2a984c7d3d2cac8ea161f6337ec0056850a6d34f07f8db35",
+    "5-222524-A-41.wav": "0161df57f3e454993357e6a2082d895a9ec7dbeb83e730e63bde030b46837136",
+    "5-9032-A-0.wav": "e49492e3cd7be48c3e5f82a121e71f23687ecb047609085231e06a0cccb2b12d"
+  },
+  "original_training_wav_sha256s": {
+    "1-100032-A-0.wav": "f40a849a2375c8c63312a73dd2dd6c74007301fcc21b4be2ece29a642831e3d8",
+    "1-30226-A-0.wav": "ca2626d2b49c7c20a3e0f9f8d7aa56f4497643c6bc264ff37764392be2b15753",
+    "1-116765-A-41.wav": "1199ff6d4f5040bf20f06a441276bcd6448b1e1de4f098ce3e47d856ee97ce33",
+    "1-47250-A-41.wav": "81312e10f426ae6312c29a97fd4227ef36bcae323c520ddff4b8e890d458772d"
+  },
+  "artifact": {
+    "id": 12572749326,
+    "name": "auditory-novel-sources-dev-02",
+    "expires_on": "2026-11-23",
+    "archive_sha256": "9a47b1e287fa01e7c2f097a0e66cb92710229bcd45b2db52aa10d62001a2825e"
+  },
+  "limits": [
+    "All 500 cases are experimenter-constructed with oracle 0.4/1.6s slots and selected 0.8s peak-energy excerpts.",
+    "125 crossed combinations reuse each of the 15 new Freesound source IDs in 25 triples; they are not 125 independent recordings.",
+    "Five unique source IDs per class is too small/nonrandom for population generalization; chainsaw examples only from folds 4/5.",
+    "The original ESC-10 clip-level labels do not verify the class was audible throughout selected 0.8s excerpt.",
+    "Energy two-active is not class identification; high positive detection with 100% negative alerts is not useful label association.",
+    "Nine-band detection had 253/500 constructed rows containing abstention and all eight positive hits used one dog source ID; no class-general association established.",
+    "Scientific model confirmation, natural event-onset, physical emitter identity, human listening and farm field deployment remain HOLD."
+  ]
+}
