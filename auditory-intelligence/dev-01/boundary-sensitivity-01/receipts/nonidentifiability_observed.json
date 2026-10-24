@@ -1,0 +1,73 @@
+{
+  "baseline_audio_dev_sha256": "ec824b080e73209c05053bed259c1105c93d9c1d009f88a5272fdb9dea41c021",
+  "cases": [
+    {
+      "action_differs_from_programmed_gap": true,
+      "case": "attenuated_tail_programmed_gap_0.48",
+      "energy_gap_band": "LONG",
+      "energy_gap_s": 0.56,
+      "energy_intervals_s": [
+        [
+          0.2,
+          0.54
+        ],
+        [
+          1.1,
+          1.52
+        ]
+      ],
+      "first_tone_programmed_end_s": 0.62,
+      "illustrative_energy_action": "READY_NOT_OBLIGATED_TO_REPLY",
+      "illustrative_programmed_gap_action": "WAIT",
+      "programmed_gap_s": 0.48,
+      "second_tone_programmed_start_s": 1.1,
+      "sensor_status": "OK",
+      "tail_amplitude_factor_after_0_54_s": 0.1,
+      "tail_region_0_54_to_0_62_rms_max": 0.030548,
+      "tail_region_0_54_to_0_62_rms_min": 0.029298,
+      "wav_sha256": "dd8dd571d40f8d9ea35f486dce11ad8c078e8203dc412a729d6ccb56acd9974b"
+    },
+    {
+      "action_differs_from_programmed_gap": false,
+      "case": "true_short_boundary_programmed_gap_0.56",
+      "energy_gap_band": "LONG",
+      "energy_gap_s": 0.56,
+      "energy_intervals_s": [
+        [
+          0.2,
+          0.54
+        ],
+        [
+          1.1,
+          1.52
+        ]
+      ],
+      "first_tone_programmed_end_s": 0.54,
+      "illustrative_energy_action": "READY_NOT_OBLIGATED_TO_REPLY",
+      "illustrative_programmed_gap_action": "READY_NOT_OBLIGATED_TO_REPLY",
+      "programmed_gap_s": 0.56,
+      "second_tone_programmed_start_s": 1.1,
+      "sensor_status": "OK",
+      "tail_amplitude_factor_after_0_54_s": null,
+      "tail_region_0_54_to_0_62_rms_max": 0.004899,
+      "tail_region_0_54_to_0_62_rms_min": 0.004289,
+      "wav_sha256": "fc937f1638a304ada5c939fd12c5221cf31c613a08efd4d10df1aa94117b9cae"
+    }
+  ],
+  "claim_challenged": "One measured energy gap/action is sufficient to infer the programmed physical boundary.",
+  "energy_threshold_rms": 0.08,
+  "frame_duration_ms": 10,
+  "interpretation": "The same detector output is consistent with at least two programmed physical histories: a 0.48 s programmed gap whose first tone continues below threshold until 0.62 s, and a true first-tone end at 0.54 s with a 0.56 s programmed gap. The fixed RMS threshold collapses these distinct signals into the same measured boundary and downstream illustrative action. Human perception was not measured.",
+  "nonclaims": [
+    "Generated pure tones, not speech, field audio, or a listening participant.",
+    "Programmed synthesizer boundaries are not perceptual ground truth.",
+    "The detector measures an RMS-threshold boundary, not a unique physical event identity.",
+    "The illustrative routing action is not a validated human turn-taking policy.",
+    "This exposed development counterexample is not independent scientific confirmation."
+  ],
+  "research_id": "AUDITORY-BOUNDARY-NONIDENTIFIABILITY-DEV-01",
+  "same_energy_observation": true,
+  "same_illustrative_energy_action": true,
+  "status": "EXPOSED_ENGINEERING_DEV",
+  "wav_bytes_identical_between_cases": false
+}
