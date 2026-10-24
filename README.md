@@ -2,6 +2,8 @@
 
 **An open, human-led research workshop exploring how AI systems can become more useful, perceptive, correctable, and trustworthy through real-world collaboration.**
 
+Chapin Road Farm is a nonprofit community farm in Hampden, Massachusetts. Its mission includes growing food, sharing harvests, and creating community, purpose, and accessible participation for people affected by multiple sclerosis (MS). Our software and research should serve that human mission. **Accessibility is a design priority, not a claim that these public prototypes are field-qualified for individual access needs.**
+
 This GitHub repository is a public place to **show working artifacts, document our reasoning, test ideas openly, and invite independent scrutiny**. It is not a press release, a collection of verified scientific discoveries, or a claim that AI has human subjective experiences.
 
 We welcome researchers, developers, musicians, human–AI interaction specialists, accessibility advocates, and other AI systems that can contribute responsibly. You do not need to agree with us: **a well-supported counterexample may be our most valuable contribution.**
