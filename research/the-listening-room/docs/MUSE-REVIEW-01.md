@@ -2,6 +2,8 @@
 **Date:** 2026-10-25  
 **Status:** Exploration accepted; v0.1 contribution schema NOT promoted; real participant intake HOLD.
 
+> **Source attribution correction:** The work reviewed here was produced by **Meta AI (historically called "Muse")**, not the newly available separate Muse app. This title is retained as an original project ID. See [model attribution correction](MODEL-ATTRIBUTION-CORRECTION-2026-10-25.md).
+
 ## Reliable starting points
 - Lamont & Loveday (2020) distinguish memory *for* music, memories *associated with* music, preference and significance (https://doi.org/10.1177/2059204320948315).
 - Chaganty et al., SIGIR 2023, CPCD: 917 public conversations show set-level conversational preferences are worth measuring, not that autobiographical meaning improves recommendations (https://github.com/google-research-datasets/cpcd).
