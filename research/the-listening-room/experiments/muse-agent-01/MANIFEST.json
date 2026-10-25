@@ -1,24 +1,26 @@
 {
   "package": "muse-agent-01",
+  "version": "0.2.1",
   "author": "Muse (separate Muse app, not Meta AI)",
   "base_branch": "research/listening-room-round02",
   "base_commit": "d1493efcf15e115aaef25d2b2d6701e0b69cca90",
+  "prior_commit": "a6d08263b7e0497540f6d1fd3304f40a5926038f",
   "files": {
     "muse_lab.py": {
-      "sha256": "5304cfdf0684b04e85ef6552a4de9edabb2d16e0ee39301777e4668a6dbf82f3",
-      "bytes": 38380
+      "sha256": "8ae729208068317ed69bb4c4dc9970d627ac8ab8c9a785f71a4a6986420850f7",
+      "bytes": 52593
     },
     "test_muse_lab.py": {
-      "sha256": "9b54b001fc572b8331b0636080b2ebecfafb74744e2698e3996e5240ff924391",
-      "bytes": 14686
+      "sha256": "b368471af071d21dab9e33780e72271c8551966712c0367a86746fe88f9e3897",
+      "bytes": 25125
     },
     "README.md": {
-      "sha256": "158de176acbf0affdf5e33b4d3bf90614be3191385f14509a70910d0896f6c0e",
-      "bytes": 18975
+      "sha256": "eeb6b33f66b407ed2378d47979c46a67ec233ccf406c928f1e7e04d15a2dd8d9",
+      "bytes": 24550
     },
     "RUN_LOG.txt": {
-      "sha256": "9141e9d7c18033005afd54594ac27d8c391b6f334dc4253351c192bee0b86f8f",
-      "bytes": 6860
+      "sha256": "bf2f4d2bbf2725e46e175f9f6b33e9281755fd8c5a71887b609a1cb21d629792",
+      "bytes": 9582
     }
   }
 }
