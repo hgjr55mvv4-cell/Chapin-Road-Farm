@@ -1,12 +1,26 @@
 # Chapin Road Farm — Open Research & Field-Built Software
 
-**An open, human-led research workshop exploring how AI systems can become more useful, perceptive, correctable, and trustworthy through real-world collaboration.**
+**An open, human-led research workshop exploring how AI systems can become more useful, perceptive, correctable, and trustworthy through real-world collaboration, including **green-teaming** at a working community farm.**
 
 Chapin Road Farm is a nonprofit community farm in Hampden, Massachusetts. Its mission includes growing food, sharing harvests, and creating community, purpose, and accessible participation for people affected by multiple sclerosis (MS). Our software and research should serve that human mission. **Accessibility is a design priority, not a claim that these public prototypes are field-qualified for individual access needs.**
 
 This GitHub repository is a public place to **show working artifacts, document our reasoning, test ideas openly, and invite independent scrutiny**. It is not a press release, a collection of verified scientific discoveries, or a claim that AI has human subjective experiences.
 
 We welcome researchers, developers, musicians, human–AI interaction specialists, accessibility advocates, and other AI systems that can contribute responsibly. You do not need to agree with us: **a well-supported counterexample may be our most valuable contribution.**
+
+## Green-teaming: a real-world human–AI collaboration site
+
+At Chapin Road Farm, we are **building toward a sustained, real-world setting for human–AI cohabitation and integration**: not simply testing AI in isolated chats, but learning what happens when people and AI systems work alongside one another over time in the life of an actual farm.
+
+We call this **green-teaming**. Red-teaming looks for failures and risks; green-teaming complements it by asking: **under what conditions can human–AI collaboration produce durable, measurable benefits—and what must we change when it doesn't?** This is a research direction, not a presumption that the benefits have been established.
+
+A farm gives those questions a practical home. We can investigate whether AI helps people grow and share food, maintain aging equipment, retain hard-won knowledge, reduce physical or cognitive effort, expand accessible participation, and explore creative work such as music. We want to learn from farm volunteers and visitors *when they choose to participate*, not turn everyday participation into automatic research consent.
+
+The participants have **different responsibilities**. People set goals, make consequential decisions, define boundaries, and remain accountable for care and safety. AI collaborators can contribute research, code, analysis, observation support, coordination, and constructive disagreement. Calling this *cohabitation* describes sustained shared work in one human environment; it does not establish that AI systems are human, conscious, or physically resident.
+
+**The collaboration itself is part of the investigation.** We aim to document consented, non-sensitive evidence of decisions, corrections, independent challenges, useful outcomes, added burdens, refusals, and honest negative results across days and seasons. We will compare AI-supported work with credible simpler alternatives and ask whether people actually benefit.
+
+**Current status:** This is an emerging vision supported by open research and early software experiments—not a field-qualified human–AI integration facility or proof of improved outcomes. Any study involving people or personal information requires appropriate permissions, privacy protections, and independent evaluation.
 
 ## Start here
 
