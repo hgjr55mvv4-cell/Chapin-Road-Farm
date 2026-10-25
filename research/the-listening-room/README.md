@@ -1,5 +1,7 @@
 # The Listening Room — Open Research Staging Area
 
+> **Research attribution correction (2026-10-25):** Earlier work credited to "Muse" was actually produced via **Meta AI** under that informal name; a separate Muse app is now newly available. The source record and independence limitations are documented in [Model attribution correction](docs/MODEL-ATTRIBUTION-CORRECTION-2026-10-25.md). Original filenames remain unchanged for continuity.
+
 **Status: Round 2 design exploration, October 25, 2026. NOT a released listening application or an open human-subject study.**
 
 The Listening Room is an experimental human–AI co-listening project: people explore music with a personal assistant that can learn explicitly shared preferences, explain supported recommendations, accept corrections, and remain silent when listening is the point.
