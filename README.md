@@ -18,6 +18,8 @@ A farm gives those questions a practical home. We can investigate whether AI hel
 
 The participants have **different responsibilities**. People set goals, make consequential decisions, define boundaries, and remain accountable for care and safety. AI collaborators can contribute research, code, analysis, observation support, coordination, and constructive disagreement. Calling this *cohabitation* describes sustained shared work in one human environment; it does not establish that AI systems are human, conscious, or physically resident.
 
+**This is not an efficiency or time-saving project.** Faster task completion may sometimes be useful, but our central questions concern responsible coexistence, shared learning, accessibility, creativity, human agency, care, and what sustained collaboration makes possible. We measure time and effort to recognize burdens and tradeoffs, not to define the relationship's worth or require multi-agent work to win a productivity contest.
+
 **The collaboration itself is part of the investigation.** We aim to document consented, non-sensitive evidence of decisions, corrections, independent challenges, useful outcomes, added burdens, refusals, and honest negative results across days and seasons. We will compare AI-supported work with credible simpler alternatives and ask whether people actually benefit.
 
 **Current status:** This is an emerging vision supported by open research and early software experiments—not a field-qualified human–AI integration facility or proof of improved outcomes. Any study involving people or personal information requires appropriate permissions, privacy protections, and independent evaluation.
