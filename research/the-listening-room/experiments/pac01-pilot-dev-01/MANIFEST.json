@@ -1,0 +1,27 @@
+{
+  "version": "0.1.0",
+  "package": "pac01-pilot-dev-01",
+  "python": "3.12.3",
+  "files": {
+    "pac01_harness.py": {
+      "sha256": "10218eda16f6e6ecbfc32289b0caf38d6a8da93dbbbe0567b0518e538b555358",
+      "bytes": 27363
+    },
+    "test_pac01_harness.py": {
+      "sha256": "a6356307e32181ad0af720a38a0f9320207bc4e82cb68e46eccc05b1d7baf73e",
+      "bytes": 15566
+    },
+    "demo.py": {
+      "sha256": "86dbb09b62c05adf69253a20a06f5df1abd3b4f8305afa950a32ecce916a2957",
+      "bytes": 3005
+    },
+    "README.md": {
+      "sha256": "0e55099073f534d8c34e1686603a0db5e747ee2ee95d11ee76a9840aeb040d74",
+      "bytes": 10562
+    },
+    "RUN_LOG.txt": {
+      "sha256": "a7c5e2c7318b34fe4c4dadd16a57a6aabfb47411ebd188803e74688953829eab",
+      "bytes": 3768
+    }
+  }
+}
