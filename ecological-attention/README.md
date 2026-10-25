@@ -15,6 +15,8 @@ This open research initiative began with an evening observation of small flying 
 - [Research disagreement ledger](CRITIQUES.md) — corrections and unresolved objections.
 - [Governance and data protection](GOVERNANCE_AND_DATA.md) — no automatic recording, data releases or field intervention.
 - [References to audit](SOURCES.md) — primary texts and science separated from modern application.
+- [Preliminary dataset scouting](reviews/GREEN-DATA-SCOUT-01.md) — verified source-page leads, **none admitted**.
+- [Annotation-only pilot concept](reviews/GREEN-ONTOLOGY-DEV-01.md) — DEV design, **not run or frozen**.
 
 ### Research directions
 1. **Attention:** events outside current task categories; the cost of false alarms and recording.
