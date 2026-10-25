@@ -1,6 +1,43 @@
 """
-Muse Constellation Lab v0.2 -- INDEPENDENT implementation
-TLR-R2-MUSE-AGENT-01, experiments/muse-agent-01/
+Muse Constellation Lab v0.2.1 -- INDEPENDENT implementation
+TLR-R2-MUSE-AGENT-01 (v0.2) + TLR-R2-MUSE-REPAIR-01 (v0.2.1 repairs)
+experiments/muse-agent-01/
+
+v0.2.1 repair summary (Sol review of PR #72, commit a6d08263):
+  R1 P0 corrections/associations containers: int/bool/string/dict
+     containers crashed or produced misleading per-character
+     errors. Now validated as lists first; malformed containers
+     return a single structured error.
+  R2 P0 unhashable title/artist: title/artist are type-checked
+     as strings before any tuple/dict-key use. List/dict
+     identity fields return an error, never TypeError.
+  R3 P1 veto revocation: unveto() now records an explicit
+     revocation event in the ledger, and avoidance_view()
+     distinguishes historical events from active restrictions.
+  R4 P1 hard exclusion in A1: negative tags remain SOFT
+     (score subtraction). Hard exclusion is by recording ID
+     (hard_excluded, plus global vetoes) and cannot be
+     overridden by a high positive score.
+  R5 P1 session/context boundaries: session-scoped corrections
+     now REQUIRE a known session_id (None is rejected for
+     session scope). Session-local pairs are stored separately
+     from global correction-pair evidence and never leak into
+     global rankers. Context-conditioned rankers use only
+     sessions and correction evidence whose context matches
+     (global, session-less evidence counts in both; unknown-
+     context evidence counts only in blind ranking).
+  R6 P1 Stage 0 allowlist: system claims are limited to
+     HUMAN_REPORT / TRACK_METADATA / SYSTEM_HYPOTHESIS /
+     UNKNOWN, each with evidence appropriate to its type.
+     Disguised field names (waveform, entrance, verified
+     acoustic structure, etc.) are rejected, and
+     authorized_audio=True never unlocks a measurement claim.
+     Listener-authored text ("I love the guitar entrance")
+     remains allowed as a human report and is never relabelled
+     as a verified acoustic observation.
+  Preserved: all 27 v0.2 tests, all v0.2 synthetic comparisons,
+  and the negative result for naive context conditioning
+  (conditioned 0.411 vs blind 0.412, seeds 1-5).
 
 Attribution, stated plainly:
   * This code was written by Muse (the newly available separate
@@ -31,7 +68,10 @@ What this lab fixes, relative to the reported Meta AI v0.1
       stored; a generator is accepted and its items are kept.
   P0c. Corrections could reference arbitrary session IDs.
       Here a session-scoped correction must reference a known
-      session, or be explicitly session-less (session_id=None).
+      session. In v0.2, session scope with session_id=None was
+      accepted; v0.2.1 repairs that (see R5): session scope
+      requires a known session, global scope is the operation
+      for session-less general preference evidence.
   P0d. Session-local suppression was described but not
       implemented in the rankers. Here recommend() takes an
       optional session_id and excludes that session's
@@ -61,14 +101,16 @@ What this lab adds (original, falsifiable):
   separately as "no provenance -- not recommended", never as
   a ranked recommendation by popularity or ID tie-break.
   Idea 2 -- Context-split edge ledger: edges are typed
-  (kept_together / replaced / not_tonight / never) and carry
-  a session context label. A context-conditioned ranker
-  uses only sessions from the queried context; a
-  context-blind ranker uses all sessions. Both receive the
-  same context label (blind ignores it), so the comparison
-  is about use, not access. On context-dependent listeners
-  the conditioned ranker must win; on stable listeners it
-  must NOT win -- otherwise it is overfitting to labels.
+  (kept_together / replaced / not_tonight / never /
+  never_revoked) and carry a session context label. A
+  context-conditioned ranker uses only sessions from the
+  queried context; a context-blind ranker uses all sessions.
+  Both receive the same context label (blind ignores it), so
+  the comparison is about use, not access. RESULT (v0.2,
+  preserved in v0.2.1): naive hard-filter conditioning does
+  NOT reliably beat blind (0.411 vs 0.412); on stable
+  listeners it is identical. That negative result is kept
+  visible, not tuned away.
   P3 -- Constrained A1 (explicit preferences): a separately
   scored ranker that uses ONLY explicitly stated user
   tokens, negative constraints, and curator tags (metadata,
@@ -106,8 +148,15 @@ _MEASUREMENT_TYPES = {
 }
 _MEASUREMENT_FIELD_SUBSTRINGS = (
     "audio_feature", "acoustic_", "spectral_", "embedding",
-    "mfcc", "chroma", "tempo_", "bpm",
+    "mfcc", "chroma", "tempo_", "bpm", "waveform",
+    "entrance", "onset", "pitch_", "frequency_",
+    "verified_acoustic", "verified_audio",
+    "instrument_entrance", "musical_structure",
 )
+# Stage 0 allowlist for SYSTEM-authored claims (v0.2.1, R6).
+# Listener-authored text in listener_report / listener_note is
+# NOT a system claim and is not subject to this allowlist.
+_SYSTEM_CLAIM_TYPES = {"HUMAN_REPORT", "TRACK_METADATA", "SYSTEM_HYPOTHESIS", "UNKNOWN"}
 
 
 def _is_measurement_claim(obj):
@@ -138,6 +187,69 @@ def _scan_measurements(obj, path="$"):
         for i, value in enumerate(obj):
             errors.extend(_scan_measurements(value, f"{path}[{i}]"))
     return errors
+
+
+def _validate_system_claims(claims):
+    """Stage 0 allowlist for system-authored claims (v0.2.1 R6).
+
+    Returns error list. A claim must be a dict, its type must
+    be in the allowlist, it must carry evidence appropriate
+    to that type, it must not contain a disguised measurement
+    field, and authorized_audio=True must never unlock it.
+    Listener text is NOT checked here; only claim structure.
+    """
+    errors = []
+    if claims is None:
+        return errors
+    if not isinstance(claims, list):
+        return ["claims must be a list"]
+    for i, claim in enumerate(claims):
+        prefix = f"claims[{i}]"
+        if not isinstance(claim, dict):
+            errors.append(f"{prefix} must be an object")
+            continue
+        claim_type = claim.get("type")
+        if claim_type not in _SYSTEM_CLAIM_TYPES:
+            errors.append(
+                f"{prefix}.type {claim_type!r} is not in the Stage 0 "
+                f"allowlist (HUMAN_REPORT, TRACK_METADATA, "
+                f"SYSTEM_HYPOTHESIS, UNKNOWN)"
+            )
+        if claim.get("authorized_audio") is True:
+            errors.append(
+                f"{prefix}: authorized_audio=True does not unlock "
+                f"any acoustic claim at Stage 0"
+            )
+        # Disguised measurement fields, whatever the type label.
+        for key, value in claim.items():
+            if isinstance(key, str) and any(s in key for s in _MEASUREMENT_FIELD_SUBSTRINGS):
+                errors.append(f"{prefix}.{key}: measurement field rejected at Stage 0")
+            if key in ("verified", "confirmed", "validated") and value is True:
+                errors.append(f"{prefix}.{key}: verified/confirmed claims are not permitted at Stage 0")
+            if key == "evidence_level" and value in ("verified", "confirmed", "validated"):
+                errors.append(f"{prefix}.evidence_level: verified/confirmed claims are not permitted at Stage 0")
+        # Evidence appropriate to the type.
+        if claim_type == "HUMAN_REPORT":
+            if not any(isinstance(claim.get(k), str) and claim[k] for k in ("listener_text", "listener_note", "text")):
+                errors.append(f"{prefix}: HUMAN_REPORT requires listener_text, listener_note, or text")
+        elif claim_type == "TRACK_METADATA":
+            if not any(k in claim for k in ("title", "artist", "metadata", "track")):
+                errors.append(f"{prefix}: TRACK_METADATA requires title, artist, metadata, or track")
+        elif claim_type == "SYSTEM_HYPOTHESIS":
+            if claim.get("hypothesis") is not None and not isinstance(claim.get("hypothesis"), str):
+                errors.append(f"{prefix}.hypothesis must be a string")
+            if claim.get("uncertainty") is not None and not isinstance(claim.get("uncertainty"), str):
+                errors.append(f"{prefix}.uncertainty must be a string")
+        elif claim_type == "UNKNOWN":
+            # UNKNOWN must assert nothing: no measurement fields
+            # (already checked above) and no verified flag.
+            pass
+    return errors
+
+
+# Public alias: the Stage 0 gate is part of the public API
+# for reviewers, not a private helper.
+validate_system_claims = _validate_system_claims
 
 
 def _string_ids(value, field_name, errors):
@@ -222,8 +334,15 @@ def validate_contribution(data):
                 errors.append(f"{prefix}.track.identity_status must be unverified or verified")
             if track.get("source_url") is not None and not isinstance(track.get("source_url"), str):
                 errors.append(f"{prefix}.track.source_url must be a string or null")
-            key = (track.get("title"), track.get("artist"))
-            if track.get("identity_status") == "unverified":
+            # v0.2.1 R2: only build the title/artist tuple key
+            # AFTER confirming both fields are strings. A list
+            # or dict title/artist previously raised TypeError
+            # (unhashable) when used as a dict key. The
+            # type errors above already cover those cases.
+            if track.get("identity_status") == "unverified" and isinstance(
+                track.get("title"), str
+            ) and isinstance(track.get("artist"), str):
+                key = (track.get("title"), track.get("artist"))
                 if key in title_artist_seen:
                     errors.append(
                         f"ambiguous recording identity: {key!r} appears for "
@@ -270,7 +389,16 @@ def validate_contribution(data):
             playlist.get("connection_in_own_words"), str
         ):
             errors.append("playlist.connection_in_own_words must be a string or null")
-    for i, corr in enumerate(data.get("corrections", []) or []):
+    # v0.2.1 R1: validate the outer container BEFORE iterating.
+    # Previously int/bool raised TypeError, and string/dict
+    # produced misleading per-character / per-key errors.
+    corrections = data.get("corrections", [])
+    if corrections is None:
+        corrections = []
+    if not isinstance(corrections, list):
+        errors.append("corrections must be a list")
+        corrections = []
+    for i, corr in enumerate(corrections):
         if not isinstance(corr, dict):
             errors.append(f"corrections[{i}] must be an object")
             continue
@@ -279,7 +407,13 @@ def validate_contribution(data):
                 errors.append(f"corrections[{i}].{fname} references unknown song_id: {corr.get(fname)!r}")
         if corr.get("rejected_id") == corr.get("replacement_id"):
             errors.append(f"corrections[{i}] rejected and replacement must differ")
-    for i, assoc in enumerate(data.get("associations", []) or []):
+    associations = data.get("associations", [])
+    if associations is None:
+        associations = []
+    if not isinstance(associations, list):
+        errors.append("associations must be a list")
+        associations = []
+    for i, assoc in enumerate(associations):
         if not isinstance(assoc, dict):
             errors.append(f"associations[{i}] must be an object")
             continue
@@ -287,7 +421,12 @@ def validate_contribution(data):
         for sid in ids:
             if sid not in seen_ids:
                 errors.append(f"associations[{i}] references unknown song_id: {sid}")
-    errors.extend(_scan_measurements(data))
+    # Scan everything EXCEPT claims for measurement markers;
+    # claims go through the Stage 0 allowlist below, so a
+    # disallowed claim is reported once, by its own rule.
+    errors.extend(_scan_measurements({k: v for k, v in data.items() if k != "claims"}))
+    if "claims" in data:
+        errors.extend(_validate_system_claims(data.get("claims")))
     return errors
 
 
@@ -297,7 +436,7 @@ def validate_contribution(data):
 
 @dataclass
 class Edge:
-    kind: str  # kept_together | replaced | not_tonight | never
+    kind: str  # kept_together | replaced | not_tonight | never | never_revoked
     a: str
     b: str | None
     session_id: str | None
@@ -309,8 +448,19 @@ class ListenerState:
     catalog: set = field(default_factory=set)
     # sessions: list of (session_id, frozenset, context or None), in order
     sessions: list = field(default_factory=list)
-    corrections: list = field(default_factory=list)  # (rejected, replacement, session_id)
+    # Global correction-pair evidence (general preference change).
+    # Session-local pairs are NOT stored here (see below).
+    corrections: list = field(default_factory=list)  # (rejected, replacement, session_id_or_note)
+    # Session-local pairs: session_id -> [(rejected, replacement)].
+    # These affect ONLY that session's recommendation, never
+    # global rankers, and never another session or context.
+    session_corrections: dict = field(default_factory=dict)
     vetoes: set = field(default_factory=set)
+    # Ordered veto history: ("veto", song_id) / ("revoke", song_id).
+    # The active set (self.vetoes) is the replay of this history;
+    # avoidance_view() exposes both, so history never masquerades
+    # as a current restriction.
+    veto_history: list = field(default_factory=list)
     reports: dict = field(default_factory=dict)
     session_suppressions: dict = field(default_factory=dict)  # session_id -> set(rejected)
     edges: list = field(default_factory=list)
@@ -321,10 +471,33 @@ class ListenerState:
         if not isinstance(song_id, str) or song_id not in self.catalog:
             raise ValueError(f"unknown song_id: {song_id!r}")
 
+    def _session_context(self, session_id):
+        for sid, _, ctx in self.sessions:
+            if sid == session_id:
+                return ctx
+        return None
+
     def _snapshot(self):
         return (list(self.sessions), list(self.corrections), set(self.vetoes),
                 dict(self.reports), {k: set(v) for k, v in self.session_suppressions.items()},
-                list(self.edges))
+                list(self.edges), list(self.veto_history),
+                {k: list(v) for k, v in self.session_corrections.items()})
+
+    def avoidance_view(self):
+        """Effective view vs history, unambiguously separated.
+
+        Returns active vetoes (current instruction), the ordered
+        veto history (including revocations), active session
+        suppressions, and historical edge kinds. A caller that
+        only reads edges must NOT infer that a 'never' edge is
+        still active if a later 'never_revoked' edge exists.
+        """
+        return {
+            "active_vetoes": sorted(self.vetoes),
+            "veto_history": list(self.veto_history),
+            "active_session_suppressions": {k: sorted(v) for k, v in self.session_suppressions.items()},
+            "historical_edge_kinds_in_order": [e.kind for e in self.edges],
+        }
 
     def add_session(self, session_id, kept_ids, context=None):
         # Materialise exactly once, validate everything, then mutate.
@@ -347,31 +520,76 @@ class ListenerState:
                     self.edges.append(Edge("kept_together", a, b, session_id, context))
 
     def add_correction(self, rejected_id, replacement_id, session_id=None, scope="session"):
-        # Validate before mutating. Session-scoped corrections must
-        # reference a known session; session_id=None means "no
-        # session context claimed", not "any session".
+        """Four clearly distinguishable operations (v0.2.1 R5):
+
+        * Session-local replacement: scope="session", session_id
+          REQUIRED and must be a known session. Stored ONLY in
+          session_corrections / session_suppressions for that
+          session. Never added to global correction-pair evidence,
+          never applied to another session or context.
+        * Historical correction-pair evidence / general
+          preference change: scope="global" (alias "global_note"
+          retained for v0.2 compatibility). Stored in
+          self.corrections. session_id, if given, is provenance
+          only (e.g. a correction ID in synthetic fixtures); it
+          does NOT create a session suppression, and it is NOT
+          required to be a known session.
+        * Permanent avoidance: veto() / unveto(), not this method.
+
+        Behaviour change from v0.2, explained: v0.2 accepted
+        scope="session" with session_id=None and stored it in
+        the global list, which is exactly the boundary failure
+        Sol identified (a session-scoped correction without a
+        session). That combination now raises ValueError.
+        """
         self._require_known(rejected_id)
         self._require_known(replacement_id)
         if rejected_id == replacement_id:
             raise ValueError("correction rejected and replacement must differ")
-        if scope not in ("session", "global_note"):
-            raise ValueError("correction scope must be 'session' or 'global_note'")
+        if scope not in ("session", "global", "global_note"):
+            raise ValueError("correction scope must be 'session', 'global', or 'global_note'")
         if scope == "session":
-            if session_id is not None and not any(sid == session_id for sid, _, _ in self.sessions):
+            if session_id is None:
+                raise ValueError("session-scoped correction requires a session_id")
+            if not any(sid == session_id for sid, _, _ in self.sessions):
                 raise ValueError(f"correction references unknown session_id: {session_id!r}")
-        self.corrections.append((rejected_id, replacement_id, session_id))
-        self.edges.append(Edge("replaced", rejected_id, replacement_id, session_id, None))
-        if scope == "session" and session_id is not None:
+            # Validate before mutating: only now append.
+            self.session_corrections.setdefault(session_id, []).append((rejected_id, replacement_id))
             self.session_suppressions.setdefault(session_id, set()).add(rejected_id)
-            self.edges.append(Edge("not_tonight", rejected_id, None, session_id, None))
+            self.edges.append(Edge("replaced", rejected_id, replacement_id, session_id,
+                                   self._session_context(session_id)))
+            self.edges.append(Edge("not_tonight", rejected_id, None, session_id,
+                                   self._session_context(session_id)))
+        else:
+            self.corrections.append((rejected_id, replacement_id, session_id))
+            self.edges.append(Edge("replaced", rejected_id, replacement_id, session_id, None))
+
+    # Convenience wrappers, naming the operation explicitly.
+    def add_session_correction(self, rejected_id, replacement_id, session_id):
+        return self.add_correction(rejected_id, replacement_id, session_id, scope="session")
+
+    def add_global_correction(self, rejected_id, replacement_id, session_id=None):
+        return self.add_correction(rejected_id, replacement_id, session_id, scope="global")
 
     def veto(self, song_id):
         self._require_known(song_id)
         self.vetoes.add(song_id)
+        self.veto_history.append(("veto", song_id))
         self.edges.append(Edge("never", song_id, None, None, None))
 
     def unveto(self, song_id):
-        self.vetoes.discard(song_id)
+        # v0.2.1 R3: revocation is an explicit event, not a
+        # silent discard. The historical 'never' edge remains
+        # in the ledger, followed by a 'never_revoked' edge,
+        # and avoidance_view() shows active vetoes as empty.
+        if song_id in self.vetoes:
+            self.vetoes.discard(song_id)
+            self.veto_history.append(("revoke", song_id))
+            self.edges.append(Edge("never_revoked", song_id, None, None, None))
+        else:
+            # Revoking a non-veto is a no-op for the active set,
+            # but record it so the history is not ambiguous.
+            self.veto_history.append(("revoke_noop", song_id))
 
     def update_report(self, song_id, text):
         self._require_known(song_id)
@@ -388,7 +606,9 @@ class ListenerState:
     def delete_all(self):
         self.sessions.clear()
         self.corrections.clear()
+        self.session_corrections.clear()
         self.vetoes.clear()
+        self.veto_history.clear()
         self.reports.clear()
         self.session_suppressions.clear()
         self.edges.clear()
@@ -400,12 +620,16 @@ class ListenerState:
 
         After delete_all() these must be zero -- there is no
         separate cache or append-only log retaining personal text.
+        The ledger itself is in-memory state and is cleared by
+        delete_all(); it is not an external append-only log.
         """
         pop = {}
         for _, kept, _ in self.sessions:
             for sid in kept:
                 pop[sid] = pop.get(sid, 0) + 1
-        return {"session_track_counts": pop, "n_corrections": len(self.corrections),
+        n_session_corr = sum(len(v) for v in self.session_corrections.values())
+        return {"session_track_counts": pop,
+                "n_corrections": len(self.corrections) + n_session_corr,
                 "n_edges": len(self.edges)}
 
 
@@ -440,12 +664,46 @@ def popularity_ranker(state, seed, all_ids):
     return sorted(_base_candidates(state, seed, all_ids), key=lambda c: (-counts.get(c, 0), c))
 
 
-def provenance_ranker(state, seed, all_ids, context=None):
+def _pair_scores(state, seed_set, context=None, session_id=None):
+    """Correction-pair scores, with context/session boundaries (R5).
+
+    * Global corrections: counted always when context is None.
+      When context is given, counted only if the correction is
+      session-less (general preference, context-independent)
+      or its session_id belongs to a session with that context.
+      A global correction whose session_id matches NO known
+      session has unknown context and is therefore EXCLUDED
+      from conditioned ranking (it still counts in blind ranking).
+    * Session-local corrections: counted ONLY when session_id
+      matches the queried session. Never counted in global
+      rankers, never counted for another session or context.
+    """
+    pair = {}
+    for rej, rep, csid in state.corrections:
+        if rej in seed_set:
+            if context is None:
+                pair[rep] = pair.get(rep, 0) + 1
+            elif csid is None:
+                pair[rep] = pair.get(rep, 0) + 1
+            elif any(sid == csid for sid, _, _ in state.sessions) and state._session_context(csid) == context:
+                pair[rep] = pair.get(rep, 0) + 1
+            # else: unknown-context or other-context evidence --
+            # excluded from conditioned ranking, by design.
+    if session_id is not None:
+        for rej, rep in state.session_corrections.get(session_id, []):
+            if rej in seed_set:
+                pair[rep] = pair.get(rep, 0) + 1
+    return pair
+
+
+def provenance_ranker(state, seed, all_ids, context=None, session_id=None):
     """Seed-conditioned co-occurrence, optionally context-restricted.
 
-    If context is given, only sessions with that context are used.
-    The caller must pass the context label to BOTH rankers in a
-    comparison; the blind ranker simply passes context=None.
+    If context is given, only sessions with that context are used,
+    and only context-matching correction evidence is used (see
+    _pair_scores). The caller must pass the context label to
+    BOTH rankers in a comparison; the blind ranker simply
+    passes context=None. That is equal access, different use.
     """
     _validate_rank_inputs(state, seed, all_ids)
     seed_set = set(seed)
@@ -458,12 +716,9 @@ def provenance_ranker(state, seed, all_ids, context=None):
             for sid in kept:
                 if sid not in seed_set:
                     co[sid] = co.get(sid, 0) + 1
-    pair = {}
-    for rej, rep, _ in state.corrections:
-        if rej in seed_set:
-            pair[rep] = pair.get(rep, 0) + 1
+    pair = _pair_scores(state, seed_set, context=context, session_id=session_id)
     counts = _popularity(state, sessions)
-    return sorted(_base_candidates(state, seed, all_ids),
+    return sorted(_base_candidates(state, seed, all_ids, session_id=session_id),
                   key=lambda c: (-co.get(c, 0), -pair.get(c, 0), -counts.get(c, 0), c))
 
 
@@ -482,7 +737,7 @@ def recommend(state, seed, all_ids, session_id=None, context=None):
     a forced ranking with zero evidence would be fabrication.
     """
     _validate_rank_inputs(state, seed, all_ids)
-    ranked = provenance_ranker(state, seed, all_ids, context=context)
+    ranked = provenance_ranker(state, seed, all_ids, context=context, session_id=session_id)
     # Recompute scores to split at >0, respecting session suppression
     seed_set = set(seed)
     sessions = state.sessions
@@ -494,19 +749,18 @@ def recommend(state, seed, all_ids, session_id=None, context=None):
             for sid in kept:
                 if sid not in seed_set:
                     co[sid] = co.get(sid, 0) + 1
-    pair = {}
-    for rej, rep, _ in state.corrections:
-        if rej in seed_set:
-            pair[rep] = pair.get(rep, 0) + 1
+    pair = _pair_scores(state, seed_set, context=context, session_id=session_id)
     candidates = _base_candidates(state, seed, all_ids, session_id=session_id)
-    # provenance_ranker does not apply session suppression, so
-    # filter ranked to candidates here for the user-facing list.
     recommended = [c for c in ranked if c in candidates and (co.get(c, 0) > 0 or pair.get(c, 0) > 0)]
     not_recommended = [c for c in candidates if c not in recommended]
     return recommended, not_recommended, len(recommended) == 0
 
 
 def replacement_ranker(state, rejected_id, all_ids):
+    """Global replacement ranking. Uses ONLY global correction
+    evidence (state.corrections). Session-local pairs are
+    deliberately NOT used here, so a session-local rejection
+    cannot become a universal replacement rule."""
     state._require_known(rejected_id)
     for sid in all_ids:
         state._require_known(sid)
@@ -531,7 +785,7 @@ def global_replacement_ranker(state, rejected_id, all_ids):
     return sorted(cands, key=lambda c: (-glob.get(c, 0), -counts.get(c, 0), c))
 
 
-def a1_explicit_ranker(explicit_tokens, negative_tokens, catalogue_tags, all_ids, vetoes):
+def a1_explicit_ranker(explicit_tokens, negative_tokens, catalogue_tags, all_ids, vetoes, hard_excluded=None):
     """P3 constrained A1 -- separately scored, different capability.
 
     Inputs are ONLY what the listener explicitly stated:
@@ -543,12 +797,25 @@ def a1_explicit_ranker(explicit_tokens, negative_tokens, catalogue_tags, all_ids
     capability, not a same-information win over provenance.
     Score = tag overlap with explicit tokens, minus overlap
     with negative tokens. Tie-break by ID, deterministic.
+
+    Negative preferences, distinguished (v0.2.1 R4):
+    * SOFT negative (negative_tokens, tag-level): "I'm not
+      particularly interested in polished music tonight."
+      Subtracts from the score. A track with a high positive
+      score can still appear, just lower. Tag-level negatives
+      are NOT hard filters, because a tag is not a recording
+      identity and a single tag must not veto a whole recording.
+    * HARD exclusion (hard_excluded, recording IDs, plus
+      global vetoes): "Do not recommend this recording."
+      Excludes the recording entirely, regardless of positive
+      score. No positive score can reintroduce it.
     """
     explicit = set(explicit_tokens or [])
     negative = set(negative_tokens or [])
+    hard = set(hard_excluded or [])
     scored = []
     for cid in all_ids:
-        if cid in vetoes:
+        if cid in vetoes or cid in hard:
             continue
         tags = set(catalogue_tags.get(cid, []))
         score = len(tags & explicit) - len(tags & negative)
@@ -846,7 +1113,7 @@ def run_experiments(seeds=(1, 2, 3, 4, 5)):
 
 def main():
     import json
-    print("Muse Constellation Lab v0.2 -- synthetic only, NOT real listeners")
+    print("Muse Constellation Lab v0.2.1 -- synthetic only, NOT real listeners")
     print(json.dumps(run_experiments(), indent=2))
 
 
