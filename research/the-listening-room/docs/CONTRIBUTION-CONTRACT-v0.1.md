@@ -40,3 +40,18 @@ No tier is automatically implied by an earlier tier. Public repositories are not
 ## Round 02 gate
 
 Muse should propose the minimum humane input instrument and demonstrate five diverse, synthetic walkthroughs. Grok should try to break it. Do not build an open collection endpoint or populate this branch with actual participant records yet.
+
+## Voluntary generosity: a real broad-sharing path (v0.2 candidate, not active)
+
+Private-by-default does **not** mean private-only. People who want to contribute extensively to an open scientific effort must have a clear, simple way to do so. The future interface should offer:
+
+- **Just for me:** session or optional locally saved history, with no research submission.
+- **Contribute privately to research:** choose some or all of a playlist and associated comments for a protected research dataset.
+- **Share my selected listening constellation openly:** authorize public release of selected song identifiers, timestamps, participant-authored text and playlist associations, with attribution choice (named, pseudonymous or no display name). Playlists may be identifying even without names.
+- **Permit model training on my selected contribution:** a distinct opt-in, separately scoped to data, recipients and training purpose; no implicit authorization from research/public release.
+
+A willing contributor may select **all entries in the current playlist/session** instead of approving each song manually; show a full preview, a sensitive-content warning and explicit final confirmation. The decision does not include future listening sessions without separate, reviewable and revocable standing authorization. The individual may share detailed first-person accounts and whole playlists while withholding selected items, third-party information or copyrighted content for which they lack redistribution rights.
+
+Share controls should not be paternalistic: permit expansive first-person stories when consciously authorized. Explain that public copies, forks, screenshots, search indexes, training derivatives, provider caches and third-party redistributions may not be retractable. State what the app can delete locally and at a protected research intake, and what it cannot guarantee to erase.
+
+**No operational intake is authorized by this addendum.** The public JSON Schema is intentionally synthetic-only, with research/public/training permissions fixed to false. Create a separately versioned security/ethics-reviewed contract for real contributions rather than relaxing those safeguards in the open branch.
