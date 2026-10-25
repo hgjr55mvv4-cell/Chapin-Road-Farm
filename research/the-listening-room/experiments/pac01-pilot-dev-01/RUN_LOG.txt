@@ -1,0 +1,74 @@
+PAC-01-DEV-01 — Execution receipts
+Synthetic-only. No real data, no audio, no training, no deployment.
+
+Python version: 3.12.3 (python3 --version, 2026-10-25)
+Working directory: research/the-listening-room/experiments/pac01-pilot-dev-01
+  (local build directory: ~/workspace/pac01-pilot-dev-01)
+
+Command 1:
+  python3 -m unittest test_pac01_harness -v
+Exit code: 0
+Result: Ran 36 tests, OK (0 failures, 0 errors)
+Coverage of assignment §8 adversarial cases:
+  duplicate recording IDs; same song in both conditions (shared once,
+  both provenances); artist domination under the per-artist cap;
+  unequal catalog snapshots (SnapshotMismatch); familiar items excluded
+  from binary counts; unheard items cannot be labelled keep/pass and
+  MAYBE/NOT_HEARD_ENOUGH/UNKNOWN excluded from binary counts; invalid
+  observation-state transitions (record after terminal state rejected,
+  explicit correct() audited in history); rankings unchanged after
+  freezing despite caller list mutation; evaluation outcomes do not
+  change frozen rankings or queues; balanced-queue failures
+  (identical rankings, one-sided uniques, cap-forced) raise
+  INSUFFICIENT_BALANCE; corrupt/malformed input (duplicate/missing/
+  unknown fields, bad tempo, non-string IDs, ranking duplicates,
+  unknown ranked IDs, unknown observation states) rejected;
+  identical replay from same seed + inputs; complete session deletion
+  and delete_all (catalog retained, sessions cleared).
+Initial run note: 34 passed, 2 errors — both errors were the demo
+catalog mock rankers returning full catalog permutations, which share
+every song and therefore cannot yield condition-unique pairs. Fixed by
+making the mock rankers return top-8 recommendation lists (documented
+in README as a ranking-opportunity choice), not by weakening any test
+or fairness check. Re-run after the fix: 36 tests, OK.
+
+Command 2:
+  python3 demo.py
+Exit code: 0
+Observed results (fictional data only):
+  Catalog: 12 fictional recordings, snapshot demo-snapshot-001
+  A1 top-8: SYN-001, SYN-002, SYN-004, SYN-005, SYN-006, SYN-008,
+    SYN-009, SYN-011
+  B-metadata top-8: SYN-001, SYN-006, SYN-012, SYN-004, SYN-005,
+    SYN-008, SYN-009, SYN-002
+  Successful comparison, seed 11:
+    Queue: SYN-001, SYN-002, SYN-004, SYN-005, SYN-006, SYN-008,
+      SYN-009, SYN-011, SYN-012
+    Shared: SYN-001, SYN-002, SYN-004, SYN-005, SYN-006, SYN-008,
+      SYN-009 (stored once each, both provenances)
+    A1-unique: SYN-011; B-metadata-unique: SYN-012
+    Listener view (seeded shuffle, no condition labels):
+      SYN-004, SYN-009, SYN-001, SYN-002, SYN-008, SYN-006, SYN-005,
+      SYN-012, SYN-011
+    Dropped by artist cap: none; unbalanced remainder: none
+    Simulated binary summary (unique heard songs only):
+      A1: kept 1, passed 0, keep_rate 1.0, binary_n 1
+      B-metadata: kept 0, passed 1, keep_rate 0.0, binary_n 1
+      shared: kept 0, passed 0, binary_n 0
+    These counts are mock results over fictional recordings with
+    n = 1 per condition. They are NOT evidence about music,
+    preference learning, or either condition's superiority.
+  Deliberately failed comparison (identical rankings for both
+  conditions): INSUFFICIENT_BALANCE raised as expected.
+  Sessions after delete_all: {} (empty).
+
+Command 3 (manifest generation, after RUN_LOG written):
+  python3 -c "hashlib.sha256 over pac01_harness.py,
+    test_pac01_harness.py, demo.py, README.md, RUN_LOG.txt"
+Exit code: 0
+Result: MANIFEST.json written with sha256 + byte counts for the five
+  artifacts above. MANIFEST.json itself is not hashed (self-reference).
+
+No other commands were run for this delivery. No network calls, no
+audio access, no GitHub writes are recorded in this log; GitHub
+delivery is recorded separately in the delivery message and PR.
