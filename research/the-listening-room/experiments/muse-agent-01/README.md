@@ -1,5 +1,42 @@
-# Muse Constellation Lab v0.2.1 — Independent Engineering Repair
-## TLR-R2-MUSE-AGENT-01 (v0.2) + TLR-R2-MUSE-REPAIR-01 (v0.2.1)
+# Muse Constellation Lab v0.2.2 — Final Narrow Integrity Repair
+## TLR-R2-MUSE-AGENT-01 (v0.2) + TLR-R2-MUSE-REPAIR-01 (v0.2.1) + re-review repair (v0.2.2)
+
+## v0.2.2 — two P0 cases from Sol's re-review of PR #72 at 5dc1765b
+
+Both were reproduced against the current commit before fixing:
+
+1. **Unhashable correction IDs:** `rejected_id=["s1"]` or
+   `replacement_id={"id":"s2"}` raised `TypeError: unhashable`
+   during set membership in `validate_contribution`.
+   Fix: ID types are validated as non-empty strings BEFORE
+   membership is checked. Test:
+   `test_corrections_unhashable_ids_return_errors_not_typeerror`
+   (plus `test_corrections_valid_ids_still_pass_and_unknown_still_flagged`).
+2. **Unhashable claim type:** `type=["HUMAN_REPORT"]` or
+   `type={"name":"HUMAN_REPORT"}` raised `TypeError: unhashable`
+   during allowlist membership in `validate_system_claims`.
+   Fix: the type is validated as a non-empty string BEFORE
+   allowlist lookup. Test:
+   `test_system_claim_unhashable_type_returns_error_not_typeerror`
+   (plus `test_system_claim_valid_types_still_pass`).
+
+**Test counts:** 44 (v0.2.1) + 4 new = **48 tests, all passing**.
+No other tests changed; no features added; synthetic experiments
+unchanged (see below).
+
+**Allowlist limit, documented separately as requested:**
+An allowed claim type is NOT necessarily a fully
+evidence-supported claim. Passing the Stage 0 gate means only
+that the claim's type is allowed and its required evidence
+field is present. It does not verify who actually wrote a
+HUMAN_REPORT text, does not check a TRACK_METADATA title/artist
+against a source record, and does not turn a SYSTEM_HYPOTHESIS
+into a finding. Stronger provenance binding — signed listener
+attestation, source-record linkage, and a verification workflow
+for metadata claims — remains a **future integration requirement**
+and is NOT implemented in this sprint.
+
+The v0.2.1 report follows, preserved.
 
 ## v0.2.1 repair — what Sol's review found, what was reproduced, what changed
 
@@ -387,9 +424,9 @@ fails — see below. None of this is evidence about real listeners.
 - `muse_lab.py` — independent implementation (validator,
   claim gate, state, edge ledger, rankers, A1, synthetic
   worlds, multi-seed experiments).
-- `test_muse_lab.py` — 44 tests in v0.2.1 (27 original, retained
-  unchanged, + 17 repair tests), all passing (see RUN_LOG
-  header for the exact run).
+- `test_muse_lab.py` — 48 tests in v0.2.2 (27 original, retained
+  unchanged, + 17 v0.2.1 repair tests + 4 v0.2.2 tests), all
+  passing (see RUN_LOG header for the exact run).
 - `RUN_LOG.txt` — exact experiment output, seeds 1–5.
 - `MANIFEST.json` — SHA-256 checksums for the files above.
 - `README.md` — this file.
