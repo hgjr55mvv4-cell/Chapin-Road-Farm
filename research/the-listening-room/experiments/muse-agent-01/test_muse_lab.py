@@ -318,3 +318,210 @@ class TestOriginalIdeas(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# ------------------------------------------------------------------
+# v0.2.1 repair tests (TLR-R2-MUSE-REPAIR-01, Sol review of PR #72)
+# These are IN ADDITION to the original 27 tests, which are retained
+# unchanged above. Each test below names the finding it covers.
+# ------------------------------------------------------------------
+
+from muse_lab import validate_system_claims
+
+
+def _claim_base(claims):
+    d = base_contribution()
+    d["claims"] = claims
+    return d
+
+
+class TestRepairP0MalformedContainers(unittest.TestCase):
+    """R1/R2: validator must return errors, never crash."""
+
+    def test_corrections_int_bool_string_dict_containers(self):
+        for val in [123, True, "not-a-list", {"rejected_id": "s1"}]:
+            d = base_contribution()
+            d["corrections"] = val
+            errors = validate_contribution(d)
+            self.assertTrue(errors, val)
+            self.assertTrue(any("corrections must be a list" in e for e in errors), errors)
+
+    def test_corrections_malformed_elements(self):
+        for val in [[123], ["x"], [None], [{"rejected_id": "s1"}]]:
+            d = base_contribution()
+            d["corrections"] = val
+            self.assertTrue(validate_contribution(d), val)
+
+    def test_associations_int_bool_string_dict_containers(self):
+        for val in [123, True, "not-a-list", {"song_ids": ["s1"]}]:
+            d = base_contribution()
+            d["associations"] = val
+            errors = validate_contribution(d)
+            self.assertTrue(errors, val)
+            self.assertTrue(any("associations must be a list" in e for e in errors), errors)
+
+    def test_associations_malformed_elements(self):
+        for val in [[123], [{"song_ids": "not-a-list"}]]:
+            d = base_contribution()
+            d["associations"] = val
+            self.assertTrue(validate_contribution(d), val)
+
+    def test_unhashable_title_and_artist_return_errors(self):
+        for title, artist in [(["A"], "X"), ("A", {"name": "X"}), (["A"], ["X"])]:
+            d = base_contribution()
+            d["songs"][0]["track"]["title"] = title
+            d["songs"][0]["track"]["artist"] = artist
+            # Must not raise TypeError; must return a type error.
+            errors = validate_contribution(d)
+            self.assertTrue(errors)
+            self.assertTrue(any("track.title" in e or "track.artist" in e for e in errors), errors)
+
+    def test_valid_corrections_and_associations_still_pass(self):
+        d = base_contribution()
+        d["corrections"] = [{"rejected_id": "s1", "replacement_id": "s2"}]
+        d["associations"] = [{"song_ids": ["s1", "s2"]}]
+        self.assertEqual(validate_contribution(d), [])
+
+
+class TestRepairP1VetoRevocation(unittest.TestCase):
+    """R3: historical 'never' must not masquerade as current."""
+
+    def test_veto_revoke_effective_view(self):
+        st = ListenerState(catalog={"A", "B", "C"})
+        st.add_session("s1", ["A", "B"])
+        st.veto("A")
+        self.assertNotIn("A", popularity_ranker(st, ["B"], ["A", "B", "C"]))
+        self.assertNotIn("A", provenance_ranker(st, ["B"], ["A", "B", "C"]))
+        st.unveto("A")
+        self.assertIn("A", popularity_ranker(st, ["B"], ["A", "B", "C"]))
+        view = st.avoidance_view()
+        self.assertEqual(view["active_vetoes"], [])
+        self.assertIn(("veto", "A"), view["veto_history"])
+        self.assertIn(("revoke", "A"), view["veto_history"])
+        self.assertIn("never", view["historical_edge_kinds_in_order"])
+        self.assertIn("never_revoked", view["historical_edge_kinds_in_order"])
+        # Revocation comes after the original veto in the ledger.
+        kinds = view["historical_edge_kinds_in_order"]
+        self.assertLess(kinds.index("never"), kinds.index("never_revoked"))
+
+    def test_delete_all_clears_veto_history_and_session_corrections(self):
+        st = ListenerState(catalog={"A", "B", "C"})
+        st.add_session("s1", ["A", "B"])
+        st.veto("A")
+        st.add_session_correction("B", "C", "s1")
+        st.delete_all()
+        self.assertEqual(st.avoidance_view()["active_vetoes"], [])
+        self.assertEqual(st.avoidance_view()["veto_history"], [])
+        self.assertEqual(st.derived_counts(), {"session_track_counts": {}, "n_corrections": 0, "n_edges": 0})
+
+
+class TestRepairP1HardExclusion(unittest.TestCase):
+    """R4: hard exclusion by recording ID, soft negative by tag."""
+
+    def test_hard_excluded_track_cannot_be_reintroduced(self):
+        catalog = make_catalog()
+        tags = {k: v["tags"] for k, v in catalog.items()}
+        # T06 is metal + tag-a: highest possible positive score
+        # for explicit ["metal", "tag-a"]. Hard-exclude it.
+        ranked = a1_explicit_ranker(["metal", "tag-a"], [], tags, sorted(catalog), set(), hard_excluded={"T06"})
+        self.assertNotIn("T06", ranked)
+        # And with vetoes alone, the same track is excluded.
+        ranked2 = a1_explicit_ranker(["metal", "tag-a"], [], tags, sorted(catalog), {"T06"})
+        self.assertNotIn("T06", ranked2)
+
+    def test_soft_negative_does_not_hard_exclude(self):
+        catalog = make_catalog()
+        tags = {k: v["tags"] for k, v in catalog.items()}
+        # T06 has metal (positive) and tag-a (positive); a soft
+        # negative on "metal" only subtracts, it does not remove
+        # the track from the list. That is the documented soft
+        # behaviour, distinct from hard exclusion above.
+        ranked = a1_explicit_ranker(["metal", "tag-a"], ["metal"], tags, sorted(catalog), set())
+        self.assertIn("T06", ranked)
+
+
+class TestRepairP1SessionContextBoundaries(unittest.TestCase):
+    """R5: session-local vs global vs context evidence."""
+
+    def test_session_correction_requires_session_id(self):
+        st = ListenerState(catalog={"A", "B", "C"})
+        st.add_session("s1", ["A", "B"])
+        with self.assertRaises(ValueError):
+            st.add_correction("A", "B", None, scope="session")
+        with self.assertRaises(ValueError):
+            st.add_correction("A", "B", "no-such-session", scope="session")
+        # Global scope remains the session-less operation.
+        st.add_global_correction("A", "B")
+        self.assertEqual(len(st.corrections), 1)
+
+    def test_cross_session_isolation_reject_in_one_accept_in_another(self):
+        st = ListenerState(catalog={"A", "B", "C", "D"})
+        st.add_session("quiet-s1", ["A", "B"], context="quiet")
+        st.add_session("morning-s1", ["A", "C"], context="morning")
+        st.add_session_correction("A", "D", "quiet-s1")
+        rec_quiet, _, _ = recommend(st, ["B"], ["A", "B", "C", "D"], session_id="quiet-s1")
+        self.assertNotIn("A", rec_quiet)
+        rec_morning, _, _ = recommend(st, ["B"], ["A", "B", "C", "D"], session_id="morning-s1")
+        self.assertIn("A", rec_morning)
+        # Global replacement must NOT use the session-local pair.
+        self.assertNotEqual(replacement_ranker(st, "A", ["A", "B", "C", "D"])[0], "D")
+
+    def test_context_conditioned_uses_only_context_matching_pair_evidence(self):
+        st = ListenerState(catalog={"A", "B", "C", "D", "E"})
+        st.add_session("quiet-s1", ["A", "B"], context="quiet")
+        st.add_session("morning-s1", ["A", "C"], context="morning")
+        # Global correction whose session_id is the quiet session.
+        st.add_global_correction("A", "D", session_id="quiet-s1")
+        blind = provenance_ranker(st, ["A"], ["A", "B", "C", "D", "E"])
+        cond_morning = provenance_ranker(st, ["A"], ["A", "B", "C", "D", "E"], context="morning")
+        cond_quiet = provenance_ranker(st, ["A"], ["A", "B", "C", "D", "E"], context="quiet")
+        # D is boosted by the pair in blind and in quiet, but
+        # must NOT be pair-boosted in morning (other context).
+        # Morning's top pair-boosted candidate should not be D
+        # via that quiet correction; quiet's should include D
+        # ahead of morning-only tracks. Check ordering directly:
+        self.assertLess(cond_quiet.index("D"), cond_quiet.index("C"))
+        # In morning, D has no pair evidence and no morning
+        # co-occurrence, so it must rank behind C (morning
+        # co-member). This is the leakage test.
+        self.assertLess(cond_morning.index("C"), cond_morning.index("D"))
+        self.assertIn("D", blind)
+
+
+class TestRepairP1Stage0Allowlist(unittest.TestCase):
+    """R6: narrow allowlist, disguised fields, listener text preserved."""
+
+    def test_allowlisted_claim_types_with_evidence_pass(self):
+        for claim in [
+            {"type": "HUMAN_REPORT", "listener_text": "I love the guitar entrance"},
+            {"type": "TRACK_METADATA", "title": "A", "artist": "X"},
+            {"type": "SYSTEM_HYPOTHESIS", "hypothesis": "these may belong together", "uncertainty": "unverified"},
+            {"type": "UNKNOWN"},
+        ]:
+            self.assertEqual(validate_system_claims([claim]), [], claim)
+            self.assertEqual(validate_contribution(_claim_base([claim])), [], claim)
+
+    def test_disallowed_types_and_disguised_fields_rejected(self):
+        for claim in [
+            {"type": "AUDIO_OBSERVATION", "value": 1},
+            {"type": "SYSTEM_NOTE", "waveform_peak": 0.9},
+            {"type": "UNKNOWN", "guitar_entrance_verified": True},
+            {"type": "TRACK_METADATA", "title": "A", "verified_acoustic_structure": "guitar entrance"},
+            {"type": "HUMAN_REPORT", "listener_text": "hi", "authorized_audio": True},
+            {"type": "HUMAN_REPORT", "listener_text": "hi", "verified": True},
+        ]:
+            self.assertTrue(validate_system_claims([claim]), claim)
+            self.assertTrue(validate_contribution(_claim_base([claim])), claim)
+
+    def test_listener_text_guitar_entrance_is_not_system_verified_audio(self):
+        # The listener may write it; the system may not relabel it.
+        d = base_contribution()
+        d["songs"][0]["listener_report"]["text"] = "I love the guitar entrance"
+        self.assertEqual(validate_contribution(d), [])
+        # The same sentence as a system claim with a verified
+        # acoustic field is rejected, not promoted.
+        claim = {"type": "SYSTEM_HYPOTHESIS", "hypothesis": "guitar entrance verified", "verified_acoustic_structure": "guitar entrance"}
+        self.assertTrue(validate_system_claims([claim]))
+
+    def test_human_report_without_evidence_rejected(self):
+        self.assertTrue(validate_system_claims([{"type": "HUMAN_REPORT"}]))
