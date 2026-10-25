@@ -1,7 +1,7 @@
-MUSE CONSTELLATION LAB v0.2.1 — TEST LOG (TLR-R2-MUSE-REPAIR-01)
+MUSE CONSTELLATION LAB v0.2.2 — TEST LOG (Sol re-review repair, PR #72 at 5dc1765b)
 Command: python3 -m unittest test_muse_lab -v
 Python: 3.12.3, stdlib only, offline
-Tests: 44 total (27 original retained unchanged + 17 new repair tests)
+Tests: 48 total (27 original + 17 v0.2.1 repair + 4 v0.2.2 repair)
 
 test_a1_can_propose_unseen_songs (test_muse_lab.TestA1ExplicitPreferences.test_a1_can_propose_unseen_songs) ... ok
 test_a1_negative_constraints_veto (test_muse_lab.TestA1ExplicitPreferences.test_a1_negative_constraints_veto) ... ok
@@ -44,6 +44,10 @@ test_human_report_without_evidence_rejected (test_muse_lab.TestRepairP1Stage0All
 test_listener_text_guitar_entrance_is_not_system_verified_audio (test_muse_lab.TestRepairP1Stage0Allowlist.test_listener_text_guitar_entrance_is_not_system_verified_audio) ... ok
 test_delete_all_clears_veto_history_and_session_corrections (test_muse_lab.TestRepairP1VetoRevocation.test_delete_all_clears_veto_history_and_session_corrections) ... ok
 test_veto_revoke_effective_view (test_muse_lab.TestRepairP1VetoRevocation.test_veto_revoke_effective_view) ... ok
+test_corrections_unhashable_ids_return_errors_not_typeerror (test_muse_lab.TestRepairV022UnhashableMembership.test_corrections_unhashable_ids_return_errors_not_typeerror) ... ok
+test_corrections_valid_ids_still_pass_and_unknown_still_flagged (test_muse_lab.TestRepairV022UnhashableMembership.test_corrections_valid_ids_still_pass_and_unknown_still_flagged) ... ok
+test_system_claim_unhashable_type_returns_error_not_typeerror (test_muse_lab.TestRepairV022UnhashableMembership.test_system_claim_unhashable_type_returns_error_not_typeerror) ... ok
+test_system_claim_valid_types_still_pass (test_muse_lab.TestRepairV022UnhashableMembership.test_system_claim_valid_types_still_pass) ... ok
 test_correction_unknown_session_rejected (test_muse_lab.TestStateFailClosed.test_correction_unknown_session_rejected)
 Reproduced Meta AI defect: arbitrary session IDs accepted. ... ok
 test_deletion_clears_derived_state (test_muse_lab.TestStateFailClosed.test_deletion_clears_derived_state) ... ok
@@ -58,15 +62,15 @@ test_silence_and_click_out_change_nothing (test_muse_lab.TestStateFailClosed.tes
 test_veto_blocks_all_rankers_until_revoked (test_muse_lab.TestStateFailClosed.test_veto_blocks_all_rankers_until_revoked) ... ok
 
 ----------------------------------------------------------------------
-Ran 44 tests in 0.180s
+Ran 48 tests in 0.175s
 
 OK
 EXIT:0
 
-=== EXPERIMENTS (before/after identical to 3 decimals, see README) ===
+=== EXPERIMENTS (identical before/after, means/CIs compared) ===
 Command: python3 muse_lab.py
 
-Muse Constellation Lab v0.2.1 -- synthetic only, NOT real listeners
+Muse Constellation Lab v0.2.2 -- synthetic only, NOT real listeners
 {
   "seeds": [
     1,
