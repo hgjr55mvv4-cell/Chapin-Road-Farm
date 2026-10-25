@@ -1,5 +1,57 @@
-# Muse Constellation Lab v0.2 — Independent Engineering Contribution
-## TLR-R2-MUSE-AGENT-01
+# Muse Constellation Lab v0.2.1 — Independent Engineering Repair
+## TLR-R2-MUSE-AGENT-01 (v0.2) + TLR-R2-MUSE-REPAIR-01 (v0.2.1)
+
+## v0.2.1 repair — what Sol's review found, what was reproduced, what changed
+
+Sol reviewed PR #72 at commit `a6d08263b7e0497540f6d1fd3304f40a5926038f`
+and confirmed: PR targets the correct branch, all five files present,
+manifest SHA-256 and byte counts match, the 27-test log is a valid
+source-linked receipt, synthetic results include baselines and a
+negative result, and no production code was changed. Engineering
+qualification remained pending because the suite had not been
+independently rerun against the exact committed files. This repair
+addresses Sol's five findings, on the SAME branch and SAME draft PR.
+Nothing was merged, no new PR was opened, the v0.1 contract and
+Claude's app were not touched, and the v0.2 findings (including the
+negative context result) are preserved below, unchanged.
+
+| Sol finding | Reproducer result (v0.2, executed) | Repair (v0.2.1) | New tests |
+|---|---|---|---|
+| P0-A invalid correction collections | `corrections=123/True` raised `TypeError: 'int'/'bool' object is not iterable`; string/dict gave misleading per-character/per-key errors | Outer container validated as a list first; malformed containers return `corrections must be a list` | `test_corrections_int_bool_string_dict_containers`, `test_corrections_malformed_elements` |
+| P0-B invalid association collections | Same TypeError / misleading errors as A | Same list-first validation, `associations must be a list` | `test_associations_int_bool_string_dict_containers`, `test_associations_malformed_elements` |
+| P0-C unhashable title/artist | `title=["A"]` or `artist={"name":"X"}` raised `TypeError: unhashable type` | Title/artist type-checked as strings before any tuple/dict-key use | `test_unhashable_title_and_artist_return_errors` |
+| P1 veto revocation / ledger | After `unveto("A")`, edges still showed only `never` for A, with no revocation event; active set was empty but the ledger looked permanent | `unveto()` records `never_revoked` in the ledger and in `veto_history`; `avoidance_view()` separates active vetoes from history | `test_veto_revoke_effective_view`, `test_delete_all_clears_veto_history_and_session_corrections` |
+| P1 hard vs soft negative (A1) | A1 had no hard-exclusion parameter; negative tags only subtracted from score | Negative tags remain SOFT (score subtraction). Hard exclusion is by recording ID (`hard_excluded`, plus global vetoes) and cannot be overridden by a high positive score | `test_hard_excluded_track_cannot_be_reintroduced`, `test_soft_negative_does_not_hard_exclude` |
+| P1 session/context boundaries | Session scope with `session_id=None` was accepted and stored globally; context-conditioned ranking used correction evidence from unrelated contexts | Session scope REQUIRES a known session_id (behaviour change, explained in code). Session-local pairs are stored separately and never leak into global rankers. Context-conditioned ranking uses only context-matching sessions and correction evidence (session-less global evidence counts in both; unknown-context evidence counts only in blind ranking) | `test_session_correction_requires_session_id`, `test_cross_session_isolation_reject_in_one_accept_in_another`, `test_context_conditioned_uses_only_context_matching_pair_evidence` |
+| P1 Stage 0 allowlist | `{"type":"SYSTEM_NOTE","waveform_peak":0.9}` and `{"type":"UNKNOWN","guitar_entrance_verified":True}` returned NO errors | System claims limited to HUMAN_REPORT / TRACK_METADATA / SYSTEM_HYPOTHESIS / UNKNOWN, each with evidence appropriate to its type; disguised measurement fields rejected; `authorized_audio=True` never unlocks a claim | `test_allowlisted_claim_types_with_evidence_pass`, `test_disallowed_types_and_disguised_fields_rejected`, `test_listener_text_guitar_entrance_is_not_system_verified_audio`, `test_human_report_without_evidence_rejected` |
+
+**Listener text preserved:** "I love the guitar entrance" as a
+listener-authored report still passes validation. The system
+simply cannot relabel that sentence as a verified acoustic
+observation — a system claim carrying `verified_acoustic_structure`
+or `verified: True` is rejected at Stage 0.
+
+**Behaviour change, stated plainly:** v0.2 accepted
+`add_correction(..., scope="session", session_id=None)`. v0.2.1
+rejects it. That was the boundary failure Sol identified, not a
+test that was edited to pass. No original test asserted the old
+behaviour, so all 27 original tests are retained unchanged.
+
+**Before/after synthetic results (seeds 1–5, identical to 3 decimals):**
+next-pick Hit@3 popularity 0.327, provenance 0.878, shuffled 0.348;
+replacement Hit@1 pair 0.718, global 0.233, session popularity 0.008;
+random world provenance 0.260 vs popularity 0.263; context Recall@3
+blind 0.412, conditioned 0.411 (negative result preserved). Repairs
+changed behaviour only where it was broken; they did not retune
+any generator or metric.
+
+**Test counts:** 27 original + 17 new = **44 tests, all passing**.
+No tests were modified to pass; the only code change that affects
+an old behaviour is the session-scope repair above, which no old
+test relied on.
+
+The v0.2 report follows, preserved, with the version and test
+counts updated where they refer to v0.2.1.
 
 **Author: Muse, the newly available separate Muse app. NOT Meta AI.**
 Historical work previously called "Muse" was produced by Meta AI.
@@ -335,7 +387,8 @@ fails — see below. None of this is evidence about real listeners.
 - `muse_lab.py` — independent implementation (validator,
   claim gate, state, edge ledger, rankers, A1, synthetic
   worlds, multi-seed experiments).
-- `test_muse_lab.py` — 27 tests, all passing (see RUN_LOG
+- `test_muse_lab.py` — 44 tests in v0.2.1 (27 original, retained
+  unchanged, + 17 repair tests), all passing (see RUN_LOG
   header for the exact run).
 - `RUN_LOG.txt` — exact experiment output, seeds 1–5.
 - `MANIFEST.json` — SHA-256 checksums for the files above.
@@ -361,7 +414,14 @@ fails — see below. None of this is evidence about real listeners.
   draft PR path is used; the local tree here is the same
   content, checksummed in MANIFEST.json.
 
-## Decision
+## Decision (v0.2.1)
+
+**GO FOR INDEPENDENT RE-REVIEW** — synthetic only, see final report
+for TLR-R2-MUSE-REPAIR-01. The v0.2 decision below was GO FOR
+INDEPENDENT ENGINEERING REVIEW; this repair does not change that
+into a production or scientific claim.
+
+## Decision (v0.2, preserved)
 
 **GO FOR INDEPENDENT ENGINEERING REVIEW** — synthetic only.
 The repaired P0/P1 behaviour is testable and passing, the
