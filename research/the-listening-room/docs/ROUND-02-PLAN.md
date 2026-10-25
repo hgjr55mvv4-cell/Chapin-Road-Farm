@@ -1,5 +1,7 @@
 # TLR-ROUND-02 — Community Listening & Continuous Learning
 
+> **Attribution correction (2026-10-25):** The historical "Muse" contributor in this plan was **Meta AI**, previously called Muse by the project lead. A separate Muse app is now available but has not contributed the earlier results. See [source identity correction](MODEL-ATTRIBUTION-CORRECTION-2026-10-25.md). Retain the historical plan sequence for auditability.
+
 **Status:** exploratory design. No participant recruitment, real data collection, audio upload, model training, public intake or scientific confirmation authorized.
 
 ## Four-model sequence
