@@ -1,6 +1,7 @@
-MUSE CONSTELLATION LAB v0.2 — TEST LOG
+MUSE CONSTELLATION LAB v0.2.1 — TEST LOG (TLR-R2-MUSE-REPAIR-01)
 Command: python3 -m unittest test_muse_lab -v
 Python: 3.12.3, stdlib only, offline
+Tests: 44 total (27 original retained unchanged + 17 new repair tests)
 
 test_a1_can_propose_unseen_songs (test_muse_lab.TestA1ExplicitPreferences.test_a1_can_propose_unseen_songs) ... ok
 test_a1_negative_constraints_veto (test_muse_lab.TestA1ExplicitPreferences.test_a1_negative_constraints_veto) ... ok
@@ -26,6 +27,23 @@ test_idea1_random_world_does_not_beat_popularity (test_muse_lab.TestOriginalIdea
 test_idea2_context_conditioned_does_not_reliably_win (test_muse_lab.TestOriginalIdeas.test_idea2_context_conditioned_does_not_reliably_win)
 NEGATIVE RESULT, reported honestly. Recall@3, overlapping ... ok
 test_multi_seed_experiments_are_discriminating (test_muse_lab.TestOriginalIdeas.test_multi_seed_experiments_are_discriminating) ... ok
+test_associations_int_bool_string_dict_containers (test_muse_lab.TestRepairP0MalformedContainers.test_associations_int_bool_string_dict_containers) ... ok
+test_associations_malformed_elements (test_muse_lab.TestRepairP0MalformedContainers.test_associations_malformed_elements) ... ok
+test_corrections_int_bool_string_dict_containers (test_muse_lab.TestRepairP0MalformedContainers.test_corrections_int_bool_string_dict_containers) ... ok
+test_corrections_malformed_elements (test_muse_lab.TestRepairP0MalformedContainers.test_corrections_malformed_elements) ... ok
+test_unhashable_title_and_artist_return_errors (test_muse_lab.TestRepairP0MalformedContainers.test_unhashable_title_and_artist_return_errors) ... ok
+test_valid_corrections_and_associations_still_pass (test_muse_lab.TestRepairP0MalformedContainers.test_valid_corrections_and_associations_still_pass) ... ok
+test_hard_excluded_track_cannot_be_reintroduced (test_muse_lab.TestRepairP1HardExclusion.test_hard_excluded_track_cannot_be_reintroduced) ... ok
+test_soft_negative_does_not_hard_exclude (test_muse_lab.TestRepairP1HardExclusion.test_soft_negative_does_not_hard_exclude) ... ok
+test_context_conditioned_uses_only_context_matching_pair_evidence (test_muse_lab.TestRepairP1SessionContextBoundaries.test_context_conditioned_uses_only_context_matching_pair_evidence) ... ok
+test_cross_session_isolation_reject_in_one_accept_in_another (test_muse_lab.TestRepairP1SessionContextBoundaries.test_cross_session_isolation_reject_in_one_accept_in_another) ... ok
+test_session_correction_requires_session_id (test_muse_lab.TestRepairP1SessionContextBoundaries.test_session_correction_requires_session_id) ... ok
+test_allowlisted_claim_types_with_evidence_pass (test_muse_lab.TestRepairP1Stage0Allowlist.test_allowlisted_claim_types_with_evidence_pass) ... ok
+test_disallowed_types_and_disguised_fields_rejected (test_muse_lab.TestRepairP1Stage0Allowlist.test_disallowed_types_and_disguised_fields_rejected) ... ok
+test_human_report_without_evidence_rejected (test_muse_lab.TestRepairP1Stage0Allowlist.test_human_report_without_evidence_rejected) ... ok
+test_listener_text_guitar_entrance_is_not_system_verified_audio (test_muse_lab.TestRepairP1Stage0Allowlist.test_listener_text_guitar_entrance_is_not_system_verified_audio) ... ok
+test_delete_all_clears_veto_history_and_session_corrections (test_muse_lab.TestRepairP1VetoRevocation.test_delete_all_clears_veto_history_and_session_corrections) ... ok
+test_veto_revoke_effective_view (test_muse_lab.TestRepairP1VetoRevocation.test_veto_revoke_effective_view) ... ok
 test_correction_unknown_session_rejected (test_muse_lab.TestStateFailClosed.test_correction_unknown_session_rejected)
 Reproduced Meta AI defect: arbitrary session IDs accepted. ... ok
 test_deletion_clears_derived_state (test_muse_lab.TestStateFailClosed.test_deletion_clears_derived_state) ... ok
@@ -40,15 +58,15 @@ test_silence_and_click_out_change_nothing (test_muse_lab.TestStateFailClosed.tes
 test_veto_blocks_all_rankers_until_revoked (test_muse_lab.TestStateFailClosed.test_veto_blocks_all_rankers_until_revoked) ... ok
 
 ----------------------------------------------------------------------
-Ran 27 tests in 0.177s
+Ran 44 tests in 0.180s
 
 OK
 EXIT:0
 
-=== EXPERIMENTS ===
+=== EXPERIMENTS (before/after identical to 3 decimals, see README) ===
 Command: python3 muse_lab.py
 
-Muse Constellation Lab v0.2 -- synthetic only, NOT real listeners
+Muse Constellation Lab v0.2.1 -- synthetic only, NOT real listeners
 {
   "seeds": [
     1,
