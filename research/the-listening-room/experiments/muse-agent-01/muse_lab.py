@@ -1,7 +1,21 @@
 """
-Muse Constellation Lab v0.2.1 -- INDEPENDENT implementation
+Muse Constellation Lab v0.2.2 -- INDEPENDENT implementation
 TLR-R2-MUSE-AGENT-01 (v0.2) + TLR-R2-MUSE-REPAIR-01 (v0.2.1 repairs)
++ final narrow integrity repair (v0.2.2, Sol re-review of PR #72
+at commit 5dc1765b)
 experiments/muse-agent-01/
+
+v0.2.2 repairs (two cases only, no feature expansion):
+  F1. validate_contribution: unhashable rejected_id /
+      replacement_id raised TypeError during set membership.
+      ID types are now validated as non-empty strings BEFORE
+      membership is checked.
+  F2. validate_system_claims: unhashable claim type raised
+      TypeError during allowlist membership. The type is now
+      validated as a non-empty string BEFORE allowlist lookup.
+  Also documented: an allowed claim type is NOT necessarily
+  a fully evidence-supported claim; stronger provenance
+  binding remains a future integration requirement.
 
 v0.2.1 repair summary (Sol review of PR #72, commit a6d08263):
   R1 P0 corrections/associations containers: int/bool/string/dict
@@ -197,6 +211,20 @@ def _validate_system_claims(claims):
     to that type, it must not contain a disguised measurement
     field, and authorized_audio=True must never unlock it.
     Listener text is NOT checked here; only claim structure.
+
+    Allowlist limit, stated explicitly (v0.2.2): passing this
+    gate means only that a claim's TYPE is allowed and its
+    required evidence field is present. It does NOT mean the
+    claim is fully evidence-supported, true, or provenance-
+    bound. A HUMAN_REPORT with listener_text passes even
+    though this gate cannot verify who actually wrote the
+    text; a TRACK_METADATA claim passes even though its
+    title/artist are not checked against a source record;
+    a SYSTEM_HYPOTHESIS passes as a hypothesis, not as a
+    finding. Stronger provenance binding — signed listener
+    attestation, source-record linkage, and a verification
+    workflow for metadata claims — remains a FUTURE
+    integration requirement and is NOT implemented here.
     """
     errors = []
     if claims is None:
@@ -209,7 +237,13 @@ def _validate_system_claims(claims):
             errors.append(f"{prefix} must be an object")
             continue
         claim_type = claim.get("type")
-        if claim_type not in _SYSTEM_CLAIM_TYPES:
+        # v0.2.2: validate the type BEFORE allowlist membership.
+        # Previously `claim_type not in _SYSTEM_CLAIM_TYPES`
+        # raised TypeError (unhashable) for list/dict types.
+        if not isinstance(claim_type, str) or not claim_type:
+            errors.append(f"{prefix}.type must be a non-empty string")
+            claim_type = None
+        elif claim_type not in _SYSTEM_CLAIM_TYPES:
             errors.append(
                 f"{prefix}.type {claim_type!r} is not in the Stage 0 "
                 f"allowlist (HUMAN_REPORT, TRACK_METADATA, "
@@ -402,9 +436,17 @@ def validate_contribution(data):
         if not isinstance(corr, dict):
             errors.append(f"corrections[{i}] must be an object")
             continue
+        # v0.2.2: validate ID types BEFORE set membership.
+        # Previously `corr.get(fname) not in seen_ids` raised
+        # TypeError (unhashable) for list/dict IDs. A non-string
+        # ID is a structured error, never a crash, and the
+        # differ-check below (equality, not hashing) is safe.
         for fname in ("rejected_id", "replacement_id"):
-            if corr.get(fname) not in seen_ids:
-                errors.append(f"corrections[{i}].{fname} references unknown song_id: {corr.get(fname)!r}")
+            val = corr.get(fname)
+            if not isinstance(val, str) or not val:
+                errors.append(f"corrections[{i}].{fname} must be a non-empty string")
+            elif val not in seen_ids:
+                errors.append(f"corrections[{i}].{fname} references unknown song_id: {val!r}")
         if corr.get("rejected_id") == corr.get("replacement_id"):
             errors.append(f"corrections[{i}] rejected and replacement must differ")
     associations = data.get("associations", [])
@@ -1113,7 +1155,7 @@ def run_experiments(seeds=(1, 2, 3, 4, 5)):
 
 def main():
     import json
-    print("Muse Constellation Lab v0.2.1 -- synthetic only, NOT real listeners")
+    print("Muse Constellation Lab v0.2.2 -- synthetic only, NOT real listeners")
     print(json.dumps(run_experiments(), indent=2))
 
 
