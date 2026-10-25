@@ -1,0 +1,57 @@
+{
+  "schema_version": "0.1-dev",
+  "synthetic": true,
+  "session": {
+    "session_id": "synthetic-session-001",
+    "occasion_label": "An imagined quiet evening"
+  },
+  "privacy": {
+    "storage": "session_only",
+    "research_use": false,
+    "public_release": false,
+    "model_training": false
+  },
+  "songs": [
+    {
+      "song_id": "s1",
+      "track": {
+        "title": "Imaginary Track A",
+        "artist": "Invented Artist One",
+        "identity_status": "unverified",
+        "source_url": null
+      },
+      "listener_report": {
+        "text": "I like the space between the notes.",
+        "scope": "whole_song"
+      },
+      "moments": [
+        {
+          "approx_seconds": 73,
+          "listener_note": "The texture changes here in my imagined example.",
+          "type": "human_report"
+        }
+      ]
+    },
+    {
+      "song_id": "s2",
+      "track": {
+        "title": "Imaginary Track B",
+        "artist": "Invented Artist Two",
+        "identity_status": "unverified",
+        "source_url": null
+      },
+      "listener_report": {
+        "text": "The rhythm feels spacious to me.",
+        "scope": "whole_song"
+      },
+      "moments": []
+    }
+  ],
+  "playlist": {
+    "song_ids": [
+      "s1",
+      "s2"
+    ],
+    "connection_in_own_words": "They feel connected to me right now, though the styles are different."
+  }
+}
