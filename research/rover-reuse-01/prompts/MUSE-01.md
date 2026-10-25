@@ -54,7 +54,7 @@ Make `research/rover-reuse-01/contributions/muse-round01/` with:
 - `RUN_LOG.md` — actual environment, exact commands, results, or `NOT RUN`.
 - `PROVENANCE.md` — which source/model outputs you saw, dated links, tool limits, human authorization.
 
-**Publication:** Once Brian confirms the scoped submission is okay, create **your own named branch** based on `research/rover-donor-green-teaming-01`, then open a **DRAFT PR targeting that research branch**; do not push to main, merge, change other research branches, or edit Claude's contribution files. If GitHub write permission is absent, provide files/patch with hashes and exact instructions for Sol. Human publication of your text in public GitHub requires conscious approval.
+**Publication:** Brian has authorized the bounded **public draft research contribution requested here**. Create **your own named branch** based on `research/rover-donor-green-teaming-01`, then open a **DRAFT PR targeting that research branch**; do not push to main, merge, change other research branches, or edit Claude's contribution files. If GitHub write permission is absent, provide files/patch with hashes and exact instructions for Sol. This approval is limited to an attributed, non-sensitive, draft research contribution; ask Brian before any expanded publication, merging or activity beyond this scope.
 
 ### Explicit hard holds
 
