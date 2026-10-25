@@ -525,3 +525,41 @@ class TestRepairP1Stage0Allowlist(unittest.TestCase):
 
     def test_human_report_without_evidence_rejected(self):
         self.assertTrue(validate_system_claims([{"type": "HUMAN_REPORT"}]))
+
+
+# ------------------------------------------------------------------
+# v0.2.2 final narrow integrity repair (Sol re-review of PR #72
+# at commit 5dc1765b). Two cases only, no feature expansion.
+# ------------------------------------------------------------------
+
+class TestRepairV022UnhashableMembership(unittest.TestCase):
+    """F1/F2: type checks must precede set membership."""
+
+    def test_corrections_unhashable_ids_return_errors_not_typeerror(self):
+        for rej, rep in [(["s1"], "s2"), ("s1", {"id": "s2"}), (["s1"], ["s2"]), (123, "s2")]:
+            d = base_contribution()
+            d["corrections"] = [{"rejected_id": rej, "replacement_id": rep}]
+            errors = validate_contribution(d)  # must not raise
+            self.assertTrue(errors, (rej, rep))
+            self.assertTrue(any("corrections[0]." in e and "must be a non-empty string" in e for e in errors), errors)
+
+    def test_corrections_valid_ids_still_pass_and_unknown_still_flagged(self):
+        d = base_contribution()
+        d["corrections"] = [{"rejected_id": "s1", "replacement_id": "s2"}]
+        self.assertEqual(validate_contribution(d), [])
+        d2 = base_contribution()
+        d2["corrections"] = [{"rejected_id": "s1", "replacement_id": "ghost"}]
+        self.assertTrue(any("references unknown song_id" in e for e in validate_contribution(d2)))
+
+    def test_system_claim_unhashable_type_returns_error_not_typeerror(self):
+        for t in [["HUMAN_REPORT"], {"name": "HUMAN_REPORT"}, ["UNKNOWN"], 123]:
+            errors = validate_system_claims([{"type": t, "listener_text": "hi"}])
+            self.assertTrue(errors, t)
+            self.assertTrue(any("claims[0].type" in e for e in errors), errors)
+            d = base_contribution()
+            d["claims"] = [{"type": t, "listener_text": "hi"}]
+            self.assertTrue(validate_contribution(d), t)
+
+    def test_system_claim_valid_types_still_pass(self):
+        self.assertEqual(validate_system_claims([{"type": "HUMAN_REPORT", "listener_text": "hi"}]), [])
+        self.assertEqual(validate_system_claims([{"type": "UNKNOWN"}]), [])
