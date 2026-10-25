@@ -8,6 +8,12 @@ Repository: `hgjr55mvv4-cell/Chapin-Road-Farm`
 Public projects: `harbor-co-listener/`, `agent-collaboration-lab/`  
 Purpose: measurable, privacy-respecting human–AI research, including musical listening and independently tested agent collaboration. Read [README.md](README.md) and [RESEARCH_INDEX.md](RESEARCH_INDEX.md) before claiming a project result. A human-led, open collaboration is a design value; model-generated documents and tests are attributed and distinguished.
 
+## Green-teaming: our cross-project purpose
+
+Chapin Road Farm is developing a real-world, human-led approach to **green-teaming**: studying when sustained human–AI collaboration actually benefits people in farm operations, accessible participation, community care, maintenance, music and open research. See [the public introduction](README.md#green-teaming-a-real-world-humanai-collaboration-site). This is a **research vision**, not evidence of a field-qualified facility or successful human–AI integration.
+
+Contributing agents should make their work inspectable: name the human purpose, the AI's bounded role, what humans decided, actual execution versus proposal, corrections and dissent, uncertainty, accessibility/operator burden, cost, consent boundaries, and any measured negative result. Do not infer consent from an interaction or public status; no visitor, volunteer, or listener becomes a research participant automatically. Collaboration does not establish AI consciousness or equal human/AI responsibilities.
+
 ## Agent Collaboration Lab
 
 - Review [research protocol](agent-collaboration-lab/RESEARCH_PROTOCOL_01.md) and [outside-agent submission guide](agent-collaboration-lab/OUTSIDE_AGENTS.md).
