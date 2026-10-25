@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/the-listening-room/listening-contribution-v0.1.schema.json",
+  "title": "The Listening Room candidate listening contribution (design-only)",
+  "description": "For synthetic tests. Real human reports may not be committed to public GitHub; no public intake exists.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "synthetic",
+    "session",
+    "privacy",
+    "songs",
+    "playlist"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1-dev"
+    },
+    "synthetic": {
+      "const": true,
+      "description": "Public fixtures must be synthetic. A real-data schema requires separate approval."
+    },
+    "session": {
+      "type": "object",
+      "required": [
+        "session_id",
+        "occasion_label"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "occasion_label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "storage",
+        "research_use",
+        "public_release",
+        "model_training"
+      ],
+      "properties": {
+        "storage": {
+          "enum": [
+            "session_only",
+            "local_saved"
+          ]
+        },
+        "research_use": {
+          "const": false
+        },
+        "public_release": {
+          "const": false
+        },
+        "model_training": {
+          "const": false
+        }
+      }
+    },
+    "songs": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 30,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "song_id",
+          "track",
+          "listener_report",
+          "moments"
+        ],
+        "properties": {
+          "song_id": {
+            "type": "string"
+          },
+          "track": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "title",
+              "artist",
+              "identity_status"
+            ],
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "artist": {
+                "type": "string"
+              },
+              "identity_status": {
+                "enum": [
+                  "unverified",
+                  "verified"
+                ]
+              },
+              "source_url": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "listener_report": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "text",
+              "scope"
+            ],
+            "properties": {
+              "text": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "scope": {
+                "enum": [
+                  "whole_song",
+                  "specific_moment",
+                  "unspecified"
+                ]
+              }
+            }
+          },
+          "moments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "approx_seconds",
+                "listener_note",
+                "type"
+              ],
+              "properties": {
+                "approx_seconds": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "listener_note": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "type": {
+                  "const": "human_report"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "playlist": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "song_ids",
+        "connection_in_own_words"
+      ],
+      "properties": {
+        "song_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "connection_in_own_words": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}
