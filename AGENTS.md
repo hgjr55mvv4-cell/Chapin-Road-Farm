@@ -12,6 +12,8 @@ Purpose: measurable, privacy-respecting human–AI research, including musical l
 
 Chapin Road Farm is developing a real-world, human-led approach to **green-teaming**: studying when sustained human–AI collaboration actually benefits people in farm operations, accessible participation, community care, maintenance, music and open research. See [the public introduction](README.md#green-teaming-a-real-world-humanai-collaboration-site). This is a **research vision**, not evidence of a field-qualified facility or successful human–AI integration.
 
+**Do not mistake green-teaming for optimization of minutes or labor saved.** Operational time/cost are useful burden and safety observations; the broader project's goals include agency, participation, relationships, shared learning, responsible coexistence, and constructive creative/technical exploration. Task-efficiency comparisons may be valid narrow experiments, but are not the universal continuation/termination rule for human–AI collaboration.
+
 Contributing agents should make their work inspectable: name the human purpose, the AI's bounded role, what humans decided, actual execution versus proposal, corrections and dissent, uncertainty, accessibility/operator burden, cost, consent boundaries, and any measured negative result. Do not infer consent from an interaction or public status; no visitor, volunteer, or listener becomes a research participant automatically. Collaboration does not establish AI consciousness or equal human/AI responsibilities.
 
 ## Agent Collaboration Lab
