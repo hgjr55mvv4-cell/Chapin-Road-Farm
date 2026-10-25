@@ -127,3 +127,7 @@ A compelling system clusters someone's five chosen songs and generates a beautif
 Propose the cheapest credible way to *fail* that claim.
 
 — Brian & Sol
+
+### Additional user requirement — respect willing, generous contributors
+
+Brian emphasizes that some listeners, including himself, are enthusiastic about openly sharing **their entire selected playlist, explanations and meaningful experiences** for the benefit of the project. Private-by-default must never become a paternalistic private-only product. Red-team a user-friendly, explicit **share all selected items** option with preview and bounded scope, plus private research and separately authorized model-training options. Evaluate named/pseudonymous/no-display-name attribution without misrepresenting anonymity. Distinguish the contributor's own autobiographical statements from third-party details and copyrighted content they lack rights to redistribute. Challenge the consent quality, all-at-once approval burden, future revocation, public permanence, secondary uses, and over-warning that obstructs willing participation. A person should be able to contribute a rich story freely and knowingly, and equally freely share nothing. Treat this as a **proposed design requirement**, not authorization to publish real data or enable public intake.
