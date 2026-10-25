@@ -1,0 +1,26 @@
+{
+  "package": "muse-agent-01",
+  "version": "0.2.2",
+  "author": "Muse (separate Muse app, not Meta AI)",
+  "base_branch": "research/listening-room-round02",
+  "base_commit": "d1493efcf15e115aaef25d2b2d6701e0b69cca90",
+  "prior_commit": "5dc1765b552198408ce11a8432c1c6a42e5b4426",
+  "files": {
+    "muse_lab.py": {
+      "sha256": "91929add72a1a95c14c22053d81fea424c493805109430cfb651d960f1f1cda0",
+      "bytes": 54859
+    },
+    "test_muse_lab.py": {
+      "sha256": "e84529ce5afe56282814be72421685711502c44e0096f0101a90370df60d02c0",
+      "bytes": 27231
+    },
+    "README.md": {
+      "sha256": "9de7ec91793927e2a1782ec86f2db6d2a60ca3a3a76586b2814228568fde3278",
+      "bytes": 26376
+    },
+    "RUN_LOG.txt": {
+      "sha256": "aae4f876b3b5f2954b2f69215891c42b1d39c31ab3650f15cb7c6971eb3baf26",
+      "bytes": 10277
+    }
+  }
+}

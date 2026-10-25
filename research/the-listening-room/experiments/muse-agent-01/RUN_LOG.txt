@@ -1,0 +1,212 @@
+MUSE CONSTELLATION LAB v0.2.2 — TEST LOG (Sol re-review repair, PR #72 at 5dc1765b)
+Command: python3 -m unittest test_muse_lab -v
+Python: 3.12.3, stdlib only, offline
+Tests: 48 total (27 original + 17 v0.2.1 repair + 4 v0.2.2 repair)
+
+test_a1_can_propose_unseen_songs (test_muse_lab.TestA1ExplicitPreferences.test_a1_can_propose_unseen_songs) ... ok
+test_a1_negative_constraints_veto (test_muse_lab.TestA1ExplicitPreferences.test_a1_negative_constraints_veto) ... ok
+test_a1_tag_shuffle_kills_advantage (test_muse_lab.TestA1ExplicitPreferences.test_a1_tag_shuffle_kills_advantage) ... ok
+test_abstention_on_zero_provenance (test_muse_lab.TestAbstentionAndStructuralProperties.test_abstention_on_zero_provenance)
+A forced ranking with zero evidence would be fabrication. ... ok
+test_rankers_take_no_metadata_parameter (test_muse_lab.TestAbstentionAndStructuralProperties.test_rankers_take_no_metadata_parameter)
+Structural property, labelled as such: rankers accept ... ok
+test_recommend_returns_provenance_only (test_muse_lab.TestAbstentionAndStructuralProperties.test_recommend_returns_provenance_only) ... ok
+test_acoustic_observation_variant_rejected (test_muse_lab.TestFailClosedValidator.test_acoustic_observation_variant_rejected)
+Reproduced Meta AI defect: 'acoustic_observation' slipped through. ... ok
+test_ambiguous_recording_identity_flagged (test_muse_lab.TestFailClosedValidator.test_ambiguous_recording_identity_flagged) ... ok
+test_audio_observation_rejected_even_when_authorized (test_muse_lab.TestFailClosedValidator.test_audio_observation_rejected_even_when_authorized) ... ok
+test_bool_seconds_rejected (test_muse_lab.TestFailClosedValidator.test_bool_seconds_rejected) ... ok
+test_dict_playlist_member_is_error_not_crash (test_muse_lab.TestFailClosedValidator.test_dict_playlist_member_is_error_not_crash)
+Reproduced Meta AI defect: TypeError unhashable dict. ... ok
+test_list_playlist_member_is_error_not_crash (test_muse_lab.TestFailClosedValidator.test_list_playlist_member_is_error_not_crash) ... ok
+test_listener_words_are_not_censored (test_muse_lab.TestFailClosedValidator.test_listener_words_are_not_censored)
+Only claim types/field names are scanned, not free text. ... ok
+test_privacy_relaxation_rejected (test_muse_lab.TestFailClosedValidator.test_privacy_relaxation_rejected) ... ok
+test_valid_passes (test_muse_lab.TestFailClosedValidator.test_valid_passes) ... ok
+test_idea1_random_world_does_not_beat_popularity (test_muse_lab.TestOriginalIdeas.test_idea1_random_world_does_not_beat_popularity) ... ok
+test_idea2_context_conditioned_does_not_reliably_win (test_muse_lab.TestOriginalIdeas.test_idea2_context_conditioned_does_not_reliably_win)
+NEGATIVE RESULT, reported honestly. Recall@3, overlapping ... ok
+test_multi_seed_experiments_are_discriminating (test_muse_lab.TestOriginalIdeas.test_multi_seed_experiments_are_discriminating) ... ok
+test_associations_int_bool_string_dict_containers (test_muse_lab.TestRepairP0MalformedContainers.test_associations_int_bool_string_dict_containers) ... ok
+test_associations_malformed_elements (test_muse_lab.TestRepairP0MalformedContainers.test_associations_malformed_elements) ... ok
+test_corrections_int_bool_string_dict_containers (test_muse_lab.TestRepairP0MalformedContainers.test_corrections_int_bool_string_dict_containers) ... ok
+test_corrections_malformed_elements (test_muse_lab.TestRepairP0MalformedContainers.test_corrections_malformed_elements) ... ok
+test_unhashable_title_and_artist_return_errors (test_muse_lab.TestRepairP0MalformedContainers.test_unhashable_title_and_artist_return_errors) ... ok
+test_valid_corrections_and_associations_still_pass (test_muse_lab.TestRepairP0MalformedContainers.test_valid_corrections_and_associations_still_pass) ... ok
+test_hard_excluded_track_cannot_be_reintroduced (test_muse_lab.TestRepairP1HardExclusion.test_hard_excluded_track_cannot_be_reintroduced) ... ok
+test_soft_negative_does_not_hard_exclude (test_muse_lab.TestRepairP1HardExclusion.test_soft_negative_does_not_hard_exclude) ... ok
+test_context_conditioned_uses_only_context_matching_pair_evidence (test_muse_lab.TestRepairP1SessionContextBoundaries.test_context_conditioned_uses_only_context_matching_pair_evidence) ... ok
+test_cross_session_isolation_reject_in_one_accept_in_another (test_muse_lab.TestRepairP1SessionContextBoundaries.test_cross_session_isolation_reject_in_one_accept_in_another) ... ok
+test_session_correction_requires_session_id (test_muse_lab.TestRepairP1SessionContextBoundaries.test_session_correction_requires_session_id) ... ok
+test_allowlisted_claim_types_with_evidence_pass (test_muse_lab.TestRepairP1Stage0Allowlist.test_allowlisted_claim_types_with_evidence_pass) ... ok
+test_disallowed_types_and_disguised_fields_rejected (test_muse_lab.TestRepairP1Stage0Allowlist.test_disallowed_types_and_disguised_fields_rejected) ... ok
+test_human_report_without_evidence_rejected (test_muse_lab.TestRepairP1Stage0Allowlist.test_human_report_without_evidence_rejected) ... ok
+test_listener_text_guitar_entrance_is_not_system_verified_audio (test_muse_lab.TestRepairP1Stage0Allowlist.test_listener_text_guitar_entrance_is_not_system_verified_audio) ... ok
+test_delete_all_clears_veto_history_and_session_corrections (test_muse_lab.TestRepairP1VetoRevocation.test_delete_all_clears_veto_history_and_session_corrections) ... ok
+test_veto_revoke_effective_view (test_muse_lab.TestRepairP1VetoRevocation.test_veto_revoke_effective_view) ... ok
+test_corrections_unhashable_ids_return_errors_not_typeerror (test_muse_lab.TestRepairV022UnhashableMembership.test_corrections_unhashable_ids_return_errors_not_typeerror) ... ok
+test_corrections_valid_ids_still_pass_and_unknown_still_flagged (test_muse_lab.TestRepairV022UnhashableMembership.test_corrections_valid_ids_still_pass_and_unknown_still_flagged) ... ok
+test_system_claim_unhashable_type_returns_error_not_typeerror (test_muse_lab.TestRepairV022UnhashableMembership.test_system_claim_unhashable_type_returns_error_not_typeerror) ... ok
+test_system_claim_valid_types_still_pass (test_muse_lab.TestRepairV022UnhashableMembership.test_system_claim_valid_types_still_pass) ... ok
+test_correction_unknown_session_rejected (test_muse_lab.TestStateFailClosed.test_correction_unknown_session_rejected)
+Reproduced Meta AI defect: arbitrary session IDs accepted. ... ok
+test_deletion_clears_derived_state (test_muse_lab.TestStateFailClosed.test_deletion_clears_derived_state) ... ok
+test_failed_add_leaves_state_unchanged (test_muse_lab.TestStateFailClosed.test_failed_add_leaves_state_unchanged) ... ok
+test_generator_session_is_kept_not_emptied (test_muse_lab.TestStateFailClosed.test_generator_session_is_kept_not_emptied)
+Reproduced Meta AI defect: generator -> empty session. ... ok
+test_ranker_rejects_unknown_ids (test_muse_lab.TestStateFailClosed.test_ranker_rejects_unknown_ids) ... ok
+test_refusal_clears_old_text (test_muse_lab.TestStateFailClosed.test_refusal_clears_old_text) ... ok
+test_session_local_suppression (test_muse_lab.TestStateFailClosed.test_session_local_suppression)
+Session-local 'not tonight' must suppress only that session. ... ok
+test_silence_and_click_out_change_nothing (test_muse_lab.TestStateFailClosed.test_silence_and_click_out_change_nothing) ... ok
+test_veto_blocks_all_rankers_until_revoked (test_muse_lab.TestStateFailClosed.test_veto_blocks_all_rankers_until_revoked) ... ok
+
+----------------------------------------------------------------------
+Ran 48 tests in 0.175s
+
+OK
+EXIT:0
+
+=== EXPERIMENTS (identical before/after, means/CIs compared) ===
+Command: python3 muse_lab.py
+
+Muse Constellation Lab v0.2.2 -- synthetic only, NOT real listeners
+{
+  "seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "stable_next_pick_hit_at_3": {
+    "popularity": {
+      "mean": 0.327,
+      "min": 0,
+      "max": 0.7,
+      "approx_95ci": [
+        0.288,
+        0.365
+      ],
+      "n": 60
+    },
+    "provenance": {
+      "mean": 0.878,
+      "min": 0.6,
+      "max": 1,
+      "approx_95ci": [
+        0.854,
+        0.903
+      ],
+      "n": 60
+    },
+    "provenance_shuffled_control": {
+      "mean": 0.348,
+      "min": 0,
+      "max": 0.8,
+      "approx_95ci": [
+        0.304,
+        0.393
+      ],
+      "n": 60
+    }
+  },
+  "replacement_hit_at_1": {
+    "session_popularity": {
+      "mean": 0.008,
+      "min": 0,
+      "max": 0.2,
+      "approx_95ci": [
+        -0.0,
+        0.017
+      ],
+      "n": 60
+    },
+    "global_replacement": {
+      "mean": 0.233,
+      "min": 0,
+      "max": 0.6,
+      "approx_95ci": [
+        0.197,
+        0.27
+      ],
+      "n": 60
+    },
+    "pair_specific": {
+      "mean": 0.718,
+      "min": 0.3,
+      "max": 0.9,
+      "approx_95ci": [
+        0.682,
+        0.755
+      ],
+      "n": 60
+    }
+  },
+  "idea1_random_world_hit_at_3": {
+    "popularity": {
+      "mean": 0.263,
+      "min": 0,
+      "max": 0.5,
+      "approx_95ci": [
+        0.219,
+        0.308
+      ],
+      "n": 30
+    },
+    "provenance": {
+      "mean": 0.26,
+      "min": 0.1,
+      "max": 0.5,
+      "approx_95ci": [
+        0.22,
+        0.3
+      ],
+      "n": 30
+    },
+    "note": "In a world with no constellations, provenance must NOT beat popularity."
+  },
+  "idea2_context_world_recall_at_3": {
+    "context_blind": {
+      "mean": 0.412,
+      "min": 0.3,
+      "max": 0.633,
+      "approx_95ci": [
+        0.385,
+        0.44
+      ],
+      "n": 30
+    },
+    "context_conditioned": {
+      "mean": 0.411,
+      "min": 0.3,
+      "max": 0.567,
+      "approx_95ci": [
+        0.386,
+        0.436
+      ],
+      "n": 30
+    },
+    "stable_world_context_blind": {
+      "mean": 0.409,
+      "min": 0.267,
+      "max": 0.533,
+      "approx_95ci": [
+        0.387,
+        0.431
+      ],
+      "n": 30
+    },
+    "stable_world_context_conditioned": {
+      "mean": 0.409,
+      "min": 0.267,
+      "max": 0.533,
+      "approx_95ci": [
+        0.387,
+        0.431
+      ],
+      "n": 30
+    },
+    "note": "Recall@3, not Hit@3: Hit@3 saturates for ambiguous seeds. RESULT: conditioned does NOT reliably beat blind in this world (means equal, CIs overlapping). See README: halving training data offsets the context benefit, and blind already benefits from overlap tracks. This is a negative result for the naive hard-filter version, not a forced win."
+  }
+}
