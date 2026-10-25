@@ -12,6 +12,10 @@
 
 **What is not yet proven:** AI hearing equivalence to humans, shared subjective feeling, a personal affinity fingerprint, machine-discovered hidden musical motifs, or confirmed improvement across sessions. Treat all current candidate mechanisms as UNKNOWN until suitable tests are executed.
 
+## Proposed research: ecological attention and agency (October 25, 2026)
+
+The [Open Ecological Intelligence founding draft](ecological-attention/README.md) examines whether AI can notice environmental events outside its operational classes while protecting human attention, privacy and agency. [EXP-001](ecological-attention/experiments/EXP-001/DESIGN.md) is **UNFROZEN / NOT RUN**, explicitly comparing against a strong task-agnostic event baseline; no public video or farm monitoring is authorized. This is a proposal under review, not a validated intervention system or a licensed public release.
+
 ## New cross-project research: auditory intelligence
 
 [Auditory Intelligence](auditory-intelligence/README.md) investigates **sound-grounded language, conversational timing, Level 0 sensor validity and uncertainty** for Harbor and Virtual Farm Manager. [AUDITORY-DEV-01](auditory-intelligence/dev-01/README.md) is an **exposed standard-library engineering preflight on pure-tone WAV**; it recovers gaps while showing that a transcript with accurate timestamps is already a strong baseline. **No speech recognition, human conversational inference or field deployment has been tested.** Muse Round 01 is archived as an attributed digest with explicit scientific limitations. **Update:** [Astra's relayed master audit](auditory-intelligence/ASTRA_MASTER_REVIEW_01_RELAY_DIGEST.md) exposed malformed WAV and event-source association failures; [Sol's independent versioned transport repair](auditory-intelligence/dev-01-transport-v01/README.md) addresses only the former. Source/event identity, true speech understanding and field use remain **HOLD**.

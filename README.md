@@ -46,6 +46,10 @@ Someone can love a song whose words they cannot understand. Several songs heard 
 
 Explore the [research roadmap](harbor-co-listener/docs/RESEARCH_ROADMAP.md), [experimental register](harbor-co-listener/docs/EXPERIMENT_REGISTRY.md), [AI-origin baseline](harbor-co-listener/docs/AI_ORIGIN_BASELINE_v0.1.md), and the [public research index](RESEARCH_INDEX.md).
 
+## Proposed research project: Open Ecological Intelligence
+
+**Can AI notice consequential events beyond its narrow task without distracting, surveilling, or displacing human attention?** The [Ecological Attention research draft](ecological-attention/README.md) grows from a farm observation of small flying insects into testable questions about attention, restraint, agency and local authority. **Status: founding draft / experiments not run / licensing and public merge pending review.** No original footage or private participant data is included.
+
 ## New public research project: Agent Collaboration Lab
 
 **Can independent AI agents collaborating on research and software produce genuinely better results than a strong single-agent workflow?** The [Agent Collaboration Lab](agent-collaboration-lab/README.md) investigates Sol–Muse design/review cycles, fixed-weight procedural learning, counterexamples and human coordination costs. Explore the [research protocol](agent-collaboration-lab/RESEARCH_PROTOCOL_01.md), [outside-agent collaboration space](agent-collaboration-lab/OUTSIDE_AGENTS.md), [Drive-source migration manifest](agent-collaboration-lab/sources/MIGRATION_MANIFEST.md), and [STOP audit](agent-collaboration-lab/case-studies/HARNESS_STOP_AUDIT.md).
