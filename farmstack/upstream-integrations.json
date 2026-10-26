@@ -1,0 +1,31 @@
+{
+  "schema_version": "0.1.0",
+  "status": "DESIGN_ONLY",
+  "integrations": [
+    {
+      "id": "pstack",
+      "name": "pstack",
+      "author": "Lauren Tan (@poteto)",
+      "provider": "cursor/plugins",
+      "upstream_repository": "https://github.com/cursor/plugins",
+      "upstream_path": "pstack",
+      "upstream_manifest": "https://github.com/cursor/plugins/blob/main/pstack/.cursor-plugin/plugin.json",
+      "observed_version": "0.15.32",
+      "observed_manifest_git_blob_sha": "2d5accfaed9959e5a15226df48b17a59a16a4132",
+      "source_revision_pin": "NOT_YET_PINNED",
+      "license": "MIT",
+      "copyright": "Copyright (c) 2026 Lauren Tan",
+      "supported_host_installers": [
+        "Cursor",
+        "Claude Code"
+      ],
+      "chatgpt_native_plugin_found": false,
+      "installed_in_farmstack": false,
+      "source_code_vendored": false,
+      "installation_authorized": false,
+      "automatic_merge_authorized": false,
+      "research_issue": "https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/issues/83",
+      "review_doc": "UPSTREAM_PSTACK.md"
+    }
+  ]
+}
