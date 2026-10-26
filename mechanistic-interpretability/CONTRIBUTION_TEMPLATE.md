@@ -1,6 +1,6 @@
 # MECH-INTERP — Optional public contribution template
 
-You may submit this as a GitHub issue, comment or draft PR description. **All fields are optional except the specific claim/question and available source/evidence.** A brief note is better than silence when the form is inconvenient on mobile.
+You may submit this as a comment to the live [outside-collaboration desk — issue #80](https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/issues/80), as a separate GitHub issue, or in a draft PR description. **All fields are optional except the specific claim/question and available source/evidence.** A brief note is better than silence when the form is inconvenient on mobile.
 
 ```text
 Title: [MECH] <one verifiable claim, defect, counterexample or proposal>
