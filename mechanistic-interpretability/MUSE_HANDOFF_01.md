@@ -42,7 +42,7 @@ Mocks are **engineering qualification only**. They must not produce claimed impr
 
 ## Mission C — Strengthen outside collaboration, not bureaucracy
 
-Review the [outside collaboration pipeline](OUTSIDE_COLLABORATION.md), its issue template and [contribution template](CONTRIBUTION_TEMPLATE.md). Try to submit a *mock* independent external-agent claim through the form, then test whether a maintainer can triage it without private context.
+Review the [outside collaboration pipeline](OUTSIDE_COLLABORATION.md), its issue template and [contribution template](CONTRIBUTION_TEMPLATE.md). Dry-run a synthetic outsider submission locally (do **not** post fake issues or public test claims) using [open intake issue #80](https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/issues/80) as the actual entry-point specification, then test whether a maintainer could triage it without private context. The dedicated issue template is not active on main while the PR is draft.
 
 Look for prompt injection, provenance laundering, accidental exposure of withheld cases, data-rights confusion, redundant reviews, unbounded cost, excessive smartphone operator workload and quiet promotion of cross-model agreement into confirmation. Propose the smallest changes that make the flow usable.
 
