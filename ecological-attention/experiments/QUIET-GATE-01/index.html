@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QUIET-GATE-01 — Quiet-first demo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <h1>Quiet Gate</h1>
+  <p class="banner" role="alert">
+    SIMULATED DEMO ONLY. Not a safety system. No real observations,
+    no recording, no monitoring. Every scenario shown here is invented.
+  </p>
+
+  <section aria-labelledby="mode-heading">
+    <h2 id="mode-heading">Choose a mode</h2>
+    <p id="mode-status">Current mode: OFF.</p>
+    <div class="controls">
+      <button id="mode-off" type="button" aria-pressed="true">Off</button>
+      <button id="mode-request" type="button" aria-pressed="false">On request</button>
+      <button id="mode-proactive" type="button" aria-pressed="false" disabled>Proactive demo</button>
+    </div>
+    <p>
+      <label>
+        <input id="proactive-optin" type="checkbox">
+        I deliberately opt in to simulated proactive prompts
+      </label>
+    </p>
+    <p class="hint">
+      Off is the default on every fresh start and every reload.
+      Switching to Off clears pending simulated prompts immediately.
+      Nothing reactivates on its own.
+    </p>
+  </section>
+
+  <section aria-labelledby="actions-heading">
+    <h2 id="actions-heading">Actions</h2>
+    <div class="controls">
+      <button id="ask-btn" type="button" disabled>Ask for a reflection</button>
+      <button id="simulate-btn" type="button" disabled>Simulate an event</button>
+      <button id="suppress-btn" type="button" disabled>Suppress simulated prompts</button>
+    </div>
+    <div class="controls">
+      <button id="advance-time-btn" type="button">Advance simulated time by 15 minutes</button>
+      <button id="clear-btn" type="button">Clear demo state</button>
+    </div>
+    <p id="pending-count">Pending simulated prompts: 0.</p>
+    <p id="rate-count">Simulated prompts delivered in the current hour: 0 of 3.</p>
+  </section>
+
+  <section aria-labelledby="output-heading">
+    <h2 id="output-heading">What the demo shows</h2>
+    <div id="output" aria-live="polite">
+      Off. Nothing is being monitored, recorded, or prompted.
+    </div>
+    <p class="hint">
+      A reflection shown here answers your explicit request. A simulated
+      prompt shown here comes only from the proactive demo you opted
+      into, within its rate cap, and only while suppression is off.
+      Neither is a real ecological observation or a safety warning.
+    </p>
+  </section>
+</main>
+<script src="gate.js"></script>
+<script src="fixtures.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

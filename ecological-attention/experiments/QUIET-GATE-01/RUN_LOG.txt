@@ -1,0 +1,22 @@
+✔ fresh start is OFF, with nothing pending and nothing delivered (8.434176ms)
+✔ a newly created gate is OFF: reload-equivalent, since no state persists (2.400389ms)
+✔ PROACTIVE without a deliberate opt-in fails and leaves mode unchanged (0.792468ms)
+✔ switching to OFF from every state clears pending prompts (0.341322ms)
+✔ ON_REQUEST never generates an unsolicited prompt (0.377926ms)
+✔ rate limit is enforced exactly at its boundary and recovers after the window (0.275864ms)
+✔ invalid state transitions fail safely and leave state unchanged (0.332589ms)
+✔ in-memory synthetic state is cleared on OFF and by explicit clear (0.468793ms)
+✔ suppression blocks delivery and unsuppression restores it (0.257325ms)
+✔ pending prompts deliver in first-in, first-out order (0.372058ms)
+✔ a full prompt queue drops further prompts instead of overflowing (0.203575ms)
+✔ explicit requests are deterministic and cycle through fictional scenarios (0.154982ms)
+✔ every fixture is labelled fictional (0.36714ms)
+✔ production source contains no persistent-storage, network, or device-sensing calls (0.666429ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 158.365268

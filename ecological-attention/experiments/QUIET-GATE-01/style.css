@@ -1,0 +1,91 @@
+/* QUIET-GATE-01 styles: large type, high contrast, large targets.
+ * No animation. No external resources. */
+
+body {
+  font-family: -apple-system, system-ui, sans-serif;
+  font-size: 19px;
+  line-height: 1.5;
+  color: #111111;
+  background: #ffffff;
+  margin: 0;
+  padding: 16px;
+}
+
+main {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-top: 32px;
+}
+
+.banner {
+  background: #fff3cd;
+  border: 3px solid #111111;
+  padding: 12px;
+  font-weight: bold;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 12px 0;
+}
+
+button {
+  font-size: 19px;
+  line-height: 1.4;
+  min-height: 48px;
+  min-width: 48px;
+  padding: 10px 16px;
+  color: #ffffff;
+  background: #1a3a5c;
+  border: 3px solid #111111;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: #767676;
+  cursor: not-allowed;
+}
+
+button:focus-visible {
+  outline: 4px solid #e67e00;
+  outline-offset: 3px;
+}
+
+button[aria-pressed="true"] {
+  background: #0b6e4f;
+}
+
+input[type="checkbox"] {
+  width: 28px;
+  height: 28px;
+  vertical-align: middle;
+}
+
+#output {
+  border: 3px solid #111111;
+  padding: 16px;
+  min-height: 96px;
+  background: #f4f4f4;
+}
+
+.hint {
+  font-size: 17px;
+  color: #333333;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none;
+  }
+}
