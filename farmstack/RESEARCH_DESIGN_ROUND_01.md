@@ -6,7 +6,9 @@
 
 Can a **thin, host-neutral FarmStack adapter** improve repeatability of research and coding-agent workflows over our existing AGENTS.md and issue/draft-PR rules while reducing or not materially increasing errors, compute/tool cost and iPad operating burden? When would it be cheaper to install pstack unchanged in a compatible host rather than build FarmStack-specific skills?
 
-**Candidates:** S0 current CRF instructions + independent review; S1 link/install upstream pstack where compatible (no fork); S2 minimal FarmStack adapters for recurring failure types, with pstack optional. Full vendoring, automation fleets and a competing plugin marketplace are *not* default candidates.
+**Candidates:** S0 current CRF instructions + independent review; S1 official pstack reference and *hypothetical* native-host comparison (installation remains **HOLD**); S2 minimal FarmStack adapters for recurring failure types with no pstack runtime. Full vendoring, automation fleets and a competing plugin marketplace are *not* default candidates.
+
+**Meta AI's founding-collaborator response (relayed 2026-10-26): REVISE, favor S2-minimal and do not install pstack.** Read the [attributed review and evidence caveats](META_AI_REVIEW_01_RELAYED.md). It proposes a candidate falsifier if operator touches exceed S0 by **more than 30%**, or if the workflow fails to improve independent error detection/re-execution or reduce correction cycles. That threshold is **proposed, not adopted**; Astra must first define the touch denominator, paired case design, stopping gate, and what constitutes meaningful accuracy gain. Do not treat a linked anecdotal video as a CRF benchmark.
 
 ## Minimum testbed proposals
 
@@ -20,8 +22,8 @@ Use public **known historical failures as DEV fixtures only**. No claim of gener
 ## Roles and deliverables
 
 - **Grok — upstream investigator:** independently inspect pinned pstack plugin manifest, actual installed skill inventory, source licensing and dependency/network/autonomy risks. Give minimal relevant skill selection; challenge whether native plugin installation wins over FarmStack.
-- **Muse — systems architect/implementation skeptic:** compare S0/S1/S2; propose 2–3 competing small workflow designs and explicit stop conditions; **do not build code or install plugins** yet. Include a fail-closed branch-base invariant and practical iPad handoff.
-- **Astra — independent protocol architect:** specify prospective evaluation: observable error catch rate, independent task clusters, blinded scorer, token/operator-cost ceiling, contamination handling and independent reviewer exposure. Try to falsify S2.
+- **Muse — systems architect/implementation skeptic:** accept Meta's S2-minimal proposal as a challenger, not a conclusion; compare it to S0 and feasible S1; propose 2–3 extremely small workflow designs and explicit stop conditions; **do not build code or install plugins** yet. Include a fail-closed branch-base invariant and practical iPad handoff.
+- **Astra — independent protocol architect:** specify prospective evaluation: observable error catch rate, independent task clusters, blinded scorer, token/operator-cost ceiling, contamination handling and independent reviewer exposure. Challenge Meta's proposed >30% operator-touch threshold and design a valid paired comparison; try to falsify S2.
 - **Sol — adjudicator:** reconcile evidence, inspect exact source/PR and recommend minimal subset for a first bounded *engineering* qualification; refrain from declaring improvement on relayed agent consensus.
 
 ## Required agent response format
