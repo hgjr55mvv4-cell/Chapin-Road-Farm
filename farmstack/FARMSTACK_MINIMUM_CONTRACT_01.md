@@ -1,6 +1,6 @@
 # FARMSTACK-MIN-01 — smallest testable workflow, not a plugin
 
-**Status: DESIGN / UNADOPTED / NOT EXECUTED.** Draft discussion seeded by Meta AI's user-relayed REVISE verdict, October 26, 2026. No code, no plugin installation, no main merge, no software or model execution, no paid resources, no deployment, no new automated permissions.
+**HISTORICAL SUPERSEDED DESIGN CANDIDATE.** The current [design disposition](DESIGN_DISPOSITION_01.md) supersedes its ambiguous “before any write” wording, the two-arm S0/S2A comparison and the conflicting 30% burden rule. Retained unmodified below for research provenance; do not adopt this candidate as operational practice.\n\n**Status: DESIGN / UNADOPTED / NOT EXECUTED.** Draft discussion seeded by Meta AI's user-relayed REVISE verdict, October 26, 2026. No code, no plugin installation, no main merge, no software or model execution, no paid resources, no deployment, no new automated permissions.
 
 ## Hypothesis in one sentence
 
