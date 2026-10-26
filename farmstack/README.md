@@ -34,6 +34,10 @@ The official [pstack](https://github.com/cursor/plugins/tree/main/pstack) plugin
 5. Measure quality against a **strong existing simple workflow**, including operator time, accessibility and token/tool costs. Accept a negative result.
 6. Tool and model availability must be detected rather than presumed. Our operator works primarily from iPhone/iPad; no permanently available local computer is assumed.
 
+## Independent review disposition (latest)
+
+[**Design disposition 01**](DESIGN_DISPOSITION_01.md) integrates Meta's, Grok's, Muse's and Astra's relayed design challenges: **NO-GO for a separate FarmStack layer or full pstack installation**; **review only** for one paragraph in existing `AGENTS.md`. It fixes the “before any write” ambiguity, distinguishes the before-create/after-create/existing-branch action boundaries, and separates an instruction-only experiment from any incremental card effect. [Astra's attributed review](ASTRA_REVIEW_01_RELAYED.md) is preserved with exposure disclosures. **No `AGENTS.md` change, benchmark, new plugin or framework has been authorized or implemented.** This design-only directory in the draft PR is a research record, not a proposed production dependency.
+
 ## Meta's founding-collaborator challenge
 
 [Meta AI's relayed review](META_AI_REVIEW_01_RELAYED.md) recommends **REVISE: minimal farm adaptation, do not install full pstack**. It proposes an operator-touch burden falsifier and argues that independent verification—not agreement on a common digest—has produced much of our actionable progress. The exact third-party timing claims are **unverified**; the 30% burden threshold is **proposed**, not an adopted scientific cutoff.
