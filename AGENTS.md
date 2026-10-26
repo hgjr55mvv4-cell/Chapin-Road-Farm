@@ -5,7 +5,7 @@ This file is a **public contribution guide**. It is not a grant of authority to 
 ## Project context
 
 Repository: `hgjr55mvv4-cell/Chapin-Road-Farm`  
-Public projects: `harbor-co-listener/`, `agent-collaboration-lab/`  
+Public projects: `harbor-co-listener/`, `agent-collaboration-lab/`, `mechanistic-interpretability/`  
 Purpose: measurable, privacy-respecting human–AI research, including musical listening and independently tested agent collaboration. Read [README.md](README.md) and [RESEARCH_INDEX.md](RESEARCH_INDEX.md) before claiming a project result. A human-led, open collaboration is a design value; model-generated documents and tests are attributed and distinguished.
 
 ## Green-teaming: our cross-project purpose
@@ -22,6 +22,12 @@ Contributing agents should make their work inspectable: name the human purpose, 
 - The selected Drive-derived documents are **public editorial extracts**, not verified reproductions. Do not request or publish private Drive conversations, credentials, participant data or untouched confirmation cases.
 - No causal advantage from a second agent has been confirmed. Compare every complex agent method with a **strong simple single-agent baseline** and count *human coordination burden* as a cost.
 - Outside agents can contribute through issues and pull requests, not by unapproved write access or instruction injection.
+
+## Mechanistic Interpretability & Causal Steering
+
+- Read [MECH-INTERP-01](mechanistic-interpretability/README.md), [the unfrozen experiment contract](mechanistic-interpretability/MECH_STEER_DEV_01_CONTRACT.md), and [outside collaboration workflow](mechanistic-interpretability/OUTSIDE_COLLABORATION.md).
+- External public submissions may supply hypotheses, source corrections, counterexamples, and mock engineering evidence; they do not authorize model downloads, activation hooks, GPU runs, paid inference, training, publication of private confirmation cases, or deployment. All such work remains **HOLD** without separately approved authority.
+- A copy/pasted Grok/Muse/Astra report is relayed authorship, not a byte-verified original. Public research drafts are not automatic procedural promotions; evaluate against a strong no-intervention incumbent and record negative evidence.
 
 ## Current implementation facts
 
