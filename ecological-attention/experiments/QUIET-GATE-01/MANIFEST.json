@@ -1,0 +1,37 @@
+{
+  "version": "0.1.0",
+  "files": {
+    "index.html": {
+      "sha256": "8c11a2445c1b00155c747f2b59b541400f91659ae02f29cc37aa9b483a3c56a2",
+      "bytes": 2657
+    },
+    "style.css": {
+      "sha256": "37738fafaf9b854c64a88fcf51556ef8c02781da9a7d212de68a93d32910b4f4",
+      "bytes": 1326
+    },
+    "gate.js": {
+      "sha256": "078c3c349d6a1f837a4c9b6b1fe87c12b784565b0a506b80a4fd1c596e1b894b",
+      "bytes": 7058
+    },
+    "fixtures.js": {
+      "sha256": "fd83c4b2aee29dc9387a28a6ed2724ea1d0c6f8544a58f6392de1e715bb2a87c",
+      "bytes": 1919
+    },
+    "app.js": {
+      "sha256": "b36632d7a8939cb0cdd0adbaaa76e5d30c071b988841b77e449b0a4e4ea292d7",
+      "bytes": 5769
+    },
+    "gate.test.js": {
+      "sha256": "529445c973a15e949d3a3f22e2cbf38f8d4ed16dd28ae3d1a23db63be026212a",
+      "bytes": 8743
+    },
+    "README.md": {
+      "sha256": "0b24d2befde7fdaf9757c0282378dac5a9ad15601e5a5878516c3a5fe3809d5e",
+      "bytes": 8154
+    },
+    "RUN_LOG.txt": {
+      "sha256": "1b9494cf08917679a9d5eb3570fcf2815c17b29f3ebf6aa12c15c164748549a2",
+      "bytes": 1241
+    }
+  }
+}
