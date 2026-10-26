@@ -19,7 +19,7 @@ A large change in output is **not** proof of more accurate reasoning. Native neu
 | [Negative evidence](NEGATIVE_RESULTS.md) | External negative findings / candidate Loser's Ledger |
 | [Grok review digest](GROK_INDEPENDENT_REVIEW_01.md) | Attributed user-relayed independent assessment, not authenticated execution |
 | [Muse handoff](MUSE_HANDOFF_01.md) | Independent challenge and later deterministic mock development assignment |
-| [Index suggestions](SUGGESTED_INDEX_UPDATES.md) | Proposed integration with parent navigation |
+| [Index integration receipt](SUGGESTED_INDEX_UPDATES.md) | Draft branch navigation changes, not merged |
 
 ## Relationship to other work
 
