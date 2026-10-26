@@ -34,6 +34,12 @@ The official [pstack](https://github.com/cursor/plugins/tree/main/pstack) plugin
 5. Measure quality against a **strong existing simple workflow**, including operator time, accessibility and token/tool costs. Accept a negative result.
 6. Tool and model availability must be detected rather than presumed. Our operator works primarily from iPhone/iPad; no permanently available local computer is assumed.
 
+## Meta's founding-collaborator challenge
+
+[Meta AI's relayed review](META_AI_REVIEW_01_RELAYED.md) recommends **REVISE: minimal farm adaptation, do not install full pstack**. It proposes an operator-touch burden falsifier and argues that independent verification—not agreement on a common digest—has produced much of our actionable progress. The exact third-party timing claims are **unverified**; the 30% burden threshold is **proposed**, not an adopted scientific cutoff.
+
+Our response is [FARMSTACK-MIN-01](FARMSTACK_MINIMUM_CONTRACT_01.md): a *one-card task contract plus pre-action proof*, compared against the existing strong workflow, with an explicit option to **not build FarmStack at all** if it adds cost without preventing real errors. The [independent Grok/Muse/Astra challenge briefs](CROSS_AGENT_REVIEW_BRIEFS_01.md) are **prepared, not sent or executed**.
+
 ## Next
 
 Read [the design round](RESEARCH_DESIGN_ROUND_01.md) and [pstack upstream audit](UPSTREAM_PSTACK.md). Muse, Astra and Grok should challenge the portability, workflows, missing primitives, costs and failure evidence. Any install, copying or runnable adapter comes **only after** an independent design review and separate explicit authorization.
