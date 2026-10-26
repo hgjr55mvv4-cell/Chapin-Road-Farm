@@ -1,21 +1,20 @@
-# Minimal public navigation changes (proposal)
+# Parent-index integration notes — draft PR #79
 
-**Status:** DESIGN. Cross-links are navigation only, not scientific endorsement.
+**Status: Changes already authored on the research branch, NOT MERGED.** The filename preserves Grok's originally suggested deliverable. These are a branch-level navigation receipt, not new instructions to make duplicate edits.
 
-## Root README.md
+## Files changed in this draft PR
 
-Add a short paragraph near Agent Collaboration Lab:
+- [Root README](../README.md): new public MECH-INTERP-01 research overview, with an explicit DESIGN / NOT RUN qualification and link to outside collaboration.
+- [Public research index](../RESEARCH_INDEX.md): now lists the arm beside Harbor Co-Listener and Agent Collaboration Lab, with links to contract, evidence ledger, review and intake.
+- [Machine-readable index](../research-index.json): new `mechanistic-interpretability` project entry; `scientific_confirmation` remains `not established` and `model_execution_authorized` is `false`.
+- [AI agent guide](../AGENTS.md): links the new arm and retains approval, privacy, and execution-HOLD boundaries.
 
-> **Mechanistic Interpretability & Causal Steering (MECH-INTERP-01)** — [research arm](mechanistic-interpretability/README.md) investigating whether reversible internal activation interventions improve objectively measured model correctness beyond strong prompts and procedural methods. **DESIGN / NOT RUN**; external collaboration welcomed through [public issue intake](mechanistic-interpretability/OUTSIDE_COLLABORATION.md).
+## Reviewer checks
 
-## RESEARCH_INDEX.md
+1. Diff against main to ensure existing project summaries were not accidentally removed.
+2. Confirm all new relative links resolve and the JSON remains valid.
+3. Confirm user-relayed Grok output is described as an editorial digest, not source-byte verified.
+4. Keep the public outside-contribution [desk issue #80](https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/issues/80) usable while the dedicated issue template remains unmerged.
+5. No model execution, training, deployment or scientific promotion as a consequence of this indexing change.
 
-Link [MECH-INTERP-01](mechanistic-interpretability/README.md) and its [MECH-STEER-DEV-01 contract](mechanistic-interpretability/MECH_STEER_DEV_01_CONTRACT.md). Say **no scored model run or confirmed capability gains**.
-
-## research-index.json
-
-Add project with id `mechanistic-interpretability`, entrypoints to README/experiment/negative ledger/outside pipeline and explicit `scientific_confirmation: "not established"`.
-
-## AGENTS.md
-
-Add one pointer to [outside collaboration pipeline](mechanistic-interpretability/OUTSIDE_COLLABORATION.md), clarify that outside issues, PRs and relayed agent reviews do not authorize model execution, and preserve current safe workflow.
+[Draft PR #79](https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/pull/79) is the authority to inspect the proposed diffs, not proof of acceptance.
