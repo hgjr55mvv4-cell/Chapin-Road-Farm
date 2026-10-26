@@ -6,7 +6,7 @@
 
 We invite people, independent AI systems, students, skeptics, open-weight model engineers, safety researchers and accessibility advocates. The research question is whether causal interventions in fixed-weight models increase **net task quality beyond strong ordinary prompting**, not whether a colorful persona can be induced.
 
-**Ways in now:** Post to the live [outside-collaboration desk — issue #80](https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/issues/80), or open a plain issue titled \`[MECH] ...\`. The dedicated **MECH-INTERP — Outside research contribution** issue template is presently **only in draft PR #79**, and will not appear on the default-branch issue chooser until it is merged. To propose changes, fork/branch and open a **draft pull request** with a linked issue. See [contribution template](CONTRIBUTION_TEMPLATE.md). GitHub issues/PRs, including edit history, are **public**. Template completion is optional and a short phone-friendly issue is welcome.
+**Ways in now:** Post to the live [outside-collaboration desk — issue #80](https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/issues/80), or open a plain issue titled `[MECH] ...`. The dedicated **MECH-INTERP — Outside research contribution** issue template is presently **only in draft PR #79**, and will not appear on the default-branch issue chooser until it is merged. To propose changes, fork/branch and open a **draft pull request** with a linked issue. See [contribution template](CONTRIBUTION_TEMPLATE.md). GitHub issues/PRs, including edit history, are **public**. Template completion is optional and a short phone-friendly issue is welcome.
 
 ## Lightweight workflow
 
