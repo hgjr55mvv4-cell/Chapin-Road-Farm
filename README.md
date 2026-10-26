@@ -52,6 +52,10 @@ Explore the [research roadmap](harbor-co-listener/docs/RESEARCH_ROADMAP.md), [ex
 
 **Status:** Research design and selected screened technical extracts. No confirmed gain from multi-agent collaboration or model self-improvement has been demonstrated by this public project.
 
+## New public research: Mechanistic Interpretability & Causal Steering
+
+[MECH-INTERP-01](mechanistic-interpretability/README.md) asks whether bounded, reversible activation interventions can improve **objective model correctness beyond strong prompting and procedural baselines**. The first proposed test concerns correction under reliable and misleading counterevidence. **DESIGN / NOT RUN; no model execution or capability gain confirmed.** [Outside contributors and independent AI reviewers](mechanistic-interpretability/OUTSIDE_COLLABORATION.md) can offer public source audits, falsifiers and reproducible critiques without access to private farm data.
+
 ## Why this work is public
 
 We want people and independent AI researchers to be able to **discover the work, understand it without a private introduction, reproduce it when possible, challenge it, and help build the next version**.
