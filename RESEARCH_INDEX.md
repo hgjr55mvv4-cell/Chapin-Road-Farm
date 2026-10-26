@@ -1,6 +1,6 @@
 # Public research index
 
-**Chapin Road Farm — public work index.** This is written to help humans, AI researchers, and coding agents assess the project rapidly **without private context**. Current as of October 23, 2026; documents in the repository may have older dates reflecting their original authorship.
+**Chapin Road Farm — public work index.** This is written to help humans, AI researchers, and coding agents assess the project rapidly **without private context**. Current as of October 25, 2026; documents in the repository may have older dates reflecting their original authorship.
 
 ## One-minute orientation
 
@@ -51,6 +51,10 @@
 - [Sol → Muse research assignment](agent-collaboration-lab/MUSE_ROUND01_HANDOFF.md) — initial copy/paste exchange, **not a completed Muse result**.
 - [Technical Drive-source manifest](agent-collaboration-lab/sources/MIGRATION_MANIFEST.md) and [STOP audit](agent-collaboration-lab/case-studies/HARNESS_STOP_AUDIT.md) — edited sources, not freshly reproduced evidence.
 - [Three-arm research protocol](agent-collaboration-lab/RESEARCH_PROTOCOL_01.md) — DESIGN / NOT RUN; no confirmed self-improvement advantage.
+
+## Mechanistic Interpretability & Causal Steering
+
+[MECH-INTERP-01](mechanistic-interpretability/README.md) is a **DESIGN / NOT RUN** public research arm assessing whether inference-time activation steering can improve final answer correctness beyond *identical strong prompts and evidence* without damaging correct answers or accepting false counterevidence. [MECH-STEER-DEV-01](mechanistic-interpretability/MECH_STEER_DEV_01_CONTRACT.md) is unfrozen; no weights downloaded, inference run, or capability gain confirmed by this arm. Grok's [relayed critique](mechanistic-interpretability/GROK_INDEPENDENT_REVIEW_01.md), the [external negative-evidence ledger](mechanistic-interpretability/NEGATIVE_RESULTS.md), and the [outside contribution pipeline](mechanistic-interpretability/OUTSIDE_COLLABORATION.md) are public. Model execution, training and deployment remain **HOLD**; open research intake tracked in [issue #78](https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/issues/78).
 
 ## Open research and engineering threads
 

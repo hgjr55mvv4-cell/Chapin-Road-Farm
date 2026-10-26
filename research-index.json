@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_date": "2026-10-23",
+  "updated_date": "2026-10-25",
   "name": "Chapin Road Farm Open Research",
   "repository": "https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm",
   "discoverability_note": "This JSON is an unofficial convenience index for readers and permitted agents, not a guaranteed crawler endpoint or claim of endorsement.",
@@ -91,6 +91,37 @@
         "agent-collaboration-lab/RESEARCH_PROTOCOL_01.md"
       ],
       "issue_urls": []
+    },
+    {
+      "id": "mechanistic-interpretability",
+      "name": "Mechanistic Interpretability & Causal Steering",
+      "directory": "mechanistic-interpretability",
+      "themes": [
+        "mechanistic interpretability",
+        "causal activation steering",
+        "fixed-weight models",
+        "counterevidence correction",
+        "reproducibility",
+        "negative results"
+      ],
+      "current_implementation": "design-documents-and-public-contribution-pipeline-only",
+      "model_execution_authorized": false,
+      "scientific_confirmation": "not established",
+      "entrypoints": [
+        "mechanistic-interpretability/README.md",
+        "mechanistic-interpretability/MECH_STEER_DEV_01_CONTRACT.md",
+        "mechanistic-interpretability/NEGATIVE_RESULTS.md",
+        "mechanistic-interpretability/OUTSIDE_COLLABORATION.md",
+        "mechanistic-interpretability/MUSE_HANDOFF_01.md"
+      ],
+      "active_questions": [
+        "Can reversible internal interventions improve net correctness beyond strong identical prompt-only baselines?",
+        "Do internal probes provide actionable signals rather than only predictive representations?",
+        "How do false-evidence acceptance, correct-answer regressions and operator cost limit claimed benefits?"
+      ],
+      "issue_urls": [
+        "https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/issues/78"
+      ]
     }
   ],
   "privacy_notice": "Do not publish unlicensed audio, protected lyrics, private human testimony, identifying music histories or credentials. Never assume a public project grants access to private accounts.",
