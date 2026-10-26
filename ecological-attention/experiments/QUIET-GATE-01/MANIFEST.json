@@ -1,5 +1,7 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "prior_version": "0.1.0",
+  "prior_commit": "f8627d02e07055429871028b64287874c1fc7c9a",
   "files": {
     "index.html": {
       "sha256": "8c11a2445c1b00155c747f2b59b541400f91659ae02f29cc37aa9b483a3c56a2",
@@ -10,28 +12,40 @@
       "bytes": 1326
     },
     "gate.js": {
-      "sha256": "078c3c349d6a1f837a4c9b6b1fe87c12b784565b0a506b80a4fd1c596e1b894b",
-      "bytes": 7058
+      "sha256": "0a35d5adbb109565929f2dc06b27a615add8596b9aec3f6b8c3371b72d2c9f25",
+      "bytes": 9162
     },
     "fixtures.js": {
       "sha256": "fd83c4b2aee29dc9387a28a6ed2724ea1d0c6f8544a58f6392de1e715bb2a87c",
       "bytes": 1919
     },
     "app.js": {
-      "sha256": "b36632d7a8939cb0cdd0adbaaa76e5d30c071b988841b77e449b0a4e4ea292d7",
-      "bytes": 5769
+      "sha256": "5cb681b64ca802190459a39d736b87751c631e9224c41c582448d8024de2d1a8",
+      "bytes": 7167
     },
     "gate.test.js": {
-      "sha256": "529445c973a15e949d3a3f22e2cbf38f8d4ed16dd28ae3d1a23db63be026212a",
-      "bytes": 8743
+      "sha256": "66d70946fed9ecbcf4f606a2f1423a3b0e51cad7ce9667cca9a0903a158e1479",
+      "bytes": 14219
+    },
+    "app.test.js": {
+      "sha256": "0c6cab575ec791edd878a44ce5bb045b961ecfb8dfa2a4c5c4d02ebb559d5297",
+      "bytes": 5654
     },
     "README.md": {
-      "sha256": "0b24d2befde7fdaf9757c0282378dac5a9ad15601e5a5878516c3a5fe3809d5e",
-      "bytes": 8154
+      "sha256": "89610fcc50c109f9007e74e359690c078c7df00609210bb160796c17c5dde30a",
+      "bytes": 9490
     },
     "RUN_LOG.txt": {
       "sha256": "1b9494cf08917679a9d5eb3570fcf2815c17b29f3ebf6aa12c15c164748549a2",
       "bytes": 1241
+    },
+    "RUN_LOG_01.1.txt": {
+      "sha256": "2af2e42e62fc92c5689067adf652a60ed729e8dc85fa10e3fb93973d71e09a4f",
+      "bytes": 2415
+    },
+    "REVIEW_SUMMARY_01.1.md": {
+      "sha256": "ca7cc15452d517fa5fd01510295a12f5a2f97ecde545040fc08955ab3f050114",
+      "bytes": 6702
     }
   }
 }

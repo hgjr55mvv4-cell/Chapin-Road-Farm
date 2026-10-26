@@ -67,9 +67,12 @@
     suppressBtn.textContent = state.suppressed
       ? "Unsuppress simulated prompts"
       : "Suppress simulated prompts";
-    if (state.mode !== "PROACTIVE") {
-      optInEl.checked = false;
-    }
+    // NOTE (v0.1.1): render() deliberately does NOT uncheck the
+    // opt-in box here. The box is user-controlled consent state:
+    // unchecking it is handled by its own change listener below,
+    // and leaving PROACTIVE unchecks it in the mode handlers.
+    // The v0.1 blanket uncheck in render() silently cleared a fresh
+    // opt-in whenever any other control re-rendered the page.
   }
 
   function showResult(result) {
@@ -101,7 +104,23 @@
 
   $("mode-request").addEventListener("click", function () {
     gate.setMode("ON_REQUEST");
+    // Leaving PROACTIVE revokes consent; a later re-entry needs a
+    // fresh deliberate opt-in, so the box is unchecked here.
+    optInEl.checked = false;
     say("On request. Nothing will appear unless you press Ask for a reflection.");
+    render();
+  });
+
+  // Defect B fix: withdrawing consent takes effect immediately.
+  // Unchecking the box while PROACTIVE switches the system to OFF
+  // (which, in gate.js, discards pending prompts and revokes
+  // consent). Checking the box alone changes nothing except the
+  // Proactive button's enabled state, via render().
+  optInEl.addEventListener("change", function () {
+    if (!optInEl.checked && gate.getState().mode === "PROACTIVE") {
+      gate.setMode("OFF");
+      say("Proactive consent withdrawn. Off. Pending simulated prompts were discarded.");
+    }
     render();
   });
 
@@ -166,9 +185,15 @@
     render();
   });
 
+  // Defect A fix: the user-facing Clear action returns the system
+  // to OFF and revokes proactive consent; it does not merely clear
+  // transient data while leaving PROACTIVE active. (The state
+  // machine's clearSyntheticState() is transient-only by design and
+  // is no longer called from this button.)
   $("clear-btn").addEventListener("click", function () {
-    gate.clearSyntheticState();
-    say("Demo state cleared. Mode is unchanged; pending prompts and counts were reset.");
+    gate.setMode("OFF");
+    optInEl.checked = false;
+    say("Off. Proactive consent revoked, pending simulated prompts discarded, and demo state cleared.");
     render();
   });
 

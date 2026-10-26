@@ -4,6 +4,32 @@
 **Budget:** $0 additional. No dependencies. No paid infrastructure.
 **Deployment:** HOLD. Not a safety system. Not for field use.
 
+## 0.1.1 Consent-integrity repair (v0.1.1, PR #82 update)
+
+Sol's source review found two consent defects in v0.1, both
+confirmed and repaired (see `REVIEW_SUMMARY_01.1.md` for the full
+account):
+
+- **Defect A:** Clear left mode PROACTIVE with opt-in false, and
+  queue/deliver checked mode only — so prompts could resume after
+  consent was cleared. **Fix:** the Clear button now returns the
+  system to OFF and revokes consent; `clearSyntheticState()` is
+  transient-only (data, not consent); queue/deliver now require
+  currently valid opt-in (`CONSENT_REQUIRED` / `CONSENT_REVOKED`).
+- **Defect B:** unchecking the opt-in box while PROACTIVE did
+  nothing. **Fix:** unchecking immediately switches to OFF and
+  discards pending prompts; re-entry needs a fresh opt-in.
+- **Invariant (enforced in `gate.js`, not just the UI):** no
+  simulated proactive prompt may be queued or delivered without
+  currently valid proactive opt-in; leaving PROACTIVE for any mode
+  revokes consent and discards pending prompts, so stale prompts
+  can never reappear after re-entry.
+- **Tests:** original 14 preserved + 8 gate regressions + 6
+  UI-wiring tests (`app.test.js`, stub DOM) = **28/28 passing**.
+  Original receipt `RUN_LOG.txt` preserved; new receipt
+  `RUN_LOG_01.1.txt`. Browser/VoiceOver/real-device checks remain
+  NOT RUN (see §3).
+
 ## 0. Pre-build assessment: GO, minimal only (independent judgment, not compliance)
 
 The assignment asked whether this component helps answer the earlier

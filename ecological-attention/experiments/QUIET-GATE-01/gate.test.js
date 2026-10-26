@@ -227,6 +227,151 @@ test("every fixture is labelled fictional", () => {
   }
 });
 
+/* --- QUIET-GATE-01.1 consent-integrity regression tests --- */
+
+test("01.1 defect A: Clear-equivalent OFF during PROACTIVE blocks further prompts", () => {
+  const { gate } = gateWithClock();
+  gate.setMode("PROACTIVE", { optIn: true });
+  gate.queuePrompt(SCENARIOS[0]);
+  gate.deliverNext();
+  // The user-facing Clear action is setMode("OFF"), not a bare
+  // transient clear: it revokes consent and discards pending work.
+  gate.setMode("OFF");
+  assert.equal(gate.getState().mode, "OFF");
+  assert.equal(gate.getState().proactiveOptIn, false);
+  assert.equal(gate.getState().pendingCount, 0);
+  assert.throws(() => gate.queuePrompt(SCENARIOS[0]), (err) => {
+    assert.equal(err.code, "INVALID_TRANSITION");
+    return true;
+  });
+  assert.deepEqual(gate.deliverNext(), {
+    delivered: false,
+    reason: "NOT_PROACTIVE",
+  });
+});
+
+test("01.1: clearing transient data alone does NOT revoke consent", () => {
+  // This is the API distinction the v0.1.1 repair introduces:
+  // clearSyntheticState() discards data but leaves mode and opt-in
+  // untouched, so a caller that wants revocation must use setMode.
+  const { gate } = gateWithClock();
+  gate.setMode("PROACTIVE", { optIn: true });
+  gate.queuePrompt(SCENARIOS[0]);
+  gate.clearSyntheticState();
+  assert.equal(gate.getState().mode, "PROACTIVE");
+  assert.equal(gate.getState().proactiveOptIn, true);
+  assert.equal(gate.getState().pendingCount, 0);
+  // Consent is still valid, so new prompts still work.
+  gate.queuePrompt(SCENARIOS[1]);
+  assert.equal(gate.deliverNext().delivered, true);
+});
+
+test("01.1 defect B: revoking consent while prompts are queued discards them", () => {
+  const { gate } = gateWithClock();
+  gate.setMode("PROACTIVE", { optIn: true });
+  gate.queuePrompt(SCENARIOS[0]);
+  gate.queuePrompt(SCENARIOS[1]);
+  // Leaving PROACTIVE (here, to ON_REQUEST) is a revocation.
+  gate.setMode("ON_REQUEST");
+  assert.equal(gate.getState().pendingCount, 0);
+  assert.equal(gate.getState().proactiveOptIn, false);
+  assert.deepEqual(gate.deliverNext(), {
+    delivered: false,
+    reason: "NOT_PROACTIVE",
+  });
+});
+
+test("01.1: re-entering PROACTIVE without renewed opt-in fails", () => {
+  const { gate } = gateWithClock();
+  gate.setMode("PROACTIVE", { optIn: true });
+  gate.setMode("OFF");
+  assert.throws(() => gate.setMode("PROACTIVE"), (err) => {
+    assert.equal(err.code, "PROACTIVE_OPT_IN_REQUIRED");
+    return true;
+  });
+  assert.equal(gate.getState().mode, "OFF");
+  // A fresh deliberate opt-in works again.
+  gate.setMode("PROACTIVE", { optIn: true });
+  assert.equal(gate.getState().mode, "PROACTIVE");
+});
+
+test("01.1: mode switching does not resurrect stale prompts", () => {
+  const { gate } = gateWithClock();
+  gate.setMode("PROACTIVE", { optIn: true });
+  gate.queuePrompt(SCENARIOS[0]);
+  gate.queuePrompt(SCENARIOS[1]);
+  gate.deliverNext();
+  gate.setMode("OFF");
+  gate.setMode("ON_REQUEST");
+  gate.setMode("PROACTIVE", { optIn: true });
+  assert.equal(gate.getState().pendingCount, 0);
+  assert.equal(gate.getState().promptsInWindow, 0);
+  assert.deepEqual(gate.deliverNext(), {
+    delivered: false,
+    reason: "NOTHING_PENDING",
+  });
+  // The direct PROACTIVE -> ON_REQUEST -> PROACTIVE path, where
+  // v0.1 left queued prompts alive across the mode change.
+  const { gate: gate2 } = gateWithClock();
+  gate2.setMode("PROACTIVE", { optIn: true });
+  gate2.queuePrompt(SCENARIOS[0]);
+  gate2.setMode("ON_REQUEST");
+  gate2.setMode("PROACTIVE", { optIn: true });
+  assert.equal(gate2.getState().pendingCount, 0);
+  assert.deepEqual(gate2.deliverNext(), {
+    delivered: false,
+    reason: "NOTHING_PENDING",
+  });
+});
+
+test("01.1: ON_REQUEST after PROACTIVE never generates unsolicited prompts", () => {
+  const { gate } = gateWithClock();
+  gate.setMode("PROACTIVE", { optIn: true });
+  gate.queuePrompt(SCENARIOS[0]);
+  gate.setMode("ON_REQUEST");
+  assert.throws(() => gate.queuePrompt(SCENARIOS[0]), (err) => {
+    assert.equal(err.code, "INVALID_TRANSITION");
+    return true;
+  });
+  assert.deepEqual(gate.deliverNext(), {
+    delivered: false,
+    reason: "NOT_PROACTIVE",
+  });
+  // Explicit requests still work in ON_REQUEST.
+  assert.equal(gate.requestAssistance().kind, "RESPONSE_TO_REQUEST");
+});
+
+test("01.1: rate cap and suppression still work after the consent repair", () => {
+  const { gate } = gateWithClock();
+  gate.setMode("PROACTIVE", { optIn: true });
+  for (let i = 0; i < 3; i++) gate.queuePrompt(SCENARIOS[i]);
+  assert.equal(gate.deliverNext().delivered, true);
+  assert.equal(gate.deliverNext().delivered, true);
+  assert.equal(gate.deliverNext().delivered, true);
+  gate.queuePrompt(SCENARIOS[0]);
+  assert.equal(gate.deliverNext().reason, "RATE_LIMIT");
+  const { gate: gate2 } = gateWithClock();
+  gate2.setMode("PROACTIVE", { optIn: true });
+  gate2.queuePrompt(SCENARIOS[0]);
+  gate2.suppress();
+  assert.equal(gate2.deliverNext().reason, "SUPPRESSED");
+  gate2.unsuppress();
+  assert.equal(gate2.deliverNext().delivered, true);
+});
+
+test("01.1: a new instance starts OFF with no remembered permission", () => {
+  const { gate } = gateWithClock();
+  gate.setMode("PROACTIVE", { optIn: true });
+  gate.queuePrompt(SCENARIOS[0]);
+  const fresh = createGate({ scenarios: SCENARIOS });
+  assert.equal(fresh.getState().mode, "OFF");
+  assert.equal(fresh.getState().proactiveOptIn, false);
+  assert.throws(() => fresh.queuePrompt(SCENARIOS[0]), (err) => {
+    assert.equal(err.code, "INVALID_TRANSITION");
+    return true;
+  });
+});
+
 test("production source contains no persistent-storage, network, or device-sensing calls", () => {
   // Source-level assertion only. It proves the shipped code does not
   // call these capabilities; it does not prove a browser behaves.

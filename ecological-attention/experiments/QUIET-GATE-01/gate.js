@@ -19,6 +19,19 @@
  *   - A fresh gate is OFF.
  *   - Switching to OFF clears pending prompts, prompt timestamps,
  *     suppression, and the proactive opt-in.
+ *   - Leaving PROACTIVE for any other mode revokes consent and
+ *     discards pending prompts, so stale prompts can never reappear
+ *     after a later re-entry.
+ *   - CONSENT INVARIANT (v0.1.1): no simulated proactive prompt may
+ *     be queued or delivered without currently valid proactive
+ *     opt-in. queuePrompt() and deliverNext() check proactiveOptIn
+ *     as well as mode, so even a hypothetical inconsistent state
+ *     (mode PROACTIVE with opt-in false) cannot produce a prompt.
+ *   - Clearing transient data is NOT revoking consent, and revoking
+ *     consent is NOT merely clearing data. clearSyntheticState()
+ *     discards pending prompts, timestamps, and counts but leaves
+ *     mode and opt-in untouched; setMode("OFF") (or any transition
+ *     out of PROACTIVE) revokes consent and clears transient state.
  *   - ON_REQUEST can never queue or deliver a spontaneous prompt.
  *   - PROACTIVE prompts are rate-limited (default 3 per 60 simulated
  *     minutes) and blocked while suppressed.
@@ -80,11 +93,18 @@
       };
     }
 
+    // Transient-only clear: discards queued prompts, rate-limit
+    // timestamps, suppression, and counts. It deliberately does NOT
+    // change mode and does NOT revoke consent. Consent revocation is
+    // setMode("OFF") or any transition out of PROACTIVE (see setMode).
+    // The v0.1 version of this function also reset proactiveOptIn,
+    // which allowed a caller to leave mode PROACTIVE with opt-in
+    // false while prompts remained possible. That defect is fixed by
+    // this separation plus the opt-in checks in queue/deliver below.
     function clearSyntheticState() {
       pending = [];
       promptTimes = [];
       suppressed = false;
-      proactiveOptIn = false;
       deliveredCount = 0;
       droppedCount = 0;
     }
@@ -100,12 +120,13 @@
           "PROACTIVE requires a deliberate opt-in: setMode('PROACTIVE', { optIn: true })"
         );
       }
-      if (next === "OFF") {
-        // OFF overrides everything: pending prompts are discarded,
-        // not deferred, and all synthetic state is cleared.
-        mode = "OFF";
+      // Leaving PROACTIVE revokes consent and discards transient
+      // state, whatever the destination mode: OFF, ON_REQUEST, or
+      // any future mode. This is what prevents stale queued prompts
+      // from reappearing after a later re-entry, and what makes
+      // revocation immediate rather than advisory.
+      if (mode === "PROACTIVE" && next !== "PROACTIVE") {
         clearSyntheticState();
-        return snapshot();
       }
       mode = next;
       proactiveOptIn = next === "PROACTIVE";
@@ -144,6 +165,15 @@
           "Spontaneous prompts exist only in PROACTIVE mode, never in " + mode + "."
         );
       }
+      // Consent invariant: mode alone is not permission. A prompt
+      // may not be queued without currently valid opt-in, even if
+      // mode somehow reads PROACTIVE.
+      if (!proactiveOptIn) {
+        throw GateError(
+          "CONSENT_REQUIRED",
+          "Spontaneous prompts require currently valid proactive opt-in."
+        );
+      }
       if (!scenario || typeof scenario.title !== "string") {
         throw GateError("INVALID_SCENARIO", "A prompt needs a scenario with a title.");
       }
@@ -158,6 +188,11 @@
     function deliverNext() {
       if (mode !== "PROACTIVE") {
         return { delivered: false, reason: "NOT_PROACTIVE" };
+      }
+      // Consent invariant, delivery side: revocation blocks even
+      // prompts that were queued while consent was valid.
+      if (!proactiveOptIn) {
+        return { delivered: false, reason: "CONSENT_REVOKED" };
       }
       if (suppressed) {
         return { delivered: false, reason: "SUPPRESSED" };

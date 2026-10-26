@@ -1,0 +1,36 @@
+✔ UI: fresh page is OFF with prompting controls disabled (4.413438ms)
+✔ UI defect B: unchecking opt-in while PROACTIVE switches to OFF immediately (3.402201ms)
+✔ UI defect B: queued prompts do not survive consent withdrawal and re-entry (1.890885ms)
+✔ UI defect A: Clear button returns to OFF and revokes consent (1.889282ms)
+✔ UI: leaving PROACTIVE for ON_REQUEST requires a fresh opt-in to return (1.575492ms)
+✔ UI: checking the box alone does not enter PROACTIVE, and rate/suppression still work (1.628031ms)
+✔ fresh start is OFF, with nothing pending and nothing delivered (1.821862ms)
+✔ a newly created gate is OFF: reload-equivalent, since no state persists (1.258036ms)
+✔ PROACTIVE without a deliberate opt-in fails and leaves mode unchanged (1.56028ms)
+✔ switching to OFF from every state clears pending prompts (0.36037ms)
+✔ ON_REQUEST never generates an unsolicited prompt (0.715463ms)
+✔ rate limit is enforced exactly at its boundary and recovers after the window (0.347611ms)
+✔ invalid state transitions fail safely and leave state unchanged (0.499459ms)
+✔ in-memory synthetic state is cleared on OFF and by explicit clear (0.389875ms)
+✔ suppression blocks delivery and unsuppression restores it (0.723204ms)
+✔ pending prompts deliver in first-in, first-out order (0.607871ms)
+✔ a full prompt queue drops further prompts instead of overflowing (1.311076ms)
+✔ explicit requests are deterministic and cycle through fictional scenarios (0.261633ms)
+✔ every fixture is labelled fictional (0.24028ms)
+✔ 01.1 defect A: Clear-equivalent OFF during PROACTIVE blocks further prompts (0.583535ms)
+✔ 01.1: clearing transient data alone does NOT revoke consent (0.210676ms)
+✔ 01.1 defect B: revoking consent while prompts are queued discards them (0.147461ms)
+✔ 01.1: re-entering PROACTIVE without renewed opt-in fails (0.969614ms)
+✔ 01.1: mode switching does not resurrect stale prompts (2.294451ms)
+✔ 01.1: ON_REQUEST after PROACTIVE never generates unsolicited prompts (0.363685ms)
+✔ 01.1: rate cap and suppression still work after the consent repair (0.159289ms)
+✔ 01.1: a new instance starts OFF with no remembered permission (0.136735ms)
+✔ production source contains no persistent-storage, network, or device-sensing calls (1.190404ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 28
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 365.303835
