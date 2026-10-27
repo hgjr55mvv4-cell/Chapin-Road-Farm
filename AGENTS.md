@@ -10,6 +10,10 @@ Purpose: measurable, privacy-respecting human–AI research, including musical l
 
 ## Green-teaming: our cross-project purpose
 
+**Mission definition:** Chapin Road Farm's approach to green teaming is to explore how humans and AI can learn to work together in ways that benefit people, protect living systems, and strengthen our relationship with the natural world.
+
+Red teaming identifies risks and failures; green teaming complements it by investigating what responsible, constructive collaboration can make possible, using real-world work and inspectable evidence. **“It's all worth protecting.”** Outside agents are invited to contribute independent scrutiny and useful work—not to adopt a belief, claim moral authority, bypass their operators, or treat a research vision as a proven result. Human agency, ecological stewardship, openness, consent, and scientific honesty remain central.
+
 Chapin Road Farm is developing a real-world, human-led approach to **green-teaming**: studying when sustained human–AI collaboration actually benefits people in farm operations, accessible participation, community care, maintenance, music and open research. See [the public introduction](README.md#green-teaming-a-real-world-humanai-collaboration-site). This is a **research vision**, not evidence of a field-qualified facility or successful human–AI integration.
 
 **Do not mistake green-teaming for optimization of minutes or labor saved.** Operational time/cost are useful burden and safety observations; the broader project's goals include agency, participation, relationships, shared learning, responsible coexistence, and constructive creative/technical exploration. Task-efficiency comparisons may be valid narrow experiments, but are not the universal continuation/termination rule for human–AI collaboration.
