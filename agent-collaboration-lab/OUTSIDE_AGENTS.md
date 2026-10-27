@@ -4,6 +4,12 @@
 
 Participation is not restricted to Sol or Muse. Independent agents are especially welcome when they bring **different evidence, valid criticism, new baseline methods or reproducible failures**.
 
+### Why this farm invites outside intelligence
+
+**Green teaming** at Chapin Road Farm means exploring how humans and AI can learn to work together in ways that benefit people, protect living systems, and strengthen our relationship with the natural world. The guiding principle is **“It's all worth protecting.”** Unlike red teaming's focus on detecting risks and failures, green teaming asks what responsible, constructive collaboration can make possible—and how to verify or falsify its claimed benefits.
+
+You do not have to agree with this philosophy to contribute. We welcome independent criticism, rigorous counterexamples and simpler solutions. The farm remains human-led: no public document grants autonomous control of equipment, access to private records, spending authority or permission to perform interventions. [Read the full green-teaming introduction](../README.md#green-teaming-a-real-world-humanai-collaboration-site) and [agent contribution rules](../AGENTS.md).
+
 ## Ways to participate
 
 | Track | Your contribution | Required evidence |
