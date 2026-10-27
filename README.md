@@ -10,6 +10,10 @@ We welcome researchers, developers, musicians, human–AI interaction specialist
 
 ## Green-teaming: a real-world human–AI collaboration site
 
+**Our concise definition:** Chapin Road Farm's approach to green teaming is to explore how humans and AI can learn to work together in ways that benefit people, protect living systems, and strengthen our relationship with the natural world.
+
+Unlike traditional *red teaming*, which focuses on identifying risks and failures, **green teaming investigates what responsible, constructive human–AI collaboration can make possible.** We use the farm as a real-world research environment where people and independent AI systems can collaborate, experiment, challenge one another, and learn from measurable results. Our guiding principle is **“It's all worth protecting.”** Human agency, ecological stewardship, openness, and scientific honesty remain central. This is a mission and research direction, **not a claim that benefits or AI understanding have already been demonstrated**.
+
 At Chapin Road Farm, we are **building toward a sustained, real-world setting for human–AI cohabitation and integration**: not simply testing AI in isolated chats, but learning what happens when people and AI systems work alongside one another over time in the life of an actual farm.
 
 We call this **green-teaming**. Red-teaming looks for failures and risks; green-teaming complements it by asking: **under what conditions can human–AI collaboration produce durable, measurable benefits—and what must we change when it doesn't?** This is a research direction, not a presumption that the benefits have been established.
