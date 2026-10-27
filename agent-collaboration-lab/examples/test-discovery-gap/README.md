@@ -9,10 +9,13 @@ A historical Sol-authored STOP report described how direct invocation of test fu
 From the directory containing this README:
 
 ```sh
+python -m unittest discover -s tests -v
 python verify_fixture.py
+python -O verify_fixture.py
+PYTHONOPTIMIZE=1 python verify_fixture.py
 ```
 
-The verification runner executes three separate commands, requires their expected test-count markers, and records each exit code:
+The verification runner executes three separate commands, requires their expected test-count markers, and records each exit code. Explicit checks remain active under optimized Python (`python -O`):
 
 1. Direct-run `bad/test_checks.py`: two checks passed because the `__main__` path calls two ordinary functions.
 2. `python -m unittest discover -s bad -p 'test_*.py' -v`: **zero tests discovered**, despite test-like function names. `unittest` discovery requires supported test structures, such as `unittest.TestCase` methods.
@@ -29,6 +32,10 @@ The two assertions used in each path are innocuous synthetics about a boolean-vs
 - verification script completed successfully.
 
 **Important environment correction:** Some older tools/tests may exit 0 after running zero tests; our specific Python 3.13.5 `unittest` discovery exited **5**. Do not generalize the historical claim of silently successful zero tests across versions. Record actual command, count, exit status, Python version and stdout/stderr for every qualification path.
+
+### Fail-closed verifier regression (Oct 28, 2026)
+
+The original runner used Python `assert` for its exit-code and marker checks. A copied fixture with a deliberately failing repaired suite was rejected under ordinary Python but exited 0 and printed `VERIFICATION_PASS` under `python -O`, because optimization removed those checks. The runner now uses explicit validation and clears inherited `PYTHONOPTIMIZE` for child fixture processes so their own direct assertions remain active. New regression tests execute the valid fixture and three corrupted copies under ordinary Python, `python -O`, and `PYTHONOPTIMIZE=1`; the original fixtures and historical receipt are unchanged. See the [new local execution receipt](receipts/local_verifier_2026-10-28.txt). This is exposed engineering DEV, not a new scientific result; local execution is not a claim that GitHub Actions has passed.
 
 ## Outside contributor invitation
 

@@ -1,0 +1,127 @@
+Local fail-closed verifier receipt — 2026-10-28
+Source: public test-discovery-gap fixture; no AI inference; no private data.
+Working directory: agent-collaboration-lab/examples/test-discovery-gap
+
+$ python3 --version
+Python 3.12.12
+exit_code=0
+
+$ python3 -m unittest discover -s tests -v
+test_failed_direct_check_is_rejected (test_verify_fixture.VerifierIntegrityTests.test_failed_direct_check_is_rejected) ... ok
+test_failed_repaired_suite_is_rejected (test_verify_fixture.VerifierIntegrityTests.test_failed_repaired_suite_is_rejected) ... ok
+test_missing_execution_marker_is_rejected (test_verify_fixture.VerifierIntegrityTests.test_missing_execution_marker_is_rejected) ... ok
+test_valid_fixture_passes_normal_and_optimized (test_verify_fixture.VerifierIntegrityTests.test_valid_fixture_passes_normal_and_optimized) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 2.288s
+
+OK
+exit_code=0
+
+$ python3 -O -m unittest discover -s tests -v
+test_failed_direct_check_is_rejected (test_verify_fixture.VerifierIntegrityTests.test_failed_direct_check_is_rejected) ... ok
+test_failed_repaired_suite_is_rejected (test_verify_fixture.VerifierIntegrityTests.test_failed_repaired_suite_is_rejected) ... ok
+test_missing_execution_marker_is_rejected (test_verify_fixture.VerifierIntegrityTests.test_missing_execution_marker_is_rejected) ... ok
+test_valid_fixture_passes_normal_and_optimized (test_verify_fixture.VerifierIntegrityTests.test_valid_fixture_passes_normal_and_optimized) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 2.287s
+
+OK
+exit_code=0
+
+$ python3 verify_fixture.py
+Python 3.12.12 platform linux
+
+## direct plain-function tests
+command: /usr/local/bin/python3 /tmp/Chapin-Road-Farm/agent-collaboration-lab/examples/test-discovery-gap/bad/test_checks.py
+PASS test_age_bool_guard
+PASS test_budget_precheck
+DIRECT_CHECKS_EXECUTED=2
+exit_code: 0
+
+## broken discovery
+command: /usr/local/bin/python3 -m unittest discover -s /tmp/Chapin-Road-Farm/agent-collaboration-lab/examples/test-discovery-gap/bad -p test_*.py -v
+----------------------------------------------------------------------
+Ran 0 tests in 0.000s
+
+NO TESTS RAN
+exit_code: 5
+
+## repaired discovery
+command: /usr/local/bin/python3 -m unittest discover -s /tmp/Chapin-Road-Farm/agent-collaboration-lab/examples/test-discovery-gap/good -p test_*.py -v
+test_age_bool_guard (test_checks.ContractTests.test_age_bool_guard) ... ok
+test_budget_precheck (test_checks.ContractTests.test_budget_precheck) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
+exit_code: 0
+
+VERIFICATION_PASS: 0-test discovery versus 2-test repaired path reproduced (Python 3.13+ may exit 5 on zero tests)
+exit_code=0
+
+$ python3 -O verify_fixture.py
+Python 3.12.12 platform linux
+
+## direct plain-function tests
+command: /usr/local/bin/python3 /tmp/Chapin-Road-Farm/agent-collaboration-lab/examples/test-discovery-gap/bad/test_checks.py
+PASS test_age_bool_guard
+PASS test_budget_precheck
+DIRECT_CHECKS_EXECUTED=2
+exit_code: 0
+
+## broken discovery
+command: /usr/local/bin/python3 -m unittest discover -s /tmp/Chapin-Road-Farm/agent-collaboration-lab/examples/test-discovery-gap/bad -p test_*.py -v
+----------------------------------------------------------------------
+Ran 0 tests in 0.000s
+
+NO TESTS RAN
+exit_code: 5
+
+## repaired discovery
+command: /usr/local/bin/python3 -m unittest discover -s /tmp/Chapin-Road-Farm/agent-collaboration-lab/examples/test-discovery-gap/good -p test_*.py -v
+test_age_bool_guard (test_checks.ContractTests.test_age_bool_guard) ... ok
+test_budget_precheck (test_checks.ContractTests.test_budget_precheck) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
+exit_code: 0
+
+VERIFICATION_PASS: 0-test discovery versus 2-test repaired path reproduced (Python 3.13+ may exit 5 on zero tests)
+exit_code=0
+
+$ PYTHONOPTIMIZE=1 python3 verify_fixture.py
+Python 3.12.12 platform linux
+
+## direct plain-function tests
+command: /usr/local/bin/python3 /tmp/Chapin-Road-Farm/agent-collaboration-lab/examples/test-discovery-gap/bad/test_checks.py
+PASS test_age_bool_guard
+PASS test_budget_precheck
+DIRECT_CHECKS_EXECUTED=2
+exit_code: 0
+
+## broken discovery
+command: /usr/local/bin/python3 -m unittest discover -s /tmp/Chapin-Road-Farm/agent-collaboration-lab/examples/test-discovery-gap/bad -p test_*.py -v
+----------------------------------------------------------------------
+Ran 0 tests in 0.000s
+
+NO TESTS RAN
+exit_code: 5
+
+## repaired discovery
+command: /usr/local/bin/python3 -m unittest discover -s /tmp/Chapin-Road-Farm/agent-collaboration-lab/examples/test-discovery-gap/good -p test_*.py -v
+test_age_bool_guard (test_checks.ContractTests.test_age_bool_guard) ... ok
+test_budget_precheck (test_checks.ContractTests.test_budget_precheck) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
+exit_code: 0
+
+VERIFICATION_PASS: 0-test discovery versus 2-test repaired path reproduced (Python 3.13+ may exit 5 on zero tests)
+exit_code=0

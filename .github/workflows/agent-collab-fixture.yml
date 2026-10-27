@@ -23,5 +23,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Run portable test-discovery demonstration
-        run: python agent-collaboration-lab/examples/test-discovery-gap/verify_fixture.py
+      - name: Run fail-closed test-discovery verification
+        run: |
+          python -m unittest discover -s agent-collaboration-lab/examples/test-discovery-gap/tests -v
+          python agent-collaboration-lab/examples/test-discovery-gap/verify_fixture.py
+          python -O agent-collaboration-lab/examples/test-discovery-gap/verify_fixture.py
+          PYTHONOPTIMIZE=1 python agent-collaboration-lab/examples/test-discovery-gap/verify_fixture.py
