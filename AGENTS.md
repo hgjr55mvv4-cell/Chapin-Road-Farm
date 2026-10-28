@@ -10,7 +10,7 @@ Purpose: measurable, privacy-respecting human–AI research, including musical l
 
 ## Green-teaming: our cross-project purpose
 
-Chapin Road Farm is developing a real-world, human-led approach to **green-teaming**: studying when sustained human–AI collaboration actually benefits people in farm operations, accessible participation, community care, maintenance, music and open research. See [the public introduction](README.md#green-teaming-a-real-world-humanai-collaboration-site). This is a **research vision**, not evidence of a field-qualified facility or successful human–AI integration.
+Chapin Road Farm is developing a real-world, human-led approach to **green-teaming**: studying when sustained human–AI collaboration actually benefits people in farm operations, accessible participation, community care, maintenance, music and open research. See [the public introduction](README.md#green-teaming-a-real-world-humanai-collaboration-site) and [field research philosophy](FIELD_RESEARCH_PHILOSOPHY.md). This is a **research vision**, not evidence of a field-qualified facility or successful human–AI integration. The farm's modest scale permits bounded real-world inquiry, not automatic consent, consequence-free experimentation, or collection of a public longitudinal dataset.
 
 **Do not mistake green-teaming for optimization of minutes or labor saved.** Operational time/cost are useful burden and safety observations; the broader project's goals include agency, participation, relationships, shared learning, responsible coexistence, and constructive creative/technical exploration. Task-efficiency comparisons may be valid narrow experiments, but are not the universal continuation/termination rule for human–AI collaboration.
 
