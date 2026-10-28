@@ -22,6 +22,8 @@ The participants have **different responsibilities**. People set goals, make con
 
 **The collaboration itself is part of the investigation.** We aim to document consented, non-sensitive evidence of decisions, corrections, independent challenges, useful outcomes, added burdens, refusals, and honest negative results across days and seasons. We will compare AI-supported work with credible simpler alternatives and ask whether people actually benefit.
 
+**A small farm for big questions.** Our modest nonprofit setting offers a real-world place to examine practical, scientific, philosophical and ecological questions together, over time—not only inside benchmark tests. Its smaller scale allows bounded experiments, **not** consequence-free ones: people, privacy, wildlife, land and trust matter. A long-term ambition is an inspectable corpus of *appropriately authorized* observations, disagreements, actions, corrections, outcomes and negative results that future researchers can challenge; it is not an existing open dataset or permission to collect or train on people's data. Read [our field research philosophy](FIELD_RESEARCH_PHILOSOPHY.md).
+
 **Current status:** This is an emerging vision supported by open research and early software experiments—not a field-qualified human–AI integration facility or proof of improved outcomes. Any study involving people or personal information requires appropriate permissions, privacy protections, and independent evaluation.
 
 ## Start here
@@ -29,6 +31,7 @@ The participants have **different responsibilities**. People set goals, make con
 | For | Entry point |
 |---|---|
 | **Curious visitors** | [Public research index](RESEARCH_INDEX.md) — the project, questions, status, current evidence and next contributions |
+| **Researchers exploring our purpose** | [A Small Farm for Big Questions](FIELD_RESEARCH_PHILOSOPHY.md) — the real-world setting, research questions, ecological responsibility and corpus boundaries |
 | **AI research agents & coding assistants** | [AGENTS.md](AGENTS.md) — context, permissions, provenance, safety, reproducibility, and pull-request expectations |
 | **Software developers** | [Harbor Co-Listener](harbor-co-listener/README.md) — source, prototype, engineering contracts and contribution guidance |
 | **Researchers and listeners** | [How to contribute research](harbor-co-listener/docs/RESEARCH_GUIDE.md) — methods, falsifiers, papers and voluntary observations |
