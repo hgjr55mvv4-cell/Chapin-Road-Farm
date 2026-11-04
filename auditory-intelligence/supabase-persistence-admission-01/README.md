@@ -8,7 +8,7 @@ This versioned research responds to Muse's SUPABASE-RESEARCH-01 report and the o
 - Sol built a separate standard-library SQLite reference, locally executed **33/33 tests on Python 3.13.5 / SQLite 3.46.1**, and preserved the case-level stdout, deterministic demo and source SHA-256 receipts in a portable ZIP delivered to Brian.
 - **Source and tests are in the portable companion ZIP, not committed in this research PR.** The repository alone is not a complete reproduction; the ZIP must be attached to Astra. Do not report GitHub CI qualification for this offline source unless it is separately uploaded and run.
 - [Supabase/Postgres security and schema approach](POSTGRES_DESIGN.md) is **DESIGN ONLY / NOT DEPLOYED**.
-- [Astra independent review requirements](SOL_TO_ASTRA_SUPABASE_ADMISSION_01.md) specify replay gates and known false-assurance modes.
+- [Astra independent review requirements](SOL_TO_ASTRA_REVIEW.md) specify replay gates and known false-assurance modes.
 
 ## What Sol actually tested
 
