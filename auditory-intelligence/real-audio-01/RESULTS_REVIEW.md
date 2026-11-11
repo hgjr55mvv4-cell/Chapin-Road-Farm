@@ -14,9 +14,9 @@
 
 **The ZCR success is all in one held-out source group:** on source group 0 it scored **0/3**, on source group 1 **3/3**. Gains are repeated treatments, not independent samples. The spectral prototype missed all positives; zero false positives arose alongside low useful coverage. **This is a negative engineering result for the richer representation under this frozen implementation**.
 
-**Exact case outcomes:** [all 48 case rows](case_decisions.csv), with slot-source labels, gain, every arm's decisions. A classifier receives the **oracle** slot boundaries and source audio already peak normalized and resampled. It does not identify original spontaneous sound onset, overlapping original source identities, an actual dog or a particular chainsaw.
+**Exact case outcomes:** [all 48 case rows](receipts/real_case_decisions.csv), with slot-source labels, gain, every arm's decisions. A classifier receives the **oracle** slot boundaries and source audio already peak normalized and resampled. It does not identify original spontaneous sound onset, overlapping original source identities, an actual dog or a particular chainsaw.
 
-**Input SHA-256 at pinned ESC-50 revision:** [verified hashes](source_sha256.json). The sources are individually marked CC0 in the upstream `LICENSE`, drawn from CC BY 3.0 ESC-10. **No original audio is in this repository.**
+**Input SHA-256 at pinned ESC-50 revision:** [verified hashes](receipts/source_sha256.json). The sources are individually marked CC0 in the upstream `LICENSE`, drawn from CC BY 3.0 ESC-10. **No original audio is in this repository.**
 
 **Structured artifact:** [Python 3.11 GitHub archived JSON](https://github.com/hgjr55mvv4-cell/Chapin-Road-Farm/actions/runs/40003763414) and Python 3.13 artifacts (30-day retention) contained an identical `results.json`; original uncompressed file **SHA-256 `4ccc41912a9a0ba05790828a989b3efffe8874e873124b479fbc0e5da5c35d0c`** in both. ZIP artifact digest differs by metadata but JSON payload hashes match. Persistent compact case CSV sha256 **`c5f14b064d8f2d05ea71520c182cdf0fe8e14b4f1d836ec20b0de6b4345b27ad`**.
 
