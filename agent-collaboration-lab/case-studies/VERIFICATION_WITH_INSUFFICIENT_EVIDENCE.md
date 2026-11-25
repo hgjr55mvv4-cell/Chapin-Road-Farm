@@ -41,6 +41,7 @@ Astra reran the following on Linux x86_64, CPython 3.12.14, from fetched Git obj
 From a local clone, fetch any missing Git objects with `git fetch origin refs/pull/106/head` (substitute each PR number as needed). The commands below write to temporary directories. The pinned SHAs identify the tested revisions even if a PR moves later.
 
 ```sh
+set -e
 work=$(mktemp -d)
 replay() (
   set -eu
@@ -69,6 +70,7 @@ replay 110 "$base" be1b75ccdaeff251a502662147843a420061db44 agent-collaboration-
 For the sixth pair, use a header-only CSV and a zero-row JSON document. Observe stdout and the process exit code for each invocation.
 
 ```sh
+set -e
 base=c444736801fb52897db1d18256895f518a343a1a
 fix=8bfb6372c20c83b9abedcce1e9b011b6efcf9031
 work=$(mktemp -d)
@@ -85,6 +87,11 @@ for rev in "$base" "$fix"; do
       (cd "$work" && python3 verify_receipts.py) || code=$?
     fi
     echo "$rev $mode exit=$code"
+    if [ "$rev" = "$base" ] && [ "$mode" = optimized ]; then
+      test "$code" -eq 0
+    else
+      test "$code" -eq 1
+    fi
   done
 done
 ```
