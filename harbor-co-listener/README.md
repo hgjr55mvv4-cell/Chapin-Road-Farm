@@ -44,6 +44,8 @@ These are separable questions. A moving answer is not proof the system heard sou
 
 ## How to contribute
 
+[Try an offline, attributed listening handoff](examples/attributed-handoff/README.md). Two fictional collaborators disagree about one listener moment. The demo keeps the original words and records which collaborator had the audio and which received only session JSON.
+
 Start with the [research contribution guide](docs/RESEARCH_GUIDE.md) or [First Five Minutes](docs/FIRST_FIVE_MINUTES.md). We welcome listeners, musicians, audio and neuroscience researchers, accessibility testers, independent AI investigators, software contributors, and informed critics.
 
 Useful contributions include a literature correction with primary-source evidence, falsifying musical example (without uploading protected audio), synthetic test fixture, reproducible technical fault, privacy safeguard, null finding, or a small branch-and-PR implementation.

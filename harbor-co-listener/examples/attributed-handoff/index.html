@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harbor · Listening handoff</title>
+<style>
+  :root { color-scheme:light; color:#202d32; background:#f8f6f0; font:1rem/1.5 system-ui,sans-serif }
+  * { box-sizing:border-box }
+  main { max-width:50rem; margin:auto; padding:2rem 1rem 4rem }
+  h1,h2 { font-family:"Source Serif 4",Georgia,serif; font-weight:normal; line-height:1.2; margin:.6em 0 }
+  h1 { font-size:clamp(2.3rem,8vw,3.7rem) }
+  section { padding:.6rem 0 1.3rem; border-bottom:1px solid #a9b4b0 }
+  article { margin:1rem 0; padding:.25rem 1rem; border-left:3px solid #5b7772 }
+  article p { margin:.3rem 0; white-space:pre-wrap; overflow-wrap:anywhere }
+  .meta,small { color:#425653 }
+  label { display:block; margin:.8rem 0 .25rem; font-weight:600 }
+  input:not([type=checkbox]),textarea,select,audio { display:block; width:100%; max-width:36rem; font:inherit }
+  input,textarea,select,button { padding:.5rem; border:1px solid #6e817b; border-radius:.3rem }
+  button { font:inherit; background:white; color:inherit; min-height:2.75rem; cursor:pointer }
+  form button { background:#244d48; color:white }
+  .actions { display:flex; flex-wrap:wrap; gap:.5rem; margin:1rem 0 }
+  [hidden] { display:none!important }
+  :focus-visible { outline:3px solid #af6226; outline-offset:2px }
+</style>
+</head>
+<body><main>
+<h1>Listening handoff</h1>
+<p>This offline demo opens with two fictional interpretations of one listener moment. Each reply records the contributor’s alias, the material available in that view, and any listening report.</p>
+<section><h2 id="song"></h2><div id="original"></div></section>
+<section><h2>Collaborator replies</h2><div id="replies"></div></section>
+<section><h2>Add a perspective</h2>
+<form id="reply-form">
+  <label for="who">Contributor name or alias</label><input id="who" required autocomplete="off">
+  <label for="target">Listener moment</label><select id="target" required></select>
+  <label for="clip">Local audio for this reply (optional)</label><input id="clip" type="file" accept="audio/*">
+  <audio id="player" hidden controls preload="metadata"></audio>
+  <p id="access" class="meta"></p>
+  <label id="listen-label" hidden><input id="listened" type="checkbox"> I listened to the selected passage.</label>
+  <label for="words">Your interpretation</label><textarea id="words" rows="3" required></textarea>
+  <div class="actions"><button id="append">Append reply</button></div>
+</form></section>
+<section><h2>Pass the record on</h2>
+<p>The handoff contains the original session and the attributed replies. Audio stays on this device. The original-session download opens in a v0.1-compatible reader.</p>
+<div class="actions"><button id="save">Save handoff JSON</button><button id="source">Save original session JSON</button></div>
+<label for="open">Open a Harbor v0.1 session or saved handoff</label><input id="open" type="file" accept=".json,application/json">
+</section>
+<p id="status" role="status" aria-live="polite"></p>
+</main>
+<script>
+'use strict';
+const el = id => document.getElementById(id);
+const FORMAT = 'harbor-attributed-handoff/dev-01';
+const DIRECT = 'DIRECT_AUDIO_AVAILABLE', JSON_ONLY = 'SESSION_JSON_ONLY';
+const UNKNOWN = 'UNKNOWN', REPORTED = 'SELF_REPORTED';
+const accessLabel = { [DIRECT]: 'Direct audio available', [JSON_ONLY]: 'Session JSON only' };
+const demoSession = {
+  schema:'harbor-co-listener/v0.1', createdAt:'2026-11-25T12:00:00.000Z',
+  song:{title:'Two tones and a pause',artist:'Synthetic example'}, audioIncluded:false,
+  moments:[{createdAt:'2026-11-25T12:01:00.000Z',timeSeconds:1.2,
+    heard:'A gap between two tones.',felt:'That pause felt like relief.'}],
+  responses:[{createdAt:'2026-11-25T12:02:00.000Z',timeSeconds:1.2,
+    noticed:'The second tone felt different.',uncertain:'I am unsure why.'}],
+  exportedAt:'2026-11-25T12:03:00.000Z'
+};
+let session = demoSession;
+let replies = [
+  {momentIndex:0, contributor:'Rowan', scriptedExample:true, access:DIRECT, listening:REPORTED,
+   interpretation:'I heard hesitation in the gap before the higher tone.'},
+  {momentIndex:0, contributor:'Jules', scriptedExample:true, access:JSON_ONLY, listening:UNKNOWN,
+   interpretation:'Reading the listener’s words, I take the pause as relief. I read Rowan’s hesitation as a different interpretation.'}
+];
+
+function element(tag, text, style) {
+  const node = document.createElement(tag);
+  node.textContent = text;
+  if (style) node.className = style;
+  return node;
+}
+function card(parent, title, meta, lines) {
+  const row = document.createElement('article');
+  row.append(element('strong', title), element('p', meta, 'meta'));
+  for (const [label, line] of lines) {
+    if (label) row.append(element('small', label));
+    row.append(element('p', line));
+  }
+  parent.append(row);
+}
+function render() {
+  el('song').textContent = session.song.title || 'Untitled session';
+  el('original').replaceChildren();
+  el('target').replaceChildren();
+  session.moments.forEach((m, i) => {
+    const time = m.timeSeconds === null ? 'untimed' : m.timeSeconds + ' s';
+    const title = 'Listener moment ' + (i + 1) + ' · ' + time;
+    card(el('original'), title, 'Legacy record · identity, access and listening unknown',
+         [['Observation', m.heard], ['Meaning to the listener', m.felt]]);
+    el('target').add(new Option(title, String(i)));
+  });
+  for (const r of session.responses)
+    card(el('original'), 'Earlier response', 'Legacy record · identity, access and listening unknown',
+         [['What they noticed', r.noticed], ['What was uncertain', r.uncertain]]);
+  el('replies').replaceChildren();
+  for (const r of replies) {
+    const listening = r.listening === REPORTED ? 'listening self-reported' : 'listening unknown';
+    const example = r.scriptedExample ? 'Fictional example · ' : '';
+    card(el('replies'), r.contributor + ' → moment ' + (r.momentIndex + 1),
+         example + accessLabel[r.access] + ' · ' + listening, [['', r.interpretation]]);
+  }
+  if (!replies.length) el('replies').append(element('p', 'No attributed replies yet.'));
+  el('append').disabled = !session.moments.length;
+}
+
+const fields = (value, keys) => value !== null && typeof value === 'object' && !Array.isArray(value)
+  && Object.keys(value).every(key => keys.includes(key));
+function exportTime(value) {
+  if (typeof value !== 'string') return false;
+  const date = new Date(value);
+  return Number.isFinite(date.getTime()) && date.toISOString() === value;
+}
+function validSession(s) {
+  const entries = (rows, a, b) => Array.isArray(rows) && rows.every(r => fields(r, ['createdAt','timeSeconds',a,b])
+    && exportTime(r.createdAt) && (r.timeSeconds === null || (Number.isFinite(r.timeSeconds) && r.timeSeconds >= 0))
+    && typeof r[a] === 'string' && typeof r[b] === 'string');
+  return fields(s, ['schema','audioIncluded','createdAt','exportedAt','song','moments','responses'])
+    && s.schema === 'harbor-co-listener/v0.1' && s.audioIncluded === false
+    && exportTime(s.createdAt) && exportTime(s.exportedAt) && fields(s.song, ['title','artist'])
+    && typeof s.song.title === 'string' && typeof s.song.artist === 'string'
+    && entries(s.moments, 'heard', 'felt') && entries(s.responses, 'noticed', 'uncertain');
+}
+function validReply(r, count) {
+  return fields(r, ['momentIndex','contributor','access','listening','interpretation','scriptedExample'])
+    && (r.scriptedExample === undefined || r.scriptedExample === true)
+    && Number.isInteger(r.momentIndex) && r.momentIndex >= 0 && r.momentIndex < count
+    && typeof r.contributor === 'string' && r.contributor.trim() && typeof r.interpretation === 'string' && r.interpretation.trim()
+    && (r.access === DIRECT || r.access === JSON_ONLY)
+    && (r.listening === UNKNOWN || (r.access === DIRECT && r.listening === REPORTED));
+}
+
+let audioUrl = null;
+let hadAudioAccess = false;
+function clearAudio() {
+  const player = el('player');
+  if (audioUrl) {
+    player.pause();
+    player.removeAttribute('src');
+    player.load();
+    URL.revokeObjectURL(audioUrl);
+    audioUrl = null;
+  }
+  el('clip').value = '';
+  player.hidden = true;
+  el('listened').checked = false;
+  el('listen-label').hidden = true;
+  el('access').textContent = hadAudioAccess ? 'Audio was available earlier in this reply.'
+    : 'This reply has the session JSON only.';
+}
+el('clip').onchange = event => {
+  const file = event.target.files[0];
+  if (!file) return;
+  clearAudio();
+  if (!file.type.startsWith('audio/') && !/\.(wav|mp3|aac|m4a|flac|ogg|opus)$/i.test(file.name)) {
+    el('status').textContent = 'Choose a local audio file.';
+    return;
+  }
+  audioUrl = URL.createObjectURL(file);
+  const player = el('player');
+  player.src = audioUrl;
+  player.hidden = false;
+  el('access').textContent = 'Opening local audio…';
+};
+el('player').onloadedmetadata = () => {
+  if (!audioUrl || el('player').currentSrc !== audioUrl) return;
+  hadAudioAccess = true;
+  el('listen-label').hidden = false;
+  el('access').textContent = 'Direct access to the selected file. Listening stays unknown unless you report it.';
+};
+el('player').onerror = () => {
+  if (!audioUrl || !el('player').error) return;
+  clearAudio();
+  el('status').textContent = 'Could not open that audio. Choose a readable file to add an audio-based reply.';
+};
+for (const id of ['target', 'who'])
+  el(id).addEventListener('input', () => { el('listened').checked = false; });
+let dirty = false;
+el('reply-form').onsubmit = event => {
+  event.preventDefault();
+  const who = el('who').value, words = el('words').value;
+  if (!who.trim() || !words.trim()) {
+    el('status').textContent = 'Enter a contributor and an interpretation.';
+    return;
+  }
+  if (audioUrl && el('listen-label').hidden) {
+    el('status').textContent = 'Wait for the selected audio to open.';
+    return;
+  }
+  replies.push({momentIndex:Number(el('target').value), contributor:who, access:hadAudioAccess ? DIRECT : JSON_ONLY,
+    listening:audioUrl && el('listened').checked ? REPORTED : UNKNOWN, interpretation:words});
+  dirty = true;
+  el('reply-form').reset();
+  hadAudioAccess = false;
+  clearAudio();
+  render();
+  el('status').textContent = 'Reply appended. The next contributor starts with the session JSON.';
+};
+function download(name, data) {
+  const url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2) + '\n'], {type:'application/json'}));
+  const a = document.createElement('a');
+  a.href = url; a.download = name; document.body.append(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 3000);
+}
+el('save').onclick = () => download('harbor-handoff.json', {format:FORMAT, session, replies});
+el('source').onclick = () => download('listening-room-session.json', session);
+let openVersion = 0;
+el('open').onchange = async event => {
+  const file = event.target.files[0];
+  if (!file) return;
+  const version = ++openVersion;
+  event.target.value = '';
+  try {
+    const data = JSON.parse(await file.text());
+    if (version !== openVersion) return;
+    const native = validSession(data);
+    const source = native ? data : data?.session;
+    const appended = native ? [] : data?.replies;
+    if ((!native && (!fields(data, ['format','session','replies']) || data.format !== FORMAT))
+        || !validSession(source) || !Array.isArray(appended)
+        || !appended.every(r => validReply(r, source.moments.length))) throw Error();
+    if ((dirty || audioUrl || el('who').value || el('words').value)
+        && !confirm('Replace this tab’s handoff and any unfinished reply?')) return;
+    session = source;
+    replies = appended;
+    dirty = false;
+    el('reply-form').reset();
+    hadAudioAccess = false;
+    clearAudio();
+    render();
+    el('status').textContent = 'Opened locally. This view has the session JSON only.';
+  } catch {
+    if (version === openVersion) el('status').textContent = 'Could not open this record. The current handoff is intact.';
+  }
+};
+clearAudio();
+render();
+</script></body></html>
