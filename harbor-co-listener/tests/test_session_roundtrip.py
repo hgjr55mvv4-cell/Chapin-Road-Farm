@@ -142,6 +142,37 @@ class SessionRoundtripTests(unittest.TestCase):
         self.assertIsNone(page.locator('#audio').get_attribute('src'))
         self.assertEqual(session_data(export(page)), session_data(replacement))
 
+    def test_preserve_listener_text_and_song_spacing(self):
+        page = self.page
+        words = ' \t“relief” — Cafe\u0301\n  second line  '
+        page.locator('#heard').fill('  \n ')
+        page.locator('#mark').click()
+        self.assertEqual(export(page)['moments'], [])
+        page.locator('#heard').fill(words)
+        page.locator('#mark').click()
+        page.locator('#noticed').fill(words)
+        page.locator('#respond').click()
+        page.locator('#song').fill('  Synthetic title  ')
+        page.locator('#artist').fill('  Test ensemble  ')
+        saved = export(page)
+        self.assertEqual(saved['moments'][0]['heard'], words)
+        self.assertEqual(saved['responses'][0]['noticed'], words)
+        self.assertEqual(saved['song'], {'title': '  Synthetic title  ', 'artist': '  Test ensemble  '})
+        saved['moments'][0]['felt'] = '  original\r\nspacing  '
+        page.reload()
+        open_file(page, saved)
+        expect(page.locator('#status')).to_contain_text('Session opened')
+        local_audio(page)
+        self.assertEqual(session_data(export(page)), session_data(saved))
+
+    def test_reselecting_audio_preserves_an_empty_archived_title(self):
+        page = self.page
+        saved = export(page)
+        open_file(page, saved)
+        expect(page.locator('#status')).to_contain_text('Session opened')
+        local_audio(page)
+        self.assertEqual(session_data(export(page)), session_data(saved))
+
     def test_latest_file_selection_wins(self):
         page = self.page
         empty = export(page)

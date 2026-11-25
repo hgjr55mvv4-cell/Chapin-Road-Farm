@@ -15,10 +15,11 @@
 </div><footer><p><strong>Research prototype, not a mind-reading tool.</strong> It does not measure brain activity, infer personal emotion from sound, or contact an AI provider. All notes exist only in this tab until you explicitly export a JSON file. The export does not include audio.</p><p><a href="README.md">Project overview</a> · <a href="docs/neuroscience.md">Brain imaging research</a> · <a href="docs/MUSE_HANDOFF.md">Muse's assignment</a></p></footer>
 </main><script>
 (()=>{"use strict";const $=id=>document.getElementById(id),a=$('audio'),state={schema:"harbor-co-listener/v0.1",createdAt:new Date().toISOString(),moments:[],responses:[]};let localUrl=null;
-const text=id=>$(id).value.trim(),stamp=t=>t===null?"untimed":Math.floor(t/60)+":"+String(Math.floor(t%60)).padStart(2,"0");function status(s){$('status').textContent=s;}
-$('file').addEventListener('change',e=>{if(localUrl)URL.revokeObjectURL(localUrl);localUrl=null;const f=e.target.files?.[0];if(!f)return;if(!f.type.startsWith('audio/')&&!/\.(mp3|wav|m4a|aac|flac|ogg|opus)$/i.test(f.name)){status("Please select an audio file");return;}localUrl=URL.createObjectURL(f);a.src=localUrl;a.load();$('audio-status').textContent="Loaded locally: "+f.name;if(!text('song'))$('song').value=f.name.replace(/\.[^.]+$/,'');});
+let restoredSession=false;
+const text=id=>$(id).value,stamp=t=>t===null?"untimed":Math.floor(t/60)+":"+String(Math.floor(t%60)).padStart(2,"0");function status(s){$('status').textContent=s;}
+$('file').addEventListener('change',e=>{if(localUrl)URL.revokeObjectURL(localUrl);localUrl=null;const f=e.target.files?.[0];if(!f)return;if(!f.type.startsWith('audio/')&&!/\.(mp3|wav|m4a|aac|flac|ogg|opus)$/i.test(f.name)){status("Please select an audio file");return;}localUrl=URL.createObjectURL(f);a.src=localUrl;a.load();$('audio-status').textContent="Loaded locally: "+f.name;if(!restoredSession && !text('song'))$('song').value=f.name.replace(/\.[^.]+$/,'');});
 const now=()=>localUrl&&Number.isFinite(a.currentTime)?Math.round(a.currentTime*100)/100:null;
-function add(type,values){if(Object.values(values).every(v=>!v)){status("Please write a note first.");return;}state[type].push({createdAt:new Date().toISOString(),timeSeconds:now(),...values});for(const k of Object.keys(values))$(k).value="";render();status("Saved in this tab. Export if you want to keep it.");}
+function add(type,values){if(Object.values(values).every(v=>!v.trim())){status("Please write a note first.");return;}state[type].push({createdAt:new Date().toISOString(),timeSeconds:now(),...values});for(const k of Object.keys(values))$(k).value="";render();status("Saved in this tab. Export if you want to keep it.");}
 $('mark').onclick=()=>add('moments',{heard:text('heard'),felt:text('felt')});$('respond').onclick=()=>add('responses',{noticed:text('noticed'),uncertain:text('uncertain')});
 function render(){const target=$('timeline');target.replaceChildren();const items=[...state.moments.map(x=>({...x,type:"Your moment"})),...state.responses.map(x=>({...x,type:"Listener response"}))].sort((x,y)=>x.createdAt.localeCompare(y.createdAt));if(!items.length){const p=document.createElement('p');p.className="muted";p.textContent="No moments yet. Every session starts somewhere.";target.append(p);return;}for(const item of items){const d=document.createElement('article');d.className="item";const h=document.createElement('strong');h.textContent=item.type+" · "+stamp(item.timeSeconds);d.append(h);for(const key of ['heard','felt','noticed','uncertain']){if(item[key]){const p=document.createElement('p');p.textContent=item[key];d.append(p);}}target.append(d);}}
 $('export').onclick=()=>{const out={...state,song:{title:text('song'),artist:text('artist')},audioIncluded:false,exportedAt:new Date().toISOString()};const url=URL.createObjectURL(new Blob([JSON.stringify(out,null,2)],{type:"application/json"}));const l=document.createElement('a');l.href=url;l.download="listening-room-session.json";document.body.append(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);status("Export created. Review it before sharing.");};
@@ -93,6 +94,7 @@ $('session-file').addEventListener('change', async event => {
   $('song').value = saved.song.title;
   $('artist').value = saved.song.artist;
   for (const id of noteFields) $(id).value = '';
+  restoredSession = true;
   state.createdAt = saved.createdAt;
   state.moments = saved.moments;
   state.responses = saved.responses;
