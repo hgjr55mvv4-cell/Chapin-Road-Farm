@@ -7,7 +7,10 @@
 <div class="grid">
 <section class="panel"><h2>1. Bring your song</h2><p class="muted">Choose a file already on your device. No audio leaves your browser.</p><label for="file">Local audio file (optional)</label><input id="file" type="file" accept="audio/*"><label for="song">Song title</label><input id="song" type="text" maxlength="180" placeholder="Song title"><label for="artist">Artist</label><input id="artist" type="text" maxlength="180" placeholder="Optional"><audio id="audio" controls preload="metadata"></audio><p id="audio-status" class="muted">You can write about a song without uploading a file.</p></section>
 <section class="panel"><h2>2. Mark a moment</h2><p class="muted">What sound, silence, turn, or memory makes this song important?</p><label for="heard">What happened?</label><textarea id="heard" placeholder="At the end of the verse, the voice almost breaks…"></textarea><label for="felt">Why does it matter to you?</label><textarea id="felt" placeholder="I think of someone I miss…"></textarea><div class="buttons"><button id="mark" type="button">Mark this moment</button></div><p class="muted">If audio is loaded, marking stores the current playback time. Otherwise, the note is untimed.</p></section>
-<section class="panel full"><h2>3. Another listener responds</h2><p class="muted">This can be a human listener. Future experiments may add an optional AI assistant; this version does not simulate AI listening or claim to feel emotion.</p><label for="noticed">What did the listener actually notice?</label><textarea id="noticed" placeholder="I noticed the abrupt change in rhythm…"></textarea><label for="uncertain">What is still uncertain or different?</label><textarea id="uncertain" placeholder="I hear it differently, and I want to understand…"></textarea><div class="buttons"><button id="respond" type="button">Save response</button><button class="secondary" id="export" type="button">Export session JSON</button><button class="secondary" id="clear" type="button">Clear session</button></div><p id="status" class="status" aria-live="polite" role="status"></p></section>
+<section class="panel full"><h2>3. Another listener responds</h2><p class="muted">This can be a human listener. Future experiments may add an optional AI assistant; this version does not simulate AI listening or claim to feel emotion.</p><label for="noticed">What did the listener actually notice?</label><textarea id="noticed" placeholder="I noticed the abrupt change in rhythm…"></textarea><label for="uncertain">What is still uncertain or different?</label><textarea id="uncertain" placeholder="I hear it differently, and I want to understand…"></textarea><div class="buttons"><button id="respond" type="button">Save response</button><button class="secondary" id="export" type="button">Export session JSON</button><button class="secondary" id="clear" type="button">Clear session</button></div>
+<label for="session-file">Open saved session (JSON)</label>
+<input id="session-file" type="file" accept=".json,application/json">
+<p id="status" class="status" aria-live="polite" role="status"></p></section>
 <section class="panel full"><h2>Listening timeline</h2><div id="timeline" aria-live="polite"><p class="muted">No moments yet. Every session starts somewhere.</p></div></section>
 </div><footer><p><strong>Research prototype, not a mind-reading tool.</strong> It does not measure brain activity, infer personal emotion from sound, or contact an AI provider. All notes exist only in this tab until you explicitly export a JSON file. The export does not include audio.</p><p><a href="README.md">Project overview</a> · <a href="docs/neuroscience.md">Brain imaging research</a> · <a href="docs/MUSE_HANDOFF.md">Muse's assignment</a></p></footer>
 </main><script>
@@ -19,6 +22,83 @@ function add(type,values){if(Object.values(values).every(v=>!v)){status("Please 
 $('mark').onclick=()=>add('moments',{heard:text('heard'),felt:text('felt')});$('respond').onclick=()=>add('responses',{noticed:text('noticed'),uncertain:text('uncertain')});
 function render(){const target=$('timeline');target.replaceChildren();const items=[...state.moments.map(x=>({...x,type:"Your moment"})),...state.responses.map(x=>({...x,type:"Listener response"}))].sort((x,y)=>x.createdAt.localeCompare(y.createdAt));if(!items.length){const p=document.createElement('p');p.className="muted";p.textContent="No moments yet. Every session starts somewhere.";target.append(p);return;}for(const item of items){const d=document.createElement('article');d.className="item";const h=document.createElement('strong');h.textContent=item.type+" · "+stamp(item.timeSeconds);d.append(h);for(const key of ['heard','felt','noticed','uncertain']){if(item[key]){const p=document.createElement('p');p.textContent=item[key];d.append(p);}}target.append(d);}}
 $('export').onclick=()=>{const out={...state,song:{title:text('song'),artist:text('artist')},audioIncluded:false,exportedAt:new Date().toISOString()};const url=URL.createObjectURL(new Blob([JSON.stringify(out,null,2)],{type:"application/json"}));const l=document.createElement('a');l.href=url;l.download="listening-room-session.json";document.body.append(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);status("Export created. Review it before sharing.");};
-$('clear').onclick=()=>{if(!confirm("Clear your notes and responses from this tab?"))return;state.moments=[];state.responses=[];render();status("Session cleared.");};
+$('clear').onclick=()=>{if(!confirm("Clear your notes and responses from this tab?"))return;openVersion++;state.moments=[];state.responses=[];render();status("Session cleared.");};
+let openVersion = 0;
+const noteFields = ['heard', 'felt', 'noticed', 'uncertain'];
+
+function hasOnlyKeys(value, keys) {
+  return value !== null && typeof value === 'object' && !Array.isArray(value)
+    && Object.keys(value).every(key => keys.includes(key));
+}
+
+function isExportTime(value) {
+  if (typeof value !== 'string') return false;
+  const date = new Date(value);
+  return Number.isFinite(date.getTime()) && date.toISOString() === value;
+}
+
+function validEntries(entries, fields) {
+  return Array.isArray(entries) && entries.every(entry =>
+    hasOnlyKeys(entry, ['createdAt', 'timeSeconds', ...fields])
+    && isExportTime(entry.createdAt)
+    && (entry.timeSeconds === null || (Number.isFinite(entry.timeSeconds) && entry.timeSeconds >= 0))
+    && fields.every(key => typeof entry[key] === 'string'));
+}
+
+function isSessionExport(data) {
+  return hasOnlyKeys(data, ['schema', 'createdAt', 'exportedAt', 'audioIncluded', 'song', 'moments', 'responses'])
+    && data.schema === state.schema && data.audioIncluded === false
+    && isExportTime(data.createdAt) && isExportTime(data.exportedAt)
+    && hasOnlyKeys(data.song, ['title', 'artist'])
+    && typeof data.song.title === 'string' && typeof data.song.artist === 'string'
+    && validEntries(data.moments, ['heard', 'felt'])
+    && validEntries(data.responses, ['noticed', 'uncertain']);
+}
+
+$('session-file').addEventListener('change', async event => {
+  const file = event.target.files[0];
+  if (!file) return;
+  const version = ++openVersion;
+  event.target.value = ''; // Allow the same file to be opened again after a cancellation.
+  let saved;
+  try {
+    saved = JSON.parse(await file.text());
+  } catch {
+    if (version === openVersion) status('Could not read that JSON file. Your current session is intact.');
+    return;
+  }
+  if (version !== openVersion) return;
+  if (!isSessionExport(saved)) {
+    status('This file does not match a Listening Room v0.1 export. Your current session is intact.');
+    return;
+  }
+
+  const hasWork = a.hasAttribute('src') || state.moments.length || state.responses.length
+    || ['song', 'artist', ...noteFields].some(id => $(id).value.length);
+  if (hasWork && !confirm('Replace the notes, drafts, song details and audio selection in this tab?')) {
+    status('Kept your current session.');
+    return;
+  }
+  if (a.hasAttribute('src')) {
+    a.pause();
+    a.removeAttribute('src');
+    a.load();
+  }
+  if (localUrl) {
+    URL.revokeObjectURL(localUrl);
+    localUrl = null;
+  }
+  $('file').value = '';
+  $('audio-status').textContent = 'Choose the matching audio file if you want playback.';
+  $('song').value = saved.song.title;
+  $('artist').value = saved.song.artist;
+  for (const id of noteFields) $(id).value = '';
+  state.createdAt = saved.createdAt;
+  state.moments = saved.moments;
+  state.responses = saved.responses;
+  render();
+  status('Session opened. You can add notes and export it again.');
+});
+
 window.addEventListener("beforeunload",()=>{if(localUrl)URL.revokeObjectURL(localUrl);});})();
 </script></body></html>
