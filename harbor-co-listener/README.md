@@ -23,7 +23,7 @@ These are separable questions. A moving answer is not proof the system heard sou
 
 ## What currently exists
 
-**Implemented:** [Browser listening prototype v0.1](index.html). Choose a local audio file, play it, mark a timestamped moment, record another person's perspective, and explicitly export session JSON. No integrated AI listener, server, cloud sync, or automatic long-term personal memory. Audio is not uploaded.
+**Implemented:** [Browser listening prototype v0.1](index.html). Choose a local audio file, play it, mark a timestamped moment, record another person's perspective, and export session JSON. Open that file in the Listening Room in a fresh tab to continue the same timeline. Select the audio separately when you want playback. No integrated AI listener, server, cloud sync, or automatic long-term personal memory. Audio is not uploaded.
 
 **Engineering design, not yet independently qualified:** [SOUND-EVENT-DEV-01 v0.2 contract](docs/SOUND_EVENT_DEV_01_v0.2_CONTRACT.md) specifies a synthetic-waveform measurement preflight, with a [bounded Muse implementation assignment](docs/SOL_TO_MUSE_ROUND03.md). Code/test qualification has not been demonstrated in the main branch.
 
