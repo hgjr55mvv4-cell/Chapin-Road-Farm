@@ -81,6 +81,51 @@ class AdmissionTests(unittest.TestCase):
         self.assertEqual(len(report['duplicate_train_eval_lineages']),1)
         self.assertTrue(all('TRAIN_EVAL_LINEAGE_LEAKAGE' in r['reasons'] for r in report['per_candidate']))
 
+    def add_alias(self, name, split):
+        source = self.base['candidates'][0]
+        clone = json.loads(json.dumps(source))
+        clone.update(sound_name=name, split=split)
+        clone['provenance']['original_recording_id'] = name
+        (self.root / name).write_bytes((self.root / source['sound_name']).read_bytes())
+        with self.csv.open('a') as f:
+            f.write(f'{name},Dog barkings and howlings,0,40,0.10,0.40,0.30\n')
+        self.base['candidates'].append(clone)
+        return clone
+
+    def test_same_audio_across_splits_holds_all_aliases(self):
+        self.add_alias('second-train.wav', 'train')
+        self.add_alias('renamed-eval.wav', 'eval')
+        report = self.run_audit()
+        self.assertEqual(report['status'], 'HOLD')
+        self.assertEqual(report['admitted_candidates'], 0)
+        self.assertEqual(report['duplicate_train_eval_lineages'], [])
+        for row in report['per_candidate']:
+            self.assertEqual(row['status'], 'HOLD')
+            self.assertIn('TRAIN_EVAL_AUDIO_HASH_LEAKAGE', row['reasons'])
+            self.assertEqual(row['positive_spans_verified'], [])
+            self.assertEqual(row['negative_spans_verified'], [])
+
+    def test_duplicate_audio_in_one_split_is_not_cross_split_leakage(self):
+        self.add_alias('also-train.wav', 'train')
+        self.assertEqual(self.run_audit()['status'], 'ADMIT')
+
+    def test_unverified_digest_does_not_hold_an_independent_candidate(self):
+        alias = self.add_alias('eval.wav', 'eval')
+        # Valid PCM, different samples, but still declares the first file's hash.
+        path = self.root / alias['sound_name']
+        data = path.read_bytes()
+        path.write_bytes(data[:-2] + b'\x00\x00')
+        train, evaluation = self.run_audit()['per_candidate']
+        self.assertEqual(train['status'], 'ADMIT')
+        self.assertIn('AUDIO_HASH_MISMATCH', evaluation['reasons'])
+        self.assertNotIn('TRAIN_EVAL_AUDIO_HASH_LEAKAGE', evaluation['reasons'])
+
+        # Once all references match the distinct file, both splits can pass.
+        alias['audio_sha256'] = hashlib.sha256(path.read_bytes()).hexdigest()
+        for check in alias['independent_listening_checks']:
+            check['audio_sha256'] = alias['audio_sha256']
+        self.assertEqual(self.run_audit()['admitted_candidates'], 2)
+
     def test_timestamp_outside_audio(self):
         self.csv.write_text('sound_name,class_name,start_time,end_time\nS-0001.wav,Dog barkings and howlings,0.9,1.7\n')
         self.assertIn('ANNOTATION_OUTSIDE_AUDIO', self.run_audit()['per_candidate'][0]['reasons'])
@@ -88,6 +133,25 @@ class AdmissionTests(unittest.TestCase):
     def test_missing_columns_rejected(self):
         self.csv.write_text('filename,label,start,end\na,b,0,1\n')
         with self.assertRaises(ValueError): read_annotations(self.csv)
+
+    def test_short_csv_row_yields_a_line_numbered_hold(self):
+        with self.csv.open('a') as f:
+            f.write('S-0001.wav\n')
+        report = self.run_audit()
+        self.assertEqual(report['status'], 'HOLD')
+        self.assertEqual(report['admitted_candidates'], 0)
+        self.assertIn('INVALID_ANNOTATION_ROW', report['per_candidate'][0]['reasons'])
+        self.assertEqual(report['unverified_annotation_rows'],
+                         [{'line': 3, 'reason': 'INVALID_ANNOTATION_ROW', 'sound_name': 'S-0001.wav'}])
+
+    def test_unattributable_row_holds_dataset_without_assigning_it_to_a_clip(self):
+        with self.csv.open('a') as f:
+            f.write(',unknown class\n')
+        report = self.run_audit()
+        self.assertEqual(report['status'], 'HOLD')
+        self.assertEqual(report['per_candidate'][0]['status'], 'ADMIT')
+        self.assertEqual(report['unverified_annotation_rows'],
+                         [{'line': 3, 'reason': 'INVALID_ANNOTATION_ROW'}])
 
     def test_nan_time_is_rejected(self):
         self.csv.write_text('sound_name,class_name,start_time,end_time\nS-0001.wav,Dog,nan,1\n')

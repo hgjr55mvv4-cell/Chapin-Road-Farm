@@ -33,11 +33,14 @@ def read_annotations(csv_path):
         spans = defaultdict(list)
         problems = []
         for n, row in enumerate(reader, start=2):
-            name = row['sound_name'].strip()
-            cls = row['class_name'].strip()
+            name = (row['sound_name'] or '').strip()
+            cls = (row['class_name'] or '').strip()
             a, b = _finite_number(row['start_time']), _finite_number(row['end_time'])
             if not name or not cls or a is None or b is None or a < 0 or b <= a:
-                problems.append({'line': n, 'reason': 'INVALID_ANNOTATION_ROW'})
+                problem = {'line': n, 'reason': 'INVALID_ANNOTATION_ROW'}
+                if name:
+                    problem['sound_name'] = name
+                problems.append(problem)
                 continue
             spans[name].append({'class_name': cls, 'start_s': a, 'end_s': b})
     for items in spans.values():
@@ -112,15 +115,24 @@ def _confirmed_negative(check, spans, digest, duration):
     return True
 
 
+def _hold_for_leakage(result, reason):
+    result['status'] = 'HOLD'
+    result['reasons'] = sorted(set(result['reasons'] + [reason]))
+    result['positive_spans_verified'] = []
+    result['negative_spans_verified'] = []
+
+
 def audit(manifest, labels_csv, audio_dir):
     if manifest.get('dataset') != 'DataSED' or not isinstance(manifest.get('dataset_revision'), str):
         raise ValueError('Expected named DataSED revision')
     spans_by_clip, annotation_errors = read_annotations(labels_csv)
+    clips_with_invalid_labels = {row['sound_name'] for row in annotation_errors if 'sound_name' in row}
     records = manifest.get('candidates')
     if not isinstance(records, list) or not records:
         raise ValueError('No explicit candidate records')
     outcomes = []
     lineage_by_split = defaultdict(set)
+    outcomes_by_audio_hash = defaultdict(list)
     for rec in records:
         name = rec.get('sound_name', '')
         split = rec.get('split')
@@ -136,6 +148,8 @@ def audit(manifest, labels_csv, audio_dir):
         if error:
             reasons.append(error)
         spans = spans_by_clip.get(name, [])
+        if name in clips_with_invalid_labels:
+            reasons.append('INVALID_ANNOTATION_ROW')
         if not spans:
             reasons.append('NO_POSITIVE_TIME_LABELS')
         if observed and any(s['end_s'] > observed['duration_s'] for s in spans):
@@ -165,14 +179,17 @@ def audit(manifest, labels_csv, audio_dir):
                          'negative_spans_verified': neg if not reasons else [],
                          'n_positive_labels_in_source': len(spans),
                          'audio_observed': observed is not None})
+        if observed and split in ('train', 'eval'):
+            outcomes_by_audio_hash[observed['sha256']].append(outcomes[-1])
     duplicate_lineage = sorted(k for k, v in lineage_by_split.items() if len(v) > 1)
     if duplicate_lineage:
         for rec, result in zip(records, outcomes):
             if (rec.get('provenance') or {}).get('original_recording_id') in duplicate_lineage:
-                result['status'] = 'HOLD'
-                result['reasons'] = sorted(set(result['reasons'] + ['TRAIN_EVAL_LINEAGE_LEAKAGE']))
-                result['positive_spans_verified'] = []
-                result['negative_spans_verified'] = []
+                _hold_for_leakage(result, 'TRAIN_EVAL_LINEAGE_LEAKAGE')
+    for matching_audio in outcomes_by_audio_hash.values():
+        if len({row['split'] for row in matching_audio}) > 1:
+            for row in matching_audio:
+                _hold_for_leakage(row, 'TRAIN_EVAL_AUDIO_HASH_LEAKAGE')
     summary = {
         'gate': 'AUDITORY_DATASED_ADMISSION_01_v0.1',
         'status': 'ADMIT' if outcomes and all(x['status'] == 'ADMIT' for x in outcomes)
