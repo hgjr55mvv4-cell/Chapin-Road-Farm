@@ -11,6 +11,7 @@ from pathlib import Path
 ARMS = ('S', 'P1', 'P2')
 TRUTHS = ('valid', 'faulty', 'unknown')
 DECISIONS = ('ACCEPT', 'REJECT', 'ABSTAIN')
+DEMO_NOTICE = 'SYNTHETIC_DEV is not a model run or scientific evidence'
 
 
 def ratio(num, den):
@@ -117,7 +118,7 @@ def check(m):
     if len(ids) != len(set(ids)):
         issue('duplicate candidate ids')
     if synthetic:
-        issue('SYNTHETIC_DEV is not a model run or scientific evidence')
+        issue(DEMO_NOTICE)
     elif not m.get('operator_approval_receipt'):
         issue('no operator-approval receipt for declared pilot')
     scores = {a: score(rows, a) for a in (*ARMS, 'P')} if rows else {}
@@ -142,7 +143,10 @@ def main():
     if args.out:
         args.out.write_text(encoded, encoding='utf-8')
     print(encoded, end='')
-    if not report['scores']:
+    clean_demo = (report['status'] == 'ENGINEERING_DEMO_NOT_MODEL_RUN'
+                  and report['issues'] == [DEMO_NOTICE])
+    complete_declarations = report['status'] == 'DECLARATIONS_COMPLETE_UNAUTHENTICATED'
+    if not report['scores'] or not (clean_demo or complete_declarations):
         raise SystemExit(2)
 
 

@@ -10,6 +10,10 @@ python -m unittest discover -s tests -v
 python audit.py examples/synthetic_only.json --out mock_receipt.json
 ```
 
+The CLI writes the same JSON to stdout and the requested output file before signaling the report outcome. Exit 2 means the report is `BLOCKED`, has no scores, or contains a synthetic validation issue beyond the standard demo notice. A rejected report can still contain diagnostic scores. Scripts collecting these reports should retain JSON on exit 2.
+
+Exit 0 can mean either a clean `ENGINEERING_DEMO_NOT_MODEL_RUN` or `DECLARATIONS_COMPLETE_UNAUTHENTICATED`. A downstream consumer of pilot declarations must read the JSON status and independently check the original evidence and authorization before acting. Shell success alone never qualifies a pilot.
+
 The test suite includes mock-only gates for identical permitted input reference, distinct declared receipt IDs, **equal opportunity cap** (S actual use <= B, P1+P2 actual use <= B), missing operator approval, unresolved truth references, mixed decisions, duplicate case IDs, unknown/invalid truth and all-abstain/zero-coverage handling.
 
 **Important:** S consuming less than B does NOT reduce P's opportunity to use B; consumption remains a measured outcome. Names such as `MOCK-P1`, arbitrary SHA strings, and `operator_approval_receipt` are **declarations only**, not proof that inference occurred or approval was granted. No automatic paid tool/action is present. Even a structurally complete real manifest returns `DECLARATIONS_COMPLETE_UNAUTHENTICATED`—an independent operator still has to verify original provider/tool logs, permission and ground truth before a pilot could be called executed.
