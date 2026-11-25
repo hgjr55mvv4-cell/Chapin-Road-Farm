@@ -9,8 +9,48 @@ from implementations import IMPLEMENTATIONS
 from truth_cases import CASES
 
 
+# The public DEV receipt covers these implementations and eight named cases per family.
+PUBLISHED_VARIANTS = {
+    'interval': {'correct': {'max_min', 'direct'},
+                 'incorrect': {'touch_counts', 'containment_only', 'inclusive_end'}},
+    'first_seen': {'correct': {'set_append', 'reverse_dict'},
+                   'incorrect': {'last_wins', 'sort_keys', 'adjacent_only'}},
+}
+
+
+def coverage_issues():
+    issues = []
+    for family in sorted(PUBLISHED_VARIANTS.keys() | IMPLEMENTATIONS.keys() | CASES.keys()):
+        cases = CASES.get(family, ())
+        minimum = 8 if family in PUBLISHED_VARIANTS else 1
+        names = [name for name, _, _ in cases]
+        if len(names) < minimum or len(set(names)) != len(names):
+            issues.append(f'{family}: expected at least {minimum} cases with distinct names')
+        for group in ('correct', 'incorrect'):
+            variants = IMPLEMENTATIONS.get(family, {}).get(group, {})
+            required = PUBLISHED_VARIANTS.get(family, {}).get(group, set())
+            missing = sorted(required.difference(variants))
+            if missing:
+                issues.append(f'{family}/{group}: missing {", ".join(missing)}')
+            elif not variants:
+                issues.append(f'{family}/{group}: no implementations')
+            for name, fn in variants.items():
+                if not callable(fn):
+                    issues.append(f'{family}/{group}: {name} is not callable')
+    return issues
+
+
 def evaluate_all():
     report = {'python': platform.python_version(), 'platform': sys.platform, 'families': {}, 'summary': {}}
+    issues = coverage_issues()
+    if issues:
+        report['coverage_issues'] = issues
+        report['summary'] = {
+            'correct_accepted': 0, 'correct_total': 0,
+            'mutants_rejected': 0, 'mutants_total': 0,
+            'mutation_detection': 'INCOMPLETE', 'correct_acceptance': 'INCOMPLETE',
+        }
+        return report
     for family, variants in IMPLEMENTATIONS.items():
         records = []
         for expected_label in ('correct', 'incorrect'):

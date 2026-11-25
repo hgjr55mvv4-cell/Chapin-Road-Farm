@@ -2,6 +2,7 @@
 import sys
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from implementations import IMPLEMENTATIONS
@@ -37,6 +38,36 @@ class TruthTableTests(unittest.TestCase):
         self.assertEqual(report['mutants_rejected'], report['mutants_total'])
         self.assertGreaterEqual(report['correct_total'], 4)
         self.assertGreaterEqual(report['mutants_total'], 6)
+
+    def assert_incomplete(self):
+        report = evaluate_all()
+        self.assertTrue(report['coverage_issues'])
+        self.assertEqual(report['summary']['mutation_detection'], 'INCOMPLETE')
+        self.assertEqual(report['summary']['correct_acceptance'], 'INCOMPLETE')
+        self.assertEqual(report['summary']['correct_total'], 0)
+        self.assertEqual(report['summary']['mutants_total'], 0)
+
+    def test_empty_implementation_registry(self):
+        with patch.dict(IMPLEMENTATIONS, clear=True):
+            self.assert_incomplete()
+
+    def test_missing_named_mutant_despite_matching_global_totals(self):
+        mutants = IMPLEMENTATIONS['interval']['incorrect']
+        with patch.dict(mutants):
+            del mutants['touch_counts']
+            mutants['another_name_for_inclusive_end'] = mutants['inclusive_end']
+            self.assert_incomplete()
+
+    def test_uncallable_mutant_is_not_counted_as_a_rejection(self):
+        with patch.dict(IMPLEMENTATIONS['interval']['incorrect'], touch_counts=None):
+            self.assert_incomplete()
+
+    def test_absent_family_and_duplicate_truth_case(self):
+        with patch.dict(CASES):
+            del CASES['first_seen']
+            self.assert_incomplete()
+        with patch.dict(CASES, interval=[CASES['interval'][0]] * 8):
+            self.assert_incomplete()
 
 
 if __name__ == '__main__':
