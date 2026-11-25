@@ -68,23 +68,29 @@ def check(m):
     if not isinstance(agents, dict):
         issue('agents not an object')
         agents = {}
+    input_refs = set()
+    receipt_ids = []
     for arm in ARMS:
         a = agents.get(arm)
         if not isinstance(a, dict):
             issue(f'{arm}: missing agent')
             continue
         for field in ('model','input_manifest_sha256','artifact_sha256','execution_receipt_id'):
-            if not isinstance(a.get(field), str) or not a[field]:
+            value = a.get(field)
+            if not isinstance(value, str) or not value:
                 issue(f'{arm}: missing {field}')
+            elif field == 'input_manifest_sha256':
+                input_refs.add(value)
+            elif field == 'execution_receipt_id':
+                receipt_ids.append(value)
         for field in ('observable_tokens','human_handoffs'):
             if type(a.get(field)) is not int or a[field] < 0:
                 issue(f'{arm}: invalid {field}')
+    if len(input_refs) > 1:
+        issue('input manifest references differ')
+    if len(set(receipt_ids)) != len(receipt_ids):
+        issue('declared receipt IDs are not distinct')
     if all(isinstance(agents.get(a), dict) for a in ARMS):
-        if len({agents[a].get('input_manifest_sha256') for a in ARMS}) != 1:
-            issue('input manifest references differ')
-        receipt_ids = [agents[a].get('execution_receipt_id') for a in ARMS]
-        if len(set(receipt_ids)) != len(ARMS):
-            issue('declared receipt IDs are not distinct')
         used = [agents[a].get('observable_tokens') for a in ARMS]
         if all(type(v) is int for v in used) and type(cap) is int and cap > 0:
             if used[0] > cap: issue('S observed use exceeds cap')
@@ -101,7 +107,8 @@ def check(m):
         cid = row.get('id')
         if not isinstance(cid, str) or not cid.strip():
             issue(f'candidate {n}: missing id')
-        ids.append(cid)
+        else:
+            ids.append(cid)
         truth = row.get('truth')
         if not isinstance(truth, str) or truth not in TRUTHS:
             issue(f'candidate {n}: invalid truth')

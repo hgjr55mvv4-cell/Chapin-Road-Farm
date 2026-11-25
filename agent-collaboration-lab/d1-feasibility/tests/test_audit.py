@@ -47,6 +47,37 @@ class IntakeTests(unittest.TestCase):
         f['candidates'][0]['id'] = f['candidates'][1]['id']
         self.assertTrue(any('duplicate candidate' in e for e in check(f)['issues']))
 
+    def test_malformed_identifiers_produce_field_issues(self):
+        for evidence, status in (('SYNTHETIC_DEV', 'ENGINEERING_DEMO_NOT_MODEL_RUN'),
+                                 ('PROSPECTIVE_PILOT', 'BLOCKED')):
+            for field in ('input_manifest_sha256', 'execution_receipt_id', 'id'):
+                for value in ([], {}):
+                    with self.subTest(evidence=evidence, field=field, value=value):
+                        f = self.trial()
+                        f['evidence_type'] = evidence
+                        if field == 'id':
+                            f['candidates'][0][field] = value
+                            expected = 'candidate 0: missing id'
+                        else:
+                            f['agents']['S'][field] = value
+                            expected = f'S: missing {field}'
+                        report = check(f)
+                        self.assertIn(expected, report['issues'])
+                        self.assertEqual(report['status'], status)
+
+    def test_malformed_values_do_not_hide_other_identifier_conflicts(self):
+        f = self.trial()
+        f['agents']['S']['input_manifest_sha256'] = []
+        f['agents']['S']['execution_receipt_id'] = {}
+        f['agents']['P2']['input_manifest_sha256'] = 'different-source'
+        f['agents']['P2']['execution_receipt_id'] = f['agents']['P1']['execution_receipt_id']
+        f['candidates'][0]['id'] = []
+        f['candidates'][1]['id'] = f['candidates'][2]['id']
+        issues = check(f)['issues']
+        self.assertIn('input manifest references differ', issues)
+        self.assertIn('declared receipt IDs are not distinct', issues)
+        self.assertIn('duplicate candidate ids', issues)
+
     def test_invalid_unhashable_truth_is_flagged(self):
         f = self.trial()
         f['candidates'][0]['truth'] = []
