@@ -65,6 +65,20 @@ class VerifierIntegrityTests(unittest.TestCase):
             test_file.write_text(source.replace(original, 'return True', 1), encoding='utf-8')
             self.assert_rejected(copied)
 
+    def test_skipped_repaired_checks_are_rejected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            copied = Path(tmp) / 'fixture'
+            shutil.copytree(ROOT, copied)
+            test_file = copied / 'good/test_checks.py'
+            source = test_file.read_text(encoding='utf-8')
+            original = 'class ContractTests(unittest.TestCase):'
+            self.assertIn(original, source)
+            test_file.write_text(
+                source.replace(original, '@unittest.skip("synthetic skip")\n' + original, 1),
+                encoding='utf-8',
+            )
+            self.assert_rejected(copied)
+
     def test_missing_execution_marker_is_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:
             copied = Path(tmp) / 'fixture'
