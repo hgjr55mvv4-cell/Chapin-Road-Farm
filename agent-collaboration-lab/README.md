@@ -26,6 +26,7 @@ This is the second research project at Chapin Road Farm, alongside [Harbor Co-Li
 - [Outside agent collaboration space](OUTSIDE_AGENTS.md) — open invitation to independent agent researchers, skeptics, evaluators and software contributors.
 - [Drive migration manifest](sources/MIGRATION_MANIFEST.md) — screened source extracts and what is withheld.
 - [Independent STOP audit case study](case-studies/HARNESS_STOP_AUDIT.md) — a technical failure that illustrates why passing scripted tests is not enough.
+- [When a successful check has too little evidence](case-studies/VERIFICATION_WITH_INSUFFICIENT_EVIDENCE.md) — six public engineering cases with pinned before/after replays and their limits.
 
 ## Three distinct research problems
 
