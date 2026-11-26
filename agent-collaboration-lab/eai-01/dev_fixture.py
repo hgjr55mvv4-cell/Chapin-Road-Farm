@@ -33,11 +33,11 @@ class LocalRepo(unittest.TestCase):
     def git(self, *args):
         return subprocess.check_output(["git", "-C", self.repo, *args], env=self.env, text=True).strip()
 
-    def run_cli(self, *, raw=None, paths=None, pin=None, repo=None, env=None, options=()):
+    def run_cli(self, *, raw=None, paths=None, pin=None, repo=None, env=None, cwd=None, options=()):
         if raw is None:
             raw = json.dumps({"commit": self.pin if pin is None else pin,
                               "paths": ["record"] if paths is None else paths}).encode()
         proc = subprocess.run([sys.executable, *options, CLI, self.repo if repo is None else repo],
-                              input=raw, env=self.env if env is None else env, capture_output=True)
+                              input=raw, cwd=cwd, env=self.env if env is None else env, capture_output=True)
         self.assertEqual(proc.stderr, b"")
         return json.loads(proc.stdout), proc.returncode

@@ -18,6 +18,13 @@ class GitEdges(LocalRepo):
         self.assertEqual([r["status"] for r in result["rows"]], ["PRESENT", "EVIDENCE_UNAVAILABLE", "MISSING"])
         self.assertEqual((result["verdict"], result["commit"], code), ("EVIDENCE_UNAVAILABLE", pin, 3))
 
+    def test_repository_relative_lookup_from_a_configured_worktree_subdirectory(self):
+        self.git("config", "core.worktree", str(self.repo))
+        sub = self.repo / "inner"
+        sub.mkdir()
+        result, code = self.run_cli(cwd=sub)
+        self.assertEqual((result["verdict"], code), ("PRESENT", 0))
+
     def test_unavailable_root_tree(self):
         oid = self.git("rev-parse", "HEAD^{tree}")
         (self.repo / ".git/objects" / oid[:2] / oid[2:]).unlink()

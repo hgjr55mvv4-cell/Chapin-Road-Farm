@@ -75,7 +75,7 @@ def tree_entries(git, oid, *, root):
     if not root and git("cat-file", "-t", oid).strip() != b"tree":
         raise Unavailable("subtree object has the wrong type")
     entries = {}
-    for record in git("ls-tree", "-z", oid).split(b"\0"):
+    for record in git("ls-tree", "--full-tree", "-z", oid).split(b"\0"):
         if record:
             header, name = record.split(b"\t", 1)
             mode, kind, child = header.decode("ascii").split()
