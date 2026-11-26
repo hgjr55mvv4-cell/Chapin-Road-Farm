@@ -1,6 +1,5 @@
 """Contract-driven CLI tests. Expected values are independent of the validator."""
 import json
-import os
 import subprocess
 import unittest
 
@@ -80,7 +79,7 @@ class ContractTests(LocalRepo):
         self.expect("PRESENT", 0, repo=worktree)
         bare = self.work / "bare"
         subprocess.run(["git", "clone", "--quiet", "--bare", "--local", self.repo, bare],
-                       env=self.env, check=True)
+                       env=dict(self.env, GIT_ALLOW_PROTOCOL="file"), check=True)
         self.expect("PRESENT", 0, repo=bare)
 
     def test_tree_symlink_gitlink_and_non_directory_traversal(self):
