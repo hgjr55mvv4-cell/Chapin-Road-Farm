@@ -1,0 +1,11 @@
+# Discovery strategies · exploratory cards
+
+These three proposals arose during EAI-01. Keep this file in the coordinator workspace. It is outside both checksum-manifest builder packets. Each card is a hypothesis about where to look for a defect. Its marginal value over ordinary engineering remains unknown.
+
+| Candidate | Trigger | Perturbation | Invariant | Where the idea can fail |
+|---|---|---|---|---|
+| Environmental invariance | The contract fixes an object's identity, but lookup also receives ambient context. | Change one ambient condition while keeping the declared input, object and permitted access fixed. | Verdict and reported identity agree across environments the contract treats as equivalent. | Working directory, permissions or locale may legitimately be inputs. Establish equivalence first. Otherwise the comparison has no oracle. |
+| Identity ambiguity | A lookup or count treats a name as a unique identity. | Introduce a second binding at the same naming layer, preserving the evidence needed to distinguish the bindings. | The outcome follows that layer's declared cardinality or precedence rule. If the contract requires unique evidence, the tool cannot silently select an arbitrary binding. | Aliases and repeated observations can be legitimate. The rule may be unspecified, yielding a design question. This card substantially overlaps the existing duplicate operation. |
+| Implicit type coercion | A lower-level tool accepts a broader class of objects than its caller promises. | Substitute an object the lower layer can accept or convert at the boundary in question. | The caller still enforces its advertised type and evidence requirements; any permitted conversion preserves the declared meaning. | A documented conversion can be correct, and ordinary type tests may already cover it. A change in spelling alone says little about runtime coercion. |
+
+EAI-01 motivates the cards with caller-relative tree listings, duplicated sibling names and a Git command that accepts a commit where a subtree was expected. All were known before writing these cards. A later independent DEV study could remove one card at a time from a matched discovery task and compare new failure families with the cost of irrelevant probes. This package sets up no such study.
