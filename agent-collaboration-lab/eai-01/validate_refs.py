@@ -69,13 +69,20 @@ def report(verdict, commit=None, rows=None, reason=None):
     return result
 
 
-def tree_entries(git, oid):
+def tree_entries(git, oid, *, root):
+    # Git also accepts commits and tags as ls-tree arguments. Only the initial
+    # lookup intentionally uses that feature; subtree edges require a tree.
+    if not root and git("cat-file", "-t", oid).strip() != b"tree":
+        raise Unavailable("subtree object has the wrong type")
     entries = {}
     for record in git("ls-tree", "-z", oid).split(b"\0"):
         if record:
             header, name = record.split(b"\t", 1)
             mode, kind, child = header.decode("ascii").split()
-            entries[name] = {"mode": mode, "type": kind, "oid": child}
+            if name in entries:
+                entries[name] = None  # The directory supplies conflicting identities.
+            else:
+                entries[name] = {"mode": mode, "type": kind, "oid": child}
     return entries
 
 
@@ -85,17 +92,22 @@ def lookup(git, cache, commit, path):
     for i, name in enumerate(parts):
         if tree not in cache:
             try:
-                cache[tree] = tree_entries(git, tree)
-            except Unavailable:
+                cache[tree] = tree_entries(git, tree, root=(i == 0))
+            except (Unavailable, ValueError):
                 cache[tree] = None
         entries = cache[tree]
         if entries is None:
             return {"path": path, "status": "EVIDENCE_UNAVAILABLE", "unreadable_at": tree}
-        entry = entries.get(name)
-        if entry is None or (i < len(parts) - 1 and entry["type"] != "tree"):
+        if name not in entries:
+            return {"path": path, "status": "MISSING"}
+        entry = entries[name]
+        if entry is None:
+            return {"path": path, "status": "EVIDENCE_UNAVAILABLE", "ambiguous_at": tree}
+        if i == len(parts) - 1:
+            return {"path": path, "status": "PRESENT", **entry}
+        if entry["type"] != "tree":
             return {"path": path, "status": "MISSING"}
         tree = entry["oid"]
-    return {"path": path, "status": "PRESENT", **entry}
 
 
 def validate(repository, raw):
@@ -118,9 +130,11 @@ def validate(repository, raw):
     cache = {}
     rows = [lookup(git, cache, pin, path) for path in paths]
     statuses = {row["status"] for row in rows}
-    verdict = "EVIDENCE_UNAVAILABLE" if "EVIDENCE_UNAVAILABLE" in statuses else (
-        "MISSING" if "MISSING" in statuses else "PRESENT")
-    return report(verdict, pin, rows)
+    if "EVIDENCE_UNAVAILABLE" in statuses:
+        return report("EVIDENCE_UNAVAILABLE", pin, rows)
+    if "MISSING" in statuses:
+        return report("MISSING", pin, rows)
+    return report("PRESENT", pin, rows)
 
 
 if __name__ == "__main__":

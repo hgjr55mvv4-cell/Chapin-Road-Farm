@@ -24,7 +24,7 @@ def duplicate_evidence(entries, source, destination):
 
 
 def unexpected_type(fields, key, replacement):
-    """Substitute a different JSON type for one existing object member."""
+    """Replace one member with a different Python type selected by the adapter."""
     if type(fields[key]) is type(replacement):
         raise ValueError("expected a type change")
     return {**fields, key: replacement}

@@ -35,6 +35,22 @@ class InheritedTests(LocalRepo):
         self.assertEqual((after["verdict"], after_code), ("PRESENT", 0))
         self.assertEqual([r["path"] for r in after["rows"]], ["record", "record"])
 
+    def test_duplicate_names_in_tree_evidence_cannot_identify_one_entry(self):
+        # Later adapter. Unlike request paths, sibling names identify a single entry.
+        names = ["a", "b", "ok"]
+        blob = bytes.fromhex(self.git("rev-parse", "HEAD:record"))
+        for siblings, expected in ((names, "PRESENT"), (duplicate_evidence(names, 0, 1), "EVIDENCE_UNAVAILABLE")):
+            with self.subTest(siblings=siblings):
+                raw = b"".join(mode + b" " + name.encode() + b"\0" + blob for mode, name in
+                               zip([b"100644", b"100755", b"100644"], siblings))
+                tree = subprocess.check_output(
+                    ["git", "-C", self.repo, "hash-object", "--literally", "-w", "-t", "tree", "--stdin"],
+                    input=raw, env=self.env).decode().strip()
+                pin = self.git("commit-tree", tree, "-m", "sibling names")
+                report, code = self.run_cli(pin=pin, paths=["a", "ok"])
+                self.assertEqual([r["status"] for r in report["rows"]], [expected, "PRESENT"])
+                self.assertEqual((report["verdict"], code), (expected, EXPECTED_EXIT[expected]))
+
     def test_same_duplicate_operation_on_distinct_git_transaction_refs(self):
         self.git("branch", "second", self.pin)
         refs = ["refs/heads/main", "refs/heads/second"]

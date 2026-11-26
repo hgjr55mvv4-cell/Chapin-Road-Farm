@@ -1,9 +1,10 @@
 """Contract-driven CLI tests. Expected values are independent of the validator."""
 import json
 import subprocess
+import sys
 import unittest
 
-from dev_fixture import LocalRepo
+from dev_fixture import CLI, LocalRepo
 
 
 class ContractTests(LocalRepo):
@@ -53,6 +54,19 @@ class ContractTests(LocalRepo):
         for raw in (b"", b"[", b"{}", b"[]", b"\xff", b'{"paths":0,"paths":1}', b"{} {}"):
             with self.subTest(raw=raw):
                 self.expect("INVALID_INPUT", 2, raw=raw)
+
+    def test_request_envelope_and_invocation(self):
+        pin = self.pin.encode()
+        requests = [
+            b'{"commit":"' + pin + b'","paths":["absent"],"paths":["record"]}',
+            json.dumps({"commit": self.pin, "paths": ["record"], "extra": True}).encode(),
+        ]
+        for raw in requests:
+            self.expect("INVALID_INPUT", 2, raw=raw)
+        for args in ([], [self.repo, self.repo], [""]):
+            with self.subTest(args=args):
+                proc = subprocess.run([sys.executable, CLI, *args], input=b"", env=self.env, capture_output=True)
+                self.assertEqual((json.loads(proc.stdout)["verdict"], proc.returncode), ("INVALID_INPUT", 2))
 
     def test_duplicate_paths_preserve_each_occurrence(self):
         rows = self.expect("PRESENT", 0, paths=["record", "record"])["rows"]

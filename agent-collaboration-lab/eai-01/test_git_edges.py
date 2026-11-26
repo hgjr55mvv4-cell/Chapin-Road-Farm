@@ -1,10 +1,9 @@
 """Follow-up Git-specific investigations using disposable local object stores."""
 import os
-from pathlib import Path
 import subprocess
 import unittest
 
-from dev_fixture import CLI, LocalRepo
+from dev_fixture import LocalRepo
 
 
 class GitEdges(LocalRepo):
@@ -38,12 +37,12 @@ class GitEdges(LocalRepo):
         env = dict(self.env, PATH=str(self.work) + os.pathsep + os.environ["PATH"], EAI_MARKER=str(marker))
         # Positive control for the observer uses the local helper; no network destination exists.
         control_env = dict(env, GIT_ALLOW_PROTOCOL="observe")
-        proc = subprocess.run(["git", "-C", self.repo, "cat-file", "-t", "0" * 40],
+        proc = subprocess.run(["git", "-C", self.repo, "cat-file", "-t", "1" * 40],
                               env=control_env, capture_output=True)
         self.assertNotEqual(proc.returncode, 0)
         self.assertTrue(marker.is_file())
         marker.unlink()
-        result, code = self.run_cli(pin="0" * 40, env=control_env)
+        result, code = self.run_cli(pin="1" * 40, env=control_env)
         self.assertEqual((result["verdict"], code), ("EVIDENCE_UNAVAILABLE", 3))
         self.assertFalse(marker.exists())
 
